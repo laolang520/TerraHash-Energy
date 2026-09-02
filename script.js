@@ -45,15 +45,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.lang, [data-lang]').forEach(control => control.remove());
   document.querySelectorAll('a.login, a[href="login.html"]').forEach(link => link.remove());
+
   initMarketIntelligence();
   if (document.querySelector('#btc-price')) setInterval(initMarketIntelligence, 60000);
 });
 
 /*
  * Live Market Intelligence
- * Primary: CoinCap public REST API.
- * Fallback: Binance public market data for price/change/volume and BTC history.
- * This keeps the static GitHub Pages site functional without exposing an API key.
+ * Primary: CoinGecko keyless public API.
+ * Fallback: Coinbase public exchange API.
+ * Both are browser-friendly public market-data endpoints and require no secret API key.
  */
 async function initMarketIntelligence() {
   const chart = document.querySelector('#btc-chart');
@@ -78,95 +79,96 @@ async function initMarketIntelligence() {
   };
   const setText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
   const setChange = (id, value) => {
-    const el = document.getElementById(id); if (!el) return;
+    const el = document.getElementById(id);
+    if (!el) return;
     const num = Number(value);
     el.textContent = Number.isFinite(num) ? `${num >= 0 ? '+' : ''}${num.toFixed(2)}%` : '—';
     el.classList.toggle('negative', Number.isFinite(num) && num < 0);
   };
 
-  const assets = { bitcoin: 'BTC', ethereum: 'ETH', solana: 'SOL' };
   let source = '';
   let loaded = false;
 
-  // Source 1: CoinCap. It provides price, market cap, 24h volume and change in one response.
+  // Primary source: CoinGecko public API.
   try {
-    const response = await fetch('https://api.coincap.io/v2/assets?ids=bitcoin,ethereum,solana', {
-      headers: {Accept: 'application/json'},
-      cache: 'no-store'
-    });
-    if (!response.ok) throw new Error(`CoinCap HTTP ${response.status}`);
-    const json = await response.json();
-    const rows = Array.isArray(json.data) ? json.data : [];
-    const byId = Object.fromEntries(rows.map(row => [row.id, row]));
-    const btc = byId.bitcoin, eth = byId.ethereum, sol = byId.solana;
-    if (!btc || !eth || !sol) throw new Error('CoinCap asset response incomplete');
+    const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&precision=4';
+    const response = await fetch(url, {cache: 'no-store'});
+    if (!response.ok) throw new Error(`CoinGecko HTTP ${response.status}`);
+    const data = await response.json();
+    if (!data.bitcoin || !data.ethereum || !data.solana) throw new Error('CoinGecko response incomplete');
 
-    setText('btc-price', fmtPrice(btc.priceUsd));
-    setChange('btc-change', btc.changePercent24Hr);
-    setText('btc-cap', fmtCompact(btc.marketCapUsd));
-    setText('eth-price', fmtPrice(eth.priceUsd));
-    setChange('eth-change', eth.changePercent24Hr);
-    setText('eth-cap', fmtCompact(eth.marketCapUsd));
-    setText('sol-price', fmtPrice(sol.priceUsd));
-    setChange('sol-change', sol.changePercent24Hr);
-    setText('sol-volume', fmtCompact(sol.volumeUsd24Hr));
+    setText('btc-price', fmtPrice(data.bitcoin.usd));
+    setChange('btc-change', data.bitcoin.usd_24h_change);
+    setText('btc-cap', fmtCompact(data.bitcoin.usd_market_cap));
+    setText('eth-price', fmtPrice(data.ethereum.usd));
+    setChange('eth-change', data.ethereum.usd_24h_change);
+    setText('eth-cap', fmtCompact(data.ethereum.usd_market_cap));
+    setText('sol-price', fmtPrice(data.solana.usd));
+    setChange('sol-change', data.solana.usd_24h_change);
+    setText('sol-volume', fmtCompact(data.solana.usd_24h_vol));
     setText('total-cap', 'Live');
     setText('total-volume', 'Live');
-    source = 'CoinCap';
+    source = 'CoinGecko';
     loaded = true;
   } catch (error) {
-    console.warn('CoinCap market data unavailable:', error);
+    console.warn('CoinGecko market data unavailable:', error);
   }
 
-  // Source 2: Binance. Public endpoints require no API key and are useful as a browser fallback.
+  // Browser fallback: Coinbase public exchange API.
   if (!loaded) {
     try {
-      const symbols = ['BTCUSDT', 'ETHUSDT', 'SOLUSDT'];
-      const responses = await Promise.all(symbols.map(symbol =>
-        fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}`, {cache: 'no-store'})
-      ));
-      if (responses.some(r => !r.ok)) throw new Error('Binance ticker request failed');
-      const rows = await Promise.all(responses.map(r => r.json()));
+      const products = ['BTC-USD', 'ETH-USD', 'SOL-USD'];
+      const rows = await Promise.all(products.map(async product => {
+        const response = await fetch(`https://api.exchange.coinbase.com/products/${product}/stats`, {cache: 'no-store'});
+        if (!response.ok) throw new Error(`Coinbase ${product} HTTP ${response.status}`);
+        return response.json();
+      }));
       const [btc, eth, sol] = rows;
-      setText('btc-price', fmtPrice(btc.lastPrice));
-      setChange('btc-change', btc.priceChangePercent);
+      const change = row => {
+        const open = Number(row.open), last = Number(row.last);
+        return Number.isFinite(open) && open !== 0 ? ((last - open) / open) * 100 : NaN;
+      };
+      setText('btc-price', fmtPrice(btc.last));
+      setChange('btc-change', change(btc));
       setText('btc-cap', '—');
-      setText('eth-price', fmtPrice(eth.lastPrice));
-      setChange('eth-change', eth.priceChangePercent);
+      setText('eth-price', fmtPrice(eth.last));
+      setChange('eth-change', change(eth));
       setText('eth-cap', '—');
-      setText('sol-price', fmtPrice(sol.lastPrice));
-      setChange('sol-change', sol.priceChangePercent);
-      setText('sol-volume', fmtCompact(sol.quoteVolume));
-      source = 'Binance fallback';
+      setText('sol-price', fmtPrice(sol.last));
+      setChange('sol-change', change(sol));
+      setText('sol-volume', fmtCompact(Number(sol.volume) * Number(sol.last)));
+      setText('total-cap', '—');
+      setText('total-volume', 'Live');
+      source = 'Coinbase fallback';
       loaded = true;
     } catch (error) {
-      console.warn('Binance fallback unavailable:', error);
+      console.warn('Coinbase fallback unavailable:', error);
     }
   }
 
+  // Historical BTC chart: CoinGecko first, Coinbase fallback.
   if (chart) {
     let points = [];
     try {
-      // CoinCap history needs no API key on its current public usage path.
-      const end = Date.now();
-      const start = end - 30 * 24 * 60 * 60 * 1000;
-      const response = await fetch(`https://api.coincap.io/v2/assets/bitcoin/history?interval=d1&start=${start}&end=${end}`, {cache: 'no-store'});
-      if (!response.ok) throw new Error(`CoinCap history HTTP ${response.status}`);
+      const response = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily', {cache: 'no-store'});
+      if (!response.ok) throw new Error(`CoinGecko chart HTTP ${response.status}`);
       const json = await response.json();
-      points = (json.data || []).map(row => ({time: row.time, price: Number(row.priceUsd)})).filter(p => p.time && Number.isFinite(p.price));
+      points = (json.prices || []).map(row => ({time: row[0], price: Number(row[1])})).filter(p => p.time && Number.isFinite(p.price));
     } catch (error) {
-      console.warn('CoinCap history unavailable:', error);
+      console.warn('CoinGecko history unavailable:', error);
     }
 
     if (!points.length) {
       try {
-        const response = await fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=30', {cache: 'no-store'});
-        if (!response.ok) throw new Error(`Binance history HTTP ${response.status}`);
+        const end = Math.floor(Date.now() / 1000);
+        const start = end - 30 * 24 * 60 * 60;
+        const response = await fetch(`https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=86400&start=${start}&end=${end}`, {cache: 'no-store'});
+        if (!response.ok) throw new Error(`Coinbase chart HTTP ${response.status}`);
         const rows = await response.json();
-        points = rows.map(row => ({time: row[0], price: Number(row[4])})).filter(p => p.time && Number.isFinite(p.price));
-        if (points.length) source = source ? `${source} + Binance chart` : 'Binance';
+        points = rows.map(row => ({time: row[0] * 1000, price: Number(row[4])})).filter(p => p.time && Number.isFinite(p.price)).sort((a, b) => a.time - b.time);
+        if (points.length) source = source ? `${source} + Coinbase chart` : 'Coinbase';
       } catch (error) {
-        console.warn('Binance history unavailable:', error);
+        console.warn('Coinbase history unavailable:', error);
       }
     }
 
@@ -190,7 +192,8 @@ function drawMarketChart(svg, points) {
     const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
     text.setAttribute('x', width / 2); text.setAttribute('y', height / 2); text.setAttribute('text-anchor', 'middle');
     text.setAttribute('fill', '#7a8881'); text.setAttribute('font-size', '14'); text.textContent = 'Historical market data temporarily unavailable';
-    svg.appendChild(text); return;
+    svg.appendChild(text);
+    return;
   }
   const values = points.map(p => p.price), min = Math.min(...values), max = Math.max(...values), range = max - min || 1;
   const x = i => padX + (i / Math.max(points.length - 1, 1)) * (width - padX * 2);
@@ -210,4 +213,7 @@ function drawMarketChart(svg, points) {
   });
 }
 
-function fmtChartPrice(value) { return '$' + Number(value).toLocaleString('en-US', {maximumFractionDigits: value >= 1000 ? 0 : 2}); }
+function fmtChartPrice(value) {
+  const n = Number(value);
+  return '$' + n.toLocaleString('en-US', {maximumFractionDigits: n >= 1000 ? 0 : 2});
+}
