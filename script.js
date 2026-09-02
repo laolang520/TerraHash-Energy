@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (spans.length > 1) spans[1].style.display = 'none';
   });
 
+  // English-only website: remove any language selector left in legacy page markup.
+  document.querySelectorAll('.lang, [data-lang]').forEach(control => control.remove());
+
   // Login / Sign Up has been removed from the public website.
   document.querySelectorAll('a.login, a[href="login.html"]').forEach(link => link.remove());
 });
