@@ -32,6 +32,21 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.lang, [data-lang]').forEach(control => control.remove());
   document.querySelectorAll('a.login, a[href="login.html"]').forEach(link => link.remove());
 
+  if ((location.pathname.split('/').pop() || 'index.html') === 'index.html') {
+    const art = document.querySelector('.hero-art');
+    if (art) {
+      art.innerHTML = '<img src="assets/homepage-hero.jpg" alt="TerraHash Energy renewable energy and digital infrastructure" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:18px;">';
+      art.style.width = 'min(62vw, 900px)';
+      art.style.height = 'min(46vw, 600px)';
+      art.style.top = '110px';
+      art.style.right = '3%';
+      art.style.borderRadius = '18px';
+      art.style.overflow = 'hidden';
+      art.style.boxShadow = '0 20px 60px rgba(0,0,0,.28)';
+      art.style.background = '#061711';
+    }
+  }
+
   initMarketIntelligence();
   if (document.querySelector('#btc-price')) setInterval(initMarketIntelligence, 60000);
   initTradingViewTabs();
