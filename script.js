@@ -15,12 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Fixed TerraHash Energy logo: use a white-background PNG instead of the
-  // previous JPEG, which had a black background and appeared as a black block.
-  const logoData = 'data:image/png;base64,PLACEHOLDER';
+  // Use the clean SVG logo so the header never renders the old black JPEG block.
   document.querySelectorAll('.brand .logo').forEach(logo => {
     logo.textContent = '';
-    logo.style.backgroundImage = `url("${logoData}")`;
+    logo.style.backgroundImage = 'url("logo.svg")';
     logo.style.backgroundRepeat = 'no-repeat';
     logo.style.backgroundPosition = 'center';
     logo.style.backgroundSize = 'contain';
