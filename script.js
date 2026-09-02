@@ -36,4 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const spans = brand.querySelectorAll(':scope > span');
     if (spans.length > 1) spans[1].style.display = 'none';
   });
+
+  // Login / Sign Up has been removed from the public website.
+  document.querySelectorAll('a.login, a[href="login.html"]').forEach(link => link.remove());
 });
