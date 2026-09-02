@@ -1,19 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 180">
-<rect width="520" height="180" rx="22" fill="#fff"/>
-<g transform="translate(22 22)">
-  <circle cx="68" cy="68" r="48" fill="none" stroke="#006b4f" stroke-width="10"/>
-  <ellipse cx="68" cy="68" rx="78" ry="30" fill="none" stroke="#009fe3" stroke-width="7" transform="rotate(-28 68 68)"/>
-  <ellipse cx="68" cy="68" rx="72" ry="32" fill="none" stroke="#39b91f" stroke-width="6" transform="rotate(35 68 68)"/>
-  <path d="M68 39 94 54v29L68 98 42 83V54z" fill="#1fbd58" stroke="#fff" stroke-width="3"/>
-  <path d="M68 39v30m26-15L68 69 42 54m26 15v29" fill="none" stroke="#b9ffcf" stroke-width="3"/>
-  <g fill="#fff" stroke="#009fe3" stroke-width="3">
-    <circle cx="68" cy="18" r="8"/><circle cx="104" cy="48" r="8"/><circle cx="105" cy="91" r="8"/>
-    <circle cx="68" cy="117" r="8"/><circle cx="31" cy="91" r="8"/><circle cx="31" cy="48" r="8"/>
-  </g>
-  <circle cx="111" cy="15" r="13" fill="#78e33f" stroke="#fff" stroke-width="3"/>
+<defs>
+ <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#006b4f"/><stop offset=".55" stop-color="#20a94f"/><stop offset="1" stop-color="#78e33f"/></linearGradient>
+ <linearGradient id="b" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#006ee8"/><stop offset="1" stop-color="#00d6ff"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<g transform="translate(16 10)" filter="url(#glow)">
+ <ellipse cx="76" cy="82" rx="70" ry="29" fill="none" stroke="url(#b)" stroke-width="7" transform="rotate(-42 76 82)"/>
+ <ellipse cx="76" cy="82" rx="72" ry="30" fill="none" stroke="url(#g)" stroke-width="7" transform="rotate(38 76 82)"/>
+ <path d="M28 112c-20-34-7-73 31-90 35-16 76-1 93 29" fill="none" stroke="#087e48" stroke-width="13" stroke-linecap="round"/>
+ <path d="M41 124c27 24 69 20 96-8 24-25 29-60 11-91" fill="none" stroke="#16b957" stroke-width="10" stroke-linecap="round"/>
+ <path d="M76 48 103 64v31L76 111 49 95V64z" fill="url(#g)" stroke="#eafff1" stroke-width="3"/>
+ <path d="M76 48v31m27-15L76 79 49 64m27 15v32" fill="none" stroke="#c9ffdc" stroke-width="3"/>
+ <g stroke="#dfffea" stroke-width="3">
+  <line x1="76" y1="25" x2="76" y2="48"/><line x1="113" y1="45" x2="103" y2="64"/><line x1="116" y1="100" x2="103" y2="95"/>
+  <line x1="76" y1="135" x2="76" y2="111"/><line x1="35" y1="101" x2="49" y2="95"/><line x1="36" y1="47" x2="49" y2="64"/>
+ </g>
+ <g fill="#1cb6ff" stroke="#fff" stroke-width="3">
+  <circle cx="76" cy="25" r="9"/><circle cx="113" cy="45" r="9"/><circle cx="116" cy="100" r="9"/>
+  <circle cx="76" cy="135" r="9"/><circle cx="36" cy="101" r="9"/><circle cx="36" cy="47" r="9"/>
+ </g>
+ <circle cx="142" cy="22" r="16" fill="url(#g)" stroke="#fff" stroke-width="4"/>
+ <circle cx="138" cy="18" r="5" fill="#d8ffbd"/>
 </g>
-<text x="158" y="92" font-family="Arial,Helvetica,sans-serif" font-size="42" font-weight="800" fill="#073d2d">TerraHash</text>
-<path d="M160 119h36" stroke="#0a9b55" stroke-width="4"/>
-<text x="205" y="127" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="#46515b">Energy Inc.</text>
-<path d="M450 119h38" stroke="#0a9b55" stroke-width="4"/>
+<text x="166" y="91" font-family="Arial,Helvetica,sans-serif" font-size="43" font-weight="800" fill="#063c2c">TerraHash</text>
+<path d="M168 119h38" stroke="#0aa357" stroke-width="5"/>
+<text x="211" y="128" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="#3d4852">Energy Inc.</text>
+<path d="M451 119h38" stroke="#0aa357" stroke-width="5"/>
 </svg>
