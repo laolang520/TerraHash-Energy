@@ -7,10 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', e => {
       e.preventDefault();
       const out = form.querySelector('.form-message');
-      if (out) {
-        out.textContent = 'Thank you. This demo form is ready to connect to your CRM or email service.';
-        out.hidden = false;
-      }
+      if (out) { out.textContent = 'Thank you. This demo form is ready to connect to your CRM or email service.'; out.hidden = false; }
       form.reset();
     });
   });
@@ -21,199 +18,123 @@ document.addEventListener('DOMContentLoaded', () => {
     logo.style.backgroundRepeat = 'no-repeat';
     logo.style.backgroundPosition = 'center';
     logo.style.backgroundSize = 'contain';
-    logo.style.width = '150px';
-    logo.style.height = '52px';
-    logo.style.flex = '0 0 150px';
-    logo.style.border = '0';
-    logo.style.borderRadius = '8px';
-    logo.style.boxShadow = 'none';
-    logo.style.backgroundColor = 'transparent';
+    logo.style.width = '150px'; logo.style.height = '52px'; logo.style.flex = '0 0 150px';
+    logo.style.border = '0'; logo.style.borderRadius = '8px'; logo.style.boxShadow = 'none'; logo.style.backgroundColor = 'transparent';
   });
-
   document.querySelectorAll('.brand').forEach(brand => {
     const spans = brand.querySelectorAll(':scope > span');
     if (spans.length > 1) spans[1].style.display = 'none';
   });
-
   if (nav && !nav.querySelector('a[href="market-intelligence.html"]')) {
-    const link = document.createElement('a');
-    link.href = 'market-intelligence.html';
-    link.textContent = 'Market Intelligence';
-    const relations = nav.querySelector('a[href="investor-relations.html"]');
-    nav.insertBefore(link, relations || nav.lastElementChild);
+    const link = document.createElement('a'); link.href = 'market-intelligence.html'; link.textContent = 'Market Intelligence';
+    const relations = nav.querySelector('a[href="investor-relations.html"]'); nav.insertBefore(link, relations || nav.lastElementChild);
   }
-
   document.querySelectorAll('.lang, [data-lang]').forEach(control => control.remove());
   document.querySelectorAll('a.login, a[href="login.html"]').forEach(link => link.remove());
 
   initMarketIntelligence();
   if (document.querySelector('#btc-price')) setInterval(initMarketIntelligence, 60000);
+  initTradingViewTabs();
 });
 
-/*
- * Live Market Intelligence
- * Primary: CoinGecko keyless public API.
- * Fallback: Coinbase public exchange API.
- * Both are browser-friendly public market-data endpoints and require no secret API key.
- */
+const MARKET_ASSETS = {
+  bitcoin: {symbol:'BTC', coinpaprika:'btc-bitcoin', coinbase:'BTC-USD', binance:'BTCUSDT'},
+  ethereum: {symbol:'ETH', coinpaprika:'eth-ethereum', coinbase:'ETH-USD', binance:'ETHUSDT'},
+  solana: {symbol:'SOL', coinpaprika:'sol-solana', coinbase:'SOL-USD', binance:'SOLUSDT'}
+};
+
+function fmtPrice(value) {
+  const n = Number(value); if (!Number.isFinite(n)) return '—';
+  if (n >= 1000) return '$' + n.toLocaleString('en-US', {maximumFractionDigits:0});
+  if (n >= 1) return '$' + n.toLocaleString('en-US', {maximumFractionDigits:2});
+  return '$' + n.toLocaleString('en-US', {maximumFractionDigits:5});
+}
+function fmtCompact(value) {
+  const n = Number(value); if (!Number.isFinite(n)) return '—';
+  const a = Math.abs(n); if (a >= 1e12) return '$' + (n/1e12).toFixed(2) + 'T';
+  if (a >= 1e9) return '$' + (n/1e9).toFixed(2) + 'B';
+  if (a >= 1e6) return '$' + (n/1e6).toFixed(2) + 'M';
+  return '$' + Math.round(n).toLocaleString('en-US');
+}
+function setText(id, value) { const el=document.getElementById(id); if(el) el.textContent=value; }
+function setChange(id, value) {
+  const el=document.getElementById(id); if(!el) return;
+  const n=Number(value); el.textContent=Number.isFinite(n)?`${n>=0?'+':''}${n.toFixed(2)}%`:'—';
+  el.classList.toggle('up', Number.isFinite(n)&&n>=0); el.classList.toggle('down', Number.isFinite(n)&&n<0); el.classList.toggle('negative', Number.isFinite(n)&&n<0);
+}
+
+async function jsonFetch(url, timeout=9000) {
+  const controller=new AbortController(); const timer=setTimeout(()=>controller.abort(),timeout);
+  try { const r=await fetch(url,{cache:'no-store',signal:controller.signal,headers:{Accept:'application/json'}}); if(!r.ok) throw new Error(`HTTP ${r.status}`); return await r.json(); }
+  finally { clearTimeout(timer); }
+}
+
+async function getCoinPaprikaAsset(id) {
+  const d=await jsonFetch(`https://api.coinpaprika.com/v1/tickers/${id}?quotes=USD`);
+  const q=d.quotes && d.quotes.USD; if(!q) throw new Error('CoinPaprika data missing');
+  return {price:q.price, change:q.percent_change_24h, cap:q.market_cap, volume:q.volume_24h, source:'CoinPaprika'};
+}
+async function getCoinbaseAsset(id) {
+  const d=await jsonFetch(`https://api.exchange.coinbase.com/products/${id}/stats`);
+  const last=Number(d.last), open=Number(d.open), volume=Number(d.volume);
+  return {price:last, change:open?((last-open)/open)*100:NaN, cap:NaN, volume:volume*last, source:'Coinbase'};
+}
+async function getBinanceAsset(id) {
+  const d=await jsonFetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${id}`);
+  return {price:Number(d.lastPrice), change:Number(d.priceChangePercent), cap:NaN, volume:Number(d.quoteVolume), source:'Binance'};
+}
+
+async function getAsset(key) {
+  const a=MARKET_ASSETS[key];
+  const attempts=[getCoinPaprikaAsset(a.coinpaprika),getCoinbaseAsset(a.coinbase),getBinanceAsset(a.binance)];
+  try { return await Promise.any(attempts); } catch(e) { return {price:NaN,change:NaN,cap:NaN,volume:NaN,source:'Unavailable'}; }
+}
+
 async function initMarketIntelligence() {
-  const chart = document.querySelector('#btc-chart');
-  const hasMarketCards = document.querySelector('#btc-price');
-  if (!chart && !hasMarketCards) return;
+  const chart=document.querySelector('#btc-chart');
+  if(!chart && !document.querySelector('#btc-price')) return;
+  const status=document.querySelector('#market-status');
+  if(status) status.textContent='Connecting to live market feeds…';
 
-  const fmtPrice = value => {
-    const n = Number(value);
-    if (!Number.isFinite(n)) return '—';
-    if (n >= 1000) return '$' + n.toLocaleString('en-US', {maximumFractionDigits: 0});
-    if (n >= 1) return '$' + n.toLocaleString('en-US', {maximumFractionDigits: 2});
-    return '$' + n.toLocaleString('en-US', {maximumFractionDigits: 4});
-  };
-  const fmtCompact = value => {
-    const n = Number(value);
-    if (!Number.isFinite(n)) return '—';
-    const abs = Math.abs(n);
-    if (abs >= 1e12) return '$' + (n / 1e12).toFixed(2) + 'T';
-    if (abs >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
-    if (abs >= 1e6) return '$' + (n / 1e6).toFixed(2) + 'M';
-    return '$' + Math.round(n).toLocaleString('en-US');
-  };
-  const setText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
-  const setChange = (id, value) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const num = Number(value);
-    el.textContent = Number.isFinite(num) ? `${num >= 0 ? '+' : ''}${num.toFixed(2)}%` : '—';
-    el.classList.toggle('negative', Number.isFinite(num) && num < 0);
-  };
+  const [btc,eth,sol]=await Promise.all([getAsset('bitcoin'),getAsset('ethereum'),getAsset('solana')]);
+  const assets={btc,eth,sol};
+  setText('btc-price',fmtPrice(btc.price)); setChange('btc-change',btc.change); setText('btc-cap',fmtCompact(btc.cap)); setText('btc-volume',fmtCompact(btc.volume));
+  setText('eth-price',fmtPrice(eth.price)); setChange('eth-change',eth.change); setText('eth-cap',fmtCompact(eth.cap)); setText('eth-volume',fmtCompact(eth.volume));
+  setText('sol-price',fmtPrice(sol.price)); setChange('sol-change',sol.change); setText('sol-volume',fmtCompact(sol.volume));
 
-  let source = '';
-  let loaded = false;
-
-  // Primary source: CoinGecko public API.
+  let globalSource='';
   try {
-    const url = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&precision=4';
-    const response = await fetch(url, {cache: 'no-store'});
-    if (!response.ok) throw new Error(`CoinGecko HTTP ${response.status}`);
-    const data = await response.json();
-    if (!data.bitcoin || !data.ethereum || !data.solana) throw new Error('CoinGecko response incomplete');
-
-    setText('btc-price', fmtPrice(data.bitcoin.usd));
-    setChange('btc-change', data.bitcoin.usd_24h_change);
-    setText('btc-cap', fmtCompact(data.bitcoin.usd_market_cap));
-    setText('eth-price', fmtPrice(data.ethereum.usd));
-    setChange('eth-change', data.ethereum.usd_24h_change);
-    setText('eth-cap', fmtCompact(data.ethereum.usd_market_cap));
-    setText('sol-price', fmtPrice(data.solana.usd));
-    setChange('sol-change', data.solana.usd_24h_change);
-    setText('sol-volume', fmtCompact(data.solana.usd_24h_vol));
-    setText('total-cap', 'Live');
-    setText('total-volume', 'Live');
-    source = 'CoinGecko';
-    loaded = true;
-  } catch (error) {
-    console.warn('CoinGecko market data unavailable:', error);
+    const g=await jsonFetch('https://api.coinpaprika.com/v1/global');
+    setText('total-cap',fmtCompact(g.market_cap_usd)); setText('total-volume',`24H volume: ${fmtCompact(g.volume_24h_usd)}`);
+    setText('btc-dominance',Number(g.bitcoin_dominance_percentage).toFixed(2)+'%');
+    setText('eth-dominance',Number(g.ethereum_dominance_percentage).toFixed(2)+'%');
+    setText('market-volume',fmtCompact(g.volume_24h_usd)); globalSource='CoinPaprika';
+  } catch(e) {
+    setText('total-cap','—'); setText('total-volume','24H volume: —'); setText('btc-dominance','—'); setText('eth-dominance','—'); setText('market-volume','—');
   }
 
-  // Browser fallback: Coinbase public exchange API.
-  if (!loaded) {
-    try {
-      const products = ['BTC-USD', 'ETH-USD', 'SOL-USD'];
-      const rows = await Promise.all(products.map(async product => {
-        const response = await fetch(`https://api.exchange.coinbase.com/products/${product}/stats`, {cache: 'no-store'});
-        if (!response.ok) throw new Error(`Coinbase ${product} HTTP ${response.status}`);
-        return response.json();
-      }));
-      const [btc, eth, sol] = rows;
-      const change = row => {
-        const open = Number(row.open), last = Number(row.last);
-        return Number.isFinite(open) && open !== 0 ? ((last - open) / open) * 100 : NaN;
-      };
-      setText('btc-price', fmtPrice(btc.last));
-      setChange('btc-change', change(btc));
-      setText('btc-cap', '—');
-      setText('eth-price', fmtPrice(eth.last));
-      setChange('eth-change', change(eth));
-      setText('eth-cap', '—');
-      setText('sol-price', fmtPrice(sol.last));
-      setChange('sol-change', change(sol));
-      setText('sol-volume', fmtCompact(Number(sol.volume) * Number(sol.last)));
-      setText('total-cap', '—');
-      setText('total-volume', 'Live');
-      source = 'Coinbase fallback';
-      loaded = true;
-    } catch (error) {
-      console.warn('Coinbase fallback unavailable:', error);
-    }
-  }
+  const loaded=[btc,eth,sol].filter(x=>x.source!=='Unavailable');
+  const sources=[...new Set(loaded.map(x=>x.source))];
+  if(status) status.textContent=loaded.length ? `LIVE · ${sources.join(' / ')} · Updated ${new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})}` : 'Market feeds unavailable — retrying automatically';
+  setText('data-source',`Sources: ${sources.length?sources.join(' / '):'public market feeds'}${globalSource?' · Global: '+globalSource:''} · TradingView chart`);
+  setText('last-updated','Last update: '+new Date().toLocaleString('en-US',{hour:'2-digit',minute:'2-digit',month:'short',day:'numeric'}));
 
-  // Historical BTC chart: CoinGecko first, Coinbase fallback.
-  if (chart) {
-    let points = [];
-    try {
-      const response = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30&interval=daily', {cache: 'no-store'});
-      if (!response.ok) throw new Error(`CoinGecko chart HTTP ${response.status}`);
-      const json = await response.json();
-      points = (json.prices || []).map(row => ({time: row[0], price: Number(row[1])})).filter(p => p.time && Number.isFinite(p.price));
-    } catch (error) {
-      console.warn('CoinGecko history unavailable:', error);
-    }
-
-    if (!points.length) {
-      try {
-        const end = Math.floor(Date.now() / 1000);
-        const start = end - 30 * 24 * 60 * 60;
-        const response = await fetch(`https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=86400&start=${start}&end=${end}`, {cache: 'no-store'});
-        if (!response.ok) throw new Error(`Coinbase chart HTTP ${response.status}`);
-        const rows = await response.json();
-        points = rows.map(row => ({time: row[0] * 1000, price: Number(row[4])})).filter(p => p.time && Number.isFinite(p.price)).sort((a, b) => a.time - b.time);
-        if (points.length) source = source ? `${source} + Coinbase chart` : 'Coinbase';
-      } catch (error) {
-        console.warn('Coinbase history unavailable:', error);
-      }
-    }
-
-    drawMarketChart(chart, points);
-  }
-
-  const status = document.querySelector('#market-status');
-  if (status) {
-    if (loaded) {
-      status.textContent = `Live source · ${source} · Updated ${new Date().toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'})}`;
-    } else {
-      status.textContent = 'Live data temporarily unavailable — retrying automatically';
-    }
-  }
+  const rel=(Number(btc.price)&&Number(eth.price))?btc.price/eth.price:NaN;
+  setText('btc-eth-relative',Number.isFinite(rel)?rel.toFixed(2)+' BTC/ETH':'—');
+  const changes=[btc.change,eth.change,sol.change].filter(Number.isFinite);
+  const avg=changes.length?changes.reduce((a,b)=>a+b,0)/changes.length:NaN;
+  setText('momentum-signal',Number.isFinite(avg)?(avg>1.5?'Positive momentum':avg<-1.5?'Negative momentum':'Mixed / neutral'):'Insufficient data');
+  setText('volatility-signal',changes.length>=2?(Math.max(...changes)-Math.min(...changes)>6?'Elevated':'Moderate'):'Monitoring');
+  setText('liquidity-signal',loaded.length>=2?'Multi-source liquidity available':'Limited feed coverage');
+  setText('breadth-signal',changes.length?`${changes.filter(x=>x>0).length} of ${changes.length} assets positive`:'Monitoring');
+  setText('market-regime',Number.isFinite(avg)?(avg>1.5?'Risk-on bias':avg<-1.5?'Risk-off bias':'Balanced'):'Analyzing');
 }
 
-function drawMarketChart(svg, points) {
-  const width = 900, height = 340, padX = 36, padY = 28;
-  svg.innerHTML = '';
-  if (!points.length) {
-    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    text.setAttribute('x', width / 2); text.setAttribute('y', height / 2); text.setAttribute('text-anchor', 'middle');
-    text.setAttribute('fill', '#7a8881'); text.setAttribute('font-size', '14'); text.textContent = 'Historical market data temporarily unavailable';
-    svg.appendChild(text);
-    return;
-  }
-  const values = points.map(p => p.price), min = Math.min(...values), max = Math.max(...values), range = max - min || 1;
-  const x = i => padX + (i / Math.max(points.length - 1, 1)) * (width - padX * 2);
-  const y = value => height - padY - ((value - min) / range) * (height - padY * 2);
-  [0.2,0.4,0.6,0.8].forEach(r => {
-    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    line.setAttribute('x1', padX); line.setAttribute('x2', width - padX); line.setAttribute('y1', y(min + range * r)); line.setAttribute('y2', y(min + range * r));
-    line.setAttribute('class', 'chart-grid-line'); svg.appendChild(line);
-  });
-  const linePath = points.map((p, i) => `${i ? 'L' : 'M'} ${x(i).toFixed(1)} ${y(p.price).toFixed(1)}`).join(' ');
-  const areaPath = `${linePath} L ${x(points.length - 1)} ${height - padY} L ${x(0)} ${height - padY} Z`;
-  const area = document.createElementNS('http://www.w3.org/2000/svg', 'path'); area.setAttribute('d', areaPath); area.setAttribute('class', 'btc-area'); svg.appendChild(area);
-  const line = document.createElementNS('http://www.w3.org/2000/svg', 'path'); line.setAttribute('d', linePath); line.setAttribute('class', 'btc-line'); svg.appendChild(line);
-  [0, Math.floor(points.length / 2), points.length - 1].forEach(i => {
-    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); circle.setAttribute('cx', x(i)); circle.setAttribute('cy', y(points[i].price)); circle.setAttribute('r', 5); circle.setAttribute('class', 'chart-point');
-    const title = document.createElementNS('http://www.w3.org/2000/svg', 'title'); title.textContent = `${new Date(points[i].time).toLocaleDateString('en-US')}: ${fmtChartPrice(points[i].price)}`; circle.appendChild(title); svg.appendChild(circle);
-  });
-}
-
-function fmtChartPrice(value) {
-  const n = Number(value);
-  return '$' + n.toLocaleString('en-US', {maximumFractionDigits: n >= 1000 ? 0 : 2});
+function initTradingViewTabs(){
+  const frame=document.getElementById('tv-chart'); if(!frame) return;
+  document.querySelectorAll('[data-tv-symbol]').forEach(btn=>btn.addEventListener('click',()=>{
+    document.querySelectorAll('[data-tv-symbol]').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+    const symbol=encodeURIComponent(btn.dataset.tvSymbol);
+    frame.src=`https://www.tradingview.com/widgetembed/?symbol=${symbol}&interval=60&hidesidetoolbar=1&symboledit=1&saveimage=0&toolbarbg=f1f3f6&theme=dark&style=1&timezone=Etc%2FUTC&withdateranges=1&hideideas=1`;
+  }));
 }
