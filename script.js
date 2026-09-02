@@ -35,7 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if ((location.pathname.split('/').pop() || 'index.html') === 'index.html') {
     const art = document.querySelector('.hero-art');
     if (art) {
-      art.innerHTML = '<img src="assets/homepage-hero.jpg" alt="TerraHash Energy renewable energy and digital infrastructure" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:18px;">';
+      // Use a CSS background with a versioned URL instead of an injected <img>.
+      // This prevents a failed/stale image element from leaving the hero blank.
+      art.innerHTML = '';
+      art.style.backgroundImage = 'url("assets/homepage-hero.jpg?v=20260902-2")';
+      art.style.backgroundSize = 'cover';
+      art.style.backgroundPosition = 'center';
+      art.style.backgroundRepeat = 'no-repeat';
       art.style.width = 'min(62vw, 900px)';
       art.style.height = 'min(46vw, 600px)';
       art.style.top = '110px';
@@ -43,7 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
       art.style.borderRadius = '18px';
       art.style.overflow = 'hidden';
       art.style.boxShadow = '0 20px 60px rgba(0,0,0,.28)';
-      art.style.background = '#061711';
+      art.style.backgroundColor = '#061711';
+      art.style.zIndex = '2';
+      art.setAttribute('aria-label', 'TerraHash Energy renewable energy and digital infrastructure');
     }
   }
 
