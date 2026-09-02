@@ -1,0 +1,6 @@
+[
+  {"name":"Solar Alpha","type":"Solar PV","capacity_mw":42,"status":"Operating"},
+  {"name":"Wind Horizon","type":"Wind","capacity_mw":86,"status":"Operating"},
+  {"name":"Storage One","type":"Battery Storage","capacity_mw":28,"status":"Development"},
+  {"name":"Solar Beta","type":"Solar PV","capacity_mw":30,"status":"Construction"}
+]
