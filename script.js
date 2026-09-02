@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (spans.length > 1) spans[1].style.display = 'none';
   });
 
-  // Keep the public navigation consistent across legacy pages.
   if (nav && !nav.querySelector('a[href="market-intelligence.html"]')) {
     const link = document.createElement('a');
     link.href = 'market-intelligence.html';
@@ -47,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.lang, [data-lang]').forEach(control => control.remove());
   document.querySelectorAll('a.login, a[href="login.html"]').forEach(link => link.remove());
   initMarketIntelligence();
+  if (document.querySelector('#btc-price')) setInterval(initMarketIntelligence, 60000);
 });
 
 async function initMarketIntelligence() {
