@@ -62,6 +62,25 @@
     img.alt = alt;
     img.className = `site-visual ${cls}`;
     img.loading = path === 'index.html' && selector === '.hero' ? 'eager' : 'lazy';
+    img.style.display = 'block';
+    img.style.objectFit = 'cover';
+    if (cls === 'hero-image') {
+      target.style.background = 'linear-gradient(90deg,rgba(2,11,18,.92),rgba(2,16,14,.48)),url("assets/hero-renewable.svg") center/cover no-repeat';
+      img.style.display = 'none';
+    } else if (cls === 'feature-image' || cls === 'solution-image') {
+      img.style.width = 'calc(100% + 60px)';
+      img.style.height = '118px';
+      img.style.margin = '-30px -30px 24px';
+      img.style.borderRadius = '12px 12px 0 0';
+    } else if (cls === 'plan-photo') {
+      img.style.position = 'absolute';
+      img.style.inset = '0';
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.opacity = '.42';
+      img.style.zIndex = '0';
+      target.querySelectorAll('*').forEach(el => { el.style.position = 'relative'; el.style.zIndex = '1'; });
+    }
     target.prepend(img);
   });
 
