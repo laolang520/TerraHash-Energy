@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 180">
+<rect width="520" height="180" rx="22" fill="#fff"/>
+<g transform="translate(22 22)">
+  <circle cx="68" cy="68" r="48" fill="none" stroke="#006b4f" stroke-width="10"/>
+  <ellipse cx="68" cy="68" rx="78" ry="30" fill="none" stroke="#009fe3" stroke-width="7" transform="rotate(-28 68 68)"/>
+  <ellipse cx="68" cy="68" rx="72" ry="32" fill="none" stroke="#39b91f" stroke-width="6" transform="rotate(35 68 68)"/>
+  <path d="M68 39 94 54v29L68 98 42 83V54z" fill="#1fbd58" stroke="#fff" stroke-width="3"/>
+  <path d="M68 39v30m26-15L68 69 42 54m26 15v29" fill="none" stroke="#b9ffcf" stroke-width="3"/>
+  <g fill="#fff" stroke="#009fe3" stroke-width="3">
+    <circle cx="68" cy="18" r="8"/><circle cx="104" cy="48" r="8"/><circle cx="105" cy="91" r="8"/>
+    <circle cx="68" cy="117" r="8"/><circle cx="31" cy="91" r="8"/><circle cx="31" cy="48" r="8"/>
+  </g>
+  <circle cx="111" cy="15" r="13" fill="#78e33f" stroke="#fff" stroke-width="3"/>
+</g>
+<text x="158" y="92" font-family="Arial,Helvetica,sans-serif" font-size="42" font-weight="800" fill="#073d2d">TerraHash</text>
+<path d="M160 119h36" stroke="#0a9b55" stroke-width="4"/>
+<text x="205" y="127" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="#46515b">Energy Inc.</text>
+<path d="M450 119h38" stroke="#0a9b55" stroke-width="4"/>
+</svg>
