@@ -33,10 +33,31 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('a.login, a[href="login.html"]').forEach(link => link.remove());
 
   addSiteVisuals();
+  upgradeHomepageHero();
   initMarketIntelligence();
   if (document.querySelector('#btc-price')) setInterval(initMarketIntelligence, 60000);
   initTradingViewTabs();
 });
+
+function upgradeHomepageHero(){
+  if (!document.querySelector('.hero') || document.querySelector('.hero-professional-visual')) return;
+  const art=document.querySelector('.hero-art');
+  if(!art) return;
+  art.classList.add('hero-professional-visual');
+  art.innerHTML=`<div class="hero-network-image"><img src="assets/hero-renewable.svg" alt="Renewable energy and infrastructure systems"><div class="hero-label label-solar">Solar Power Systems</div><div class="hero-label label-grid">Power Grid Connection</div><div class="hero-label label-storage">Energy Storage Systems</div><div class="hero-label label-compute">Digital Infrastructure</div><div class="hero-label label-data">Energy Data & Monitoring</div><div class="hero-label label-energy">Renewable Energy</div></div>`;
+  const style=document.createElement('style');
+  style.textContent=`
+    .hero-professional-visual{position:relative!important;min-height:470px!important;display:flex!important;align-items:stretch!important;overflow:hidden!important;border-radius:18px!important;background:#061711!important;border:1px solid rgba(119,228,62,.18)!important;box-shadow:0 20px 60px rgba(0,0,0,.22)!important}
+    .hero-network-image{position:relative;width:100%;height:100%;min-height:470px;overflow:hidden}
+    .hero-network-image>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82}
+    .hero-network-image:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,16,13,.08),rgba(3,16,13,.18));pointer-events:none}
+    .hero-label{position:absolute;z-index:3;padding:8px 11px;border:1px solid rgba(119,228,62,.48);background:rgba(3,20,15,.82);backdrop-filter:blur(7px);color:#e8f6ed;border-radius:7px;font:700 9px/1.2 Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+    .label-solar{right:8%;top:25%}.label-grid{right:3%;top:49%}.label-storage{left:42%;bottom:12%}.label-compute{left:43%;top:37%}.label-data{left:8%;top:52%}.label-energy{left:7%;bottom:17%}
+    @media(max-width:900px){.hero-professional-visual{min-height:360px!important}.hero-network-image{min-height:360px}.hero-label{font-size:8px;padding:6px 8px}.label-grid{right:2%}}
+    @media(max-width:650px){.hero-professional-visual{min-height:280px!important}.hero-network-image{min-height:280px}.hero-label{font-size:7px;padding:5px 6px}.label-data,.label-energy{display:none}}
+  `;
+  document.head.appendChild(style);
+}
 
 function addSiteVisuals(){
   const path = location.pathname.split('/').pop() || 'index.html';
