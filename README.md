@@ -27,3 +27,7 @@ python -m http.server 8080 --directory web
 ## GitHub Pages
 
 本仓库已配置 GitHub Actions 自动部署。进入 Settings → Pages，选择 GitHub Actions 作为发布方式。
+
+## Homepage Visual
+
+The homepage uses the English corporate hero visual at `assets/homepage-hero.jpg`.
