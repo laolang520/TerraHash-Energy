@@ -21,6 +21,62 @@ jobs:
         uses: actions/checkout@v4
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      - name: Prepare production metadata
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import html, re
+
+          BASE = "https://www.terrahashenergy.com"
+          pages = sorted(Path('.').glob('*.html'))
+          sitemap_urls = []
+
+          for path in pages:
+              text = path.read_text(encoding='utf-8')
+              canonical = BASE + ('/' if path.name == 'index.html' else '/' + path.name)
+              sitemap_urls.append(canonical)
+
+              title_match = re.search(r'<title>(.*?)</title>', text, flags=re.I|re.S)
+              desc_match = re.search(r'<meta\s+name=["\']description["\']\s+content=["\'](.*?)["\']\s*/?>', text, flags=re.I|re.S)
+              title = html.unescape(title_match.group(1).strip()) if title_match else 'TerraHash Energy'
+              desc = html.unescape(desc_match.group(1).strip()) if desc_match else 'TerraHash Energy — energy-led infrastructure for a connected digital future.'
+
+              tags = []
+              if not re.search(r'<link\s+rel=["\']canonical["\']', text, flags=re.I):
+                  tags.append(f'<link rel="canonical" href="{canonical}">')
+              if not re.search(r'<meta\s+property=["\']og:type["\']', text, flags=re.I):
+                  tags.append('<meta property="og:type" content="website">')
+              if not re.search(r'<meta\s+property=["\']og:site_name["\']', text, flags=re.I):
+                  tags.append('<meta property="og:site_name" content="TerraHash Energy">')
+              if not re.search(r'<meta\s+property=["\']og:title["\']', text, flags=re.I):
+                  tags.append(f'<meta property="og:title" content="{html.escape(title, quote=True)}">')
+              if not re.search(r'<meta\s+property=["\']og:description["\']', text, flags=re.I):
+                  tags.append(f'<meta property="og:description" content="{html.escape(desc, quote=True)}">')
+              if not re.search(r'<meta\s+property=["\']og:url["\']', text, flags=re.I):
+                  tags.append(f'<meta property="og:url" content="{canonical}">')
+              if not re.search(r'<meta\s+name=["\']twitter:card["\']', text, flags=re.I):
+                  tags.append('<meta name="twitter:card" content="summary_large_image">')
+              if not re.search(r'<meta\s+name=["\']robots["\']', text, flags=re.I):
+                  tags.append('<meta name="robots" content="index,follow,max-image-preview:large">')
+
+              if tags:
+                  text = text.replace('</head>', ''.join(tags) + '</head>', 1)
+                  path.write_text(text, encoding='utf-8')
+
+          Path('robots.txt').write_text(
+              'User-agent: *\nAllow: /\nSitemap: https://www.terrahashenergy.com/sitemap.xml\n',
+              encoding='utf-8'
+          )
+
+          urls = ''.join(f'  <url><loc>{u}</loc></url>\n' for u in sitemap_urls)
+          Path('sitemap.xml').write_text(
+              '<?xml version="1.0" encoding="UTF-8"?>\n'
+              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+              + urls + '</urlset>\n',
+              encoding='utf-8'
+          )
+          PY
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
