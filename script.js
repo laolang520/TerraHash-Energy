@@ -29,6 +29,8 @@ function initHomepage(){
   injectHomeDesign();
   const heroArt=document.querySelector('.hero-art');
   if(heroArt){heroArt.innerHTML='';Object.assign(heroArt.style,{backgroundImage:'url("assets/homepage-hero.jpg?v=20260902-2")',backgroundSize:'cover',backgroundPosition:'center',backgroundRepeat:'no-repeat',borderRadius:'0',overflow:'hidden',boxShadow:'none',backgroundColor:'#061711',zIndex:'1'});}
+  const platformImage=document.querySelector('.platform-photo img');
+  if(platformImage){platformImage.src='image_H569_科技感机械臂元素背景_..._6.png';platformImage.alt='Integrated industrial automation and digital infrastructure';}
   initHomeMarketChart();
 }
 function chartUrl(symbol,interval='15'){return`https://www.tradingview.com/widgetembed/?symbol=${encodeURIComponent(symbol)}&interval=${encodeURIComponent(interval)}&hidesidetoolbar=0&symboledit=1&saveimage=0&theme=dark&style=1&timezone=Etc%2FUTC&withdateranges=1&hideideas=1&studies=Volume%40tv-basicstudies`}
