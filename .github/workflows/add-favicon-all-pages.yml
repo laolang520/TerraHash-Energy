@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/add-favicon-all-pages.yml'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -13,34 +14,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Add favicon references to all HTML pages
+      - name: Normalize favicon references on all HTML pages
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          favicon = '<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png"><link rel="shortcut icon" href="/favicon-48x48.png">'
-          changed = []
+          import re
+          favicon = '<link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png"><link rel="shortcut icon" href="/favicon-48x48.png">'
+          changed=[]
           for p in Path('.').rglob('*.html'):
-              text = p.read_text(encoding='utf-8')
-              if 'favicon-48x48.png' in text:
-                  continue
+              text=p.read_text(encoding='utf-8')
+              old=text
+              text=re.sub(r'<link\s+rel="(?:shortcut )?icon"[^>]*>', '', text, flags=re.I)
               if '</title>' in text:
-                  text = text.replace('</title>', '</title>' + favicon, 1)
+                  text=text.replace('</title>', '</title>'+favicon, 1)
               elif '<head>' in text:
-                  text = text.replace('<head>', '<head>' + favicon, 1)
+                  text=text.replace('<head>', '<head>'+favicon, 1)
               else:
                   continue
-              p.write_text(text, encoding='utf-8')
-              changed.append(str(p))
+              if text != old:
+                  p.write_text(text, encoding='utf-8')
+                  changed.append(str(p))
           print('Updated:', ', '.join(changed) if changed else 'none')
           PY
       - name: Commit favicon rollout
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add '*.html' 'web/*.html' || true
+          git add -A
           if git diff --cached --quiet; then
             echo "No HTML changes needed"
           else
-            git commit -m "Add favicon references across all HTML pages"
+            git commit -m "Standardize favicon references across site"
             git push
           fi
