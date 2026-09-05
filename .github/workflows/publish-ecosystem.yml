@@ -1,0 +1,63 @@
+name: Publish Ecosystem Section
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Publish Ecosystem page and add global navigation
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          preview = Path('ecosystem-clean-preview.html')
+          if not preview.exists():
+              raise SystemExit('ecosystem-clean-preview.html not found')
+
+          html = preview.read_text(encoding='utf-8')
+          html = html.replace('<meta name="robots" content="noindex,nofollow">', '')
+          html = html.replace('ecosystem-clean-preview.html', 'ecosystem.html')
+          Path('ecosystem.html').write_text(html, encoding='utf-8')
+
+          for p in Path('.').glob('*.html'):
+              if p.name in {'ecosystem-clean-preview.html', 'ecosystem.html'}:
+                  continue
+              text = p.read_text(encoding='utf-8')
+              if 'href="ecosystem.html"' in text:
+                  continue
+              pattern = r'(<a(?:\s+class="[^"]*")?\s+href="digital-assets\.html">Digital Assets</a>)'
+              updated, n = re.subn(pattern, r'\1<a href="ecosystem.html">Ecosystem</a>', text, count=1)
+              if n:
+                  p.write_text(updated, encoding='utf-8')
+
+          sitemap = Path('sitemap.xml')
+          if sitemap.exists():
+              s = sitemap.read_text(encoding='utf-8')
+              url = 'https://www.terrahashenergy.com/ecosystem.html'
+              if url not in s:
+                  entry = f'<url><loc>{url}</loc></url>'
+                  s = s.replace('</urlset>', entry + '</urlset>')
+                  sitemap.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit published section
+        run: |
+          if git diff --quiet && [ -z "$(git status --porcelain)" ]; then
+            echo "No changes needed"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ecosystem.html sitemap.xml *.html
+          git commit -m "Publish Ecosystem section across site navigation"
+          git push
