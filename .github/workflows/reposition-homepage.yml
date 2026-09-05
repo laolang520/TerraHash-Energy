@@ -1,0 +1,43 @@
+name: Reposition TerraHash homepage
+
+on:
+  push:
+    paths:
+      - '.github/workflows/reposition-homepage.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-homepage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update homepage positioning
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          replacements = {
+            'Powering the Infrastructure Behind a <span>Digital Future.</span>': 'Powering the Next Generation of <span>Digital Infrastructure.</span>',
+            'TerraHash Energy is a Los Angeles–based energy infrastructure company developing integrated capabilities across renewable energy, power and storage, digital infrastructure, and energy intelligence.': 'TerraHash Energy is a Los Angeles–based renewable-energy-powered digital infrastructure company connecting power, storage and energy intelligence with high-performance computing for AI, HPC, blockchain and other digital applications.',
+            'Digital Infrastructure</b><span>Energy-aligned compute systems': 'Compute Infrastructure</b><span>AI, HPC and specialized compute systems',
+            'Energy Intelligence</b><span>Operational data and visibility': 'Digital Applications</b><span>AI, blockchain and digital systems'
+          }
+          changed = False
+          for old, new in replacements.items():
+              if old in s:
+                  s = s.replace(old, new, 1)
+                  changed = True
+          if not changed:
+              raise SystemExit('Expected homepage text not found; no changes made')
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit homepage update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Position TerraHash as renewable-powered digital infrastructure" || exit 0
+          git push
