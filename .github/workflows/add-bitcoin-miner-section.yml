@@ -1,0 +1,48 @@
+name: Add Bitcoin Miner Ecosystem Section
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-bitcoin-miner-section.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-ecosystem:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add Bitcoin miner section
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('ecosystem-clean-preview.html')
+          text = p.read_text(encoding='utf-8')
+          if 'id="bitcoin-miner"' in text:
+              print('Bitcoin miner section already present')
+              raise SystemExit
+
+          css = '''.miner-education{background:#040b08;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.miner-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:center}.miner-visual{position:relative;min-height:560px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#07110d}.miner-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.72) brightness(.7)}.miner-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,9,7,.92),rgba(3,9,7,.08) 62%)}.miner-visual-copy{position:absolute;z-index:2;left:32px;right:32px;bottom:30px}.miner-visual-copy small{font-size:8px;letter-spacing:.16em;color:var(--green)}.miner-visual-copy strong{display:block;font-size:28px;line-height:1.08;margin-top:9px}.miner-copy h2{font-size:clamp(44px,5vw,66px);line-height:.96;letter-spacing:-.05em;margin:12px 0 22px}.miner-copy>p{font-size:12px;line-height:1.85;color:#9dada4}.miner-formula{margin:30px 0;padding:22px 24px;border-left:2px solid var(--green);background:#08150f}.miner-formula strong{font-size:22px;letter-spacing:-.025em}.miner-formula span{color:var(--green)}.miner-points{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);margin-top:25px}.miner-point{padding:22px 22px 22px 0;border-bottom:1px solid var(--line)}.miner-point:nth-child(even){padding-left:22px;border-left:1px solid var(--line)}.miner-point small{font-size:8px;color:var(--green);letter-spacing:.13em}.miner-point b{display:block;font-size:15px;margin:9px 0 6px}.miner-point p{font-size:10px;line-height:1.65;color:#87988f;margin:0}.renewable-link{margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}.renewable-link b{display:block;font-size:14px;margin-bottom:7px}.renewable-link p{font-size:10px;line-height:1.7;color:#8fa097;margin:0}@media(max-width:980px){.miner-layout{grid-template-columns:1fr}.miner-visual{min-height:440px}}@media(max-width:620px){.miner-points{grid-template-columns:1fr}.miner-point:nth-child(even){padding-left:0;border-left:0}.miner-visual{min-height:340px}}'''
+          text = text.replace('</style>', css + '</style>', 1)
+
+          section = '''<section class="miner-education" id="bitcoin-miner"><div class="section wrap miner-layout"><div class="miner-visual"><img src="imgi_15_tIprOhHAQHzpmbzy.jpg" alt="Bitcoin ASIC mining infrastructure"><div class="miner-visual-copy"><small>BITCOIN COMPUTE INFRASTRUCTURE</small><strong>Specialized machines. Industrial-scale power. Continuous computation.</strong></div></div><div class="miner-copy"><div class="eyebrow">BITCOIN MINING · EXPLAINED</div><h2>What is a Bitcoin miner?</h2><p>A Bitcoin miner is a specialized computing machine, typically built around application-specific integrated circuit (ASIC) chips, designed to perform SHA-256 calculations for the Bitcoin network. Miners repeatedly process cryptographic computations as part of Bitcoin's proof-of-work system, contributing computing power — or hashrate — to network security and transaction settlement.</p><p>At industrial scale, a miner is only one component of a larger operating system. Reliable mining requires electrical infrastructure, transformers and distribution, network connectivity, cooling or thermal management, monitoring, maintenance and disciplined fleet operations.</p><div class="miner-formula"><strong><span>Energy</span> is the input. <span>Hashrate</span> is the output.</strong></div><div class="miner-points"><div class="miner-point"><small>01 / HARDWARE</small><b>ASIC Computing</b><p>Purpose-built hardware optimized for BTC SHA-256 computation rather than general-purpose computing.</p></div><div class="miner-point"><small>02 / POWER</small><b>Continuous Energy Demand</b><p>Large fleets require reliable, scalable electricity and site-level power systems designed for dense loads.</p></div><div class="miner-point"><small>03 / THERMAL</small><b>Cooling & Operations</b><p>Airflow, liquid or immersion cooling, maintenance and uptime management influence operating efficiency.</p></div><div class="miner-point"><small>04 / OUTPUT</small><b>Hashrate</b><p>Electrical energy supports specialized computation that contributes hashrate to the Bitcoin network.</p></div></div><div class="renewable-link"><b>Why renewable energy matters</b><p>Wind, solar, hydro and storage can form part of the power mix supporting mining infrastructure. For TerraHash, the strategic connection is the infrastructure layer: matching power resources, site conditions and high-density compute demand within one coordinated operating model.</p></div></div></div></section>'''
+
+          marker = '<section class="feature">'
+          if marker not in text:
+              raise SystemExit('Feature section marker not found')
+          text = text.replace(marker, section + marker, 1)
+          p.write_text(text, encoding='utf-8')
+          print('Updated ecosystem-clean-preview.html')
+          PY
+      - name: Commit Ecosystem update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ecosystem-clean-preview.html
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+          else
+            git commit -m "Add Bitcoin miner education section to Ecosystem preview"
+            git push
+          fi
