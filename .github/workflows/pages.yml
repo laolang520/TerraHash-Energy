@@ -21,24 +21,30 @@ jobs:
         uses: actions/checkout@v4
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      - name: Install favicon tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y librsvg2-bin imagemagick
+      - name: Build production favicons
+        shell: bash
+        run: |
+          set -e
+          # Generate a true 48x48 PNG directly from the approved TerraHash SVG.
+          rsvg-convert -w 48 -h 48 favicon.svg -o favicon-48x48.png
+          # Generate real PNG frames for a standards-compliant multi-size ICO.
+          rsvg-convert -w 16 -h 16 favicon.svg -o /tmp/favicon-16.png
+          rsvg-convert -w 32 -h 32 favicon.svg -o /tmp/favicon-32.png
+          rsvg-convert -w 48 -h 48 favicon.svg -o /tmp/favicon-48.png
+          convert /tmp/favicon-16.png /tmp/favicon-32.png /tmp/favicon-48.png favicon.ico
+          file favicon.ico favicon-48x48.png
       - name: Prepare production metadata
         shell: bash
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import html, re, struct
+          import html, re
 
           BASE = "https://www.terrahashenergy.com"
-
-          # Build a standards-compatible root /favicon.ico from the existing PNG.
-          # Modern ICO files may embed PNG image data directly.
-          png_path = Path('favicon-48x48.png')
-          if png_path.exists():
-              png = png_path.read_bytes()
-              header = struct.pack('<HHH', 0, 1, 1)
-              entry = struct.pack('<BBBBHHII', 48, 48, 0, 0, 1, 32, len(png), 22)
-              Path('favicon.ico').write_bytes(header + entry + png)
-
           pages = sorted(Path('.').glob('*.html'))
           sitemap_urls = []
 
@@ -52,11 +58,18 @@ jobs:
               title = html.unescape(title_match.group(1).strip()) if title_match else 'TerraHash Energy'
               desc = html.unescape(desc_match.group(1).strip()) if desc_match else 'TerraHash Energy — energy-led infrastructure for a connected digital future.'
 
+              # Remove stale favicon declarations so every production page uses the same files/order.
+              text = re.sub(r'<link\s+rel=["\'](?:shortcut icon|icon)["\'][^>]*href=["\']/favicon(?:-48x48)?\.(?:ico|png|svg)["\'][^>]*>', '', text, flags=re.I)
+              favicon_tags = (
+                  '<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">'
+                  '<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">'
+                  '<link rel="icon" type="image/svg+xml" href="/favicon.svg">'
+              )
+              text = text.replace('</head>', favicon_tags + '</head>', 1)
+
               tags = []
               if not re.search(r'<link\s+rel=["\']canonical["\']', text, flags=re.I):
                   tags.append(f'<link rel="canonical" href="{canonical}">')
-              if not re.search(r'href=["\']/favicon\.ico["\']', text, flags=re.I):
-                  tags.append('<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">')
               if not re.search(r'<meta\s+property=["\']og:type["\']', text, flags=re.I):
                   tags.append('<meta property="og:type" content="website">')
               if not re.search(r'<meta\s+property=["\']og:site_name["\']', text, flags=re.I):
@@ -74,7 +87,7 @@ jobs:
 
               if tags:
                   text = text.replace('</head>', ''.join(tags) + '</head>', 1)
-                  path.write_text(text, encoding='utf-8')
+              path.write_text(text, encoding='utf-8')
 
           Path('robots.txt').write_text(
               'User-agent: *\nAllow: /\nSitemap: https://www.terrahashenergy.com/sitemap.xml\n',
