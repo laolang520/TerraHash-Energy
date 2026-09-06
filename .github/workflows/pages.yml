@@ -26,9 +26,19 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import html, re
+          import html, re, struct
 
           BASE = "https://www.terrahashenergy.com"
+
+          # Build a standards-compatible root /favicon.ico from the existing PNG.
+          # Modern ICO files may embed PNG image data directly.
+          png_path = Path('favicon-48x48.png')
+          if png_path.exists():
+              png = png_path.read_bytes()
+              header = struct.pack('<HHH', 0, 1, 1)
+              entry = struct.pack('<BBBBHHII', 48, 48, 0, 0, 1, 32, len(png), 22)
+              Path('favicon.ico').write_bytes(header + entry + png)
+
           pages = sorted(Path('.').glob('*.html'))
           sitemap_urls = []
 
@@ -45,6 +55,8 @@ jobs:
               tags = []
               if not re.search(r'<link\s+rel=["\']canonical["\']', text, flags=re.I):
                   tags.append(f'<link rel="canonical" href="{canonical}">')
+              if not re.search(r'href=["\']/favicon\.ico["\']', text, flags=re.I):
+                  tags.append('<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">')
               if not re.search(r'<meta\s+property=["\']og:type["\']', text, flags=re.I):
                   tags.append('<meta property="og:type" content="website">')
               if not re.search(r'<meta\s+property=["\']og:site_name["\']', text, flags=re.I):
