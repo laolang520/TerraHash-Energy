@@ -1,0 +1,49 @@
+name: Add LinkedIn Footer Link
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-linkedin-footer.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  add-linkedin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add LinkedIn icon to homepage footer
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          url = 'https://www.linkedin.com/company/terrahash-energy/'
+
+          if url in s:
+              print('LinkedIn link already present; no change needed.')
+              raise SystemExit(0)
+
+          icon = '''<a href="https://www.linkedin.com/company/terrahash-energy/" target="_blank" rel="noopener noreferrer" aria-label="TerraHash Energy on LinkedIn" title="LinkedIn" style="display:inline-flex;align-items:center;justify-content:center;margin-left:12px;color:currentColor;vertical-align:middle"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V8.98h3.42v1.57h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.32 7.41a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.1 20.45H3.54V8.98H7.1v11.47Z"/></svg></a>'''
+
+          marker = '</footer>'
+          if marker not in s:
+              raise SystemExit('Footer closing tag not found; refusing to modify index.html.')
+
+          s = s.replace(marker, icon + marker, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit website change
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "No website change required."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add LinkedIn icon to website footer"
+          git push
