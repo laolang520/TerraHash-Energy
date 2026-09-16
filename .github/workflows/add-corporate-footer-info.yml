@@ -1,0 +1,42 @@
+name: Add Corporate Footer Information
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-corporate-footer-info.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add corporate information and legal links to site footers
+        shell: python
+        run: |
+          from pathlib import Path
+          pages = [
+            'index.html','about.html','solutions.html','digital-assets.html','ecosystem.html',
+            'market-intelligence.html','investor-relations.html','news.html','careers.html',
+            'careers-cdo.html','careers-cgo.html','careers-coo.html','contact.html'
+          ]
+          block = '''<div class="footer-corporate-info" style="margin-top:14px;font-size:12px;line-height:1.7;color:inherit;opacity:.78"><div>TerraHash Energy LLC · Los Angeles, California, United States</div><div><a href="mailto:ir@terrahashenergy.com">Corporate Inquiries: ir@terrahashenergy.com</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="applicant-privacy-notice.html">Applicant Privacy Notice</a> · <a href="https://www.linkedin.com/company/terrahash-energy/" target="_blank" rel="noopener noreferrer" aria-label="TerraHash Energy on LinkedIn">LinkedIn</a></div></div>'''
+          for name in pages:
+              p = Path(name)
+              if not p.exists():
+                  continue
+              s = p.read_text(encoding='utf-8')
+              if 'footer-corporate-info' in s or '</footer>' not in s:
+                  continue
+              s = s.replace('</footer>', block + '</footer>', 1)
+              p.write_text(s, encoding='utf-8')
+      - name: Commit changes
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html about.html solutions.html digital-assets.html ecosystem.html market-intelligence.html investor-relations.html news.html careers.html careers-cdo.html careers-cgo.html careers-coo.html contact.html
+          git commit -m "Add corporate information and legal links to footers"
+          git push
