@@ -10,7 +10,7 @@ function initGlobalUI(){
   if(menu&&nav)menu.addEventListener('click',()=>nav.classList.toggle('open'));
   document.querySelectorAll('form[data-demo]').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();const o=f.querySelector('.form-message');if(o){o.textContent='Thank you. This demo form is ready to connect to your CRM or email service.';o.hidden=false}f.reset()}));
   document.querySelectorAll('.brand .logo').forEach(l=>{l.textContent='';Object.assign(l.style,{backgroundImage:'url("logo.svg?v=20260903-1")',backgroundRepeat:'no-repeat',backgroundPosition:'center',backgroundSize:'contain',width:'145px',height:'50px',flex:'0 0 145px',border:'0',borderRadius:'0',boxShadow:'none',backgroundColor:'transparent'})});
-  document.querySelectorAll('.brand').forEach(b=>{const s=b.querySelectorAll(':scope > span');if(s.length>1)s[1].style.display='none'});
+  
   if(nav&&!nav.querySelector('a[href="market-intelligence.html"]')){const a=document.createElement('a');a.href='market-intelligence.html';a.textContent='Market Intelligence';const r=nav.querySelector('a[href="investor-relations.html"]');nav.insertBefore(a,r||nav.lastElementChild)}
   document.querySelectorAll('.lang,[data-lang],a.login,a[href="login.html"]').forEach(x=>x.remove());
 }
