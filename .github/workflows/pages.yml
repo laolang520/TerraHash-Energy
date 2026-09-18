@@ -51,7 +51,8 @@ jobs:
           for path in pages:
               text = path.read_text(encoding='utf-8')
               canonical = BASE + ('/' if path.name == 'index.html' else '/' + path.name)
-              sitemap_urls.append(canonical)
+              if '-preview' not in path.name:
+                  sitemap_urls.append(canonical)
 
               title_match = re.search(r'<title>(.*?)</title>', text, flags=re.I|re.S)
               desc_match = re.search(r'<meta\s+name=["\']description["\']\s+content=["\'](.*?)["\']\s*/?>', text, flags=re.I|re.S)
