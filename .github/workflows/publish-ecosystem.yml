@@ -3,6 +3,8 @@ name: Publish Ecosystem Section
 on:
   push:
     branches: [main]
+    paths:
+      - 'ecosystem-clean-preview.html'
   workflow_dispatch:
 
 permissions:
