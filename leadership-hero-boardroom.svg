@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">TerraHash Energy leadership and energy infrastructure</title>
+<desc id="desc">A dark executive strategy room overlooking renewable energy infrastructure with a luminous global network.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#020b11"/>
+    <stop offset=".55" stop-color="#071a1d"/>
+    <stop offset="1" stop-color="#0b2419"/>
+  </linearGradient>
+  <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#142b30" stop-opacity=".7"/>
+    <stop offset="1" stop-color="#071116" stop-opacity=".15"/>
+  </linearGradient>
+  <linearGradient id="desk" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#11191c"/>
+    <stop offset=".5" stop-color="#071014"/>
+    <stop offset="1" stop-color="#15231f"/>
+  </linearGradient>
+  <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+    <stop offset="0" stop-color="#7dff32" stop-opacity=".24"/>
+    <stop offset=".45" stop-color="#50d529" stop-opacity=".08"/>
+    <stop offset="1" stop-color="#7dff32" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+    <stop offset="0" stop-color="#d8ffbb" stop-opacity=".9"/>
+    <stop offset=".25" stop-color="#8cf05c" stop-opacity=".36"/>
+    <stop offset="1" stop-color="#72df40" stop-opacity="0"/>
+  </radialGradient>
+  <filter id="blur20"><feGaussianBlur stdDeviation="20"/></filter>
+  <filter id="blur8"><feGaussianBlur stdDeviation="8"/></filter>
+  <filter id="greenGlow">
+    <feGaussianBlur stdDeviation="5" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <clipPath id="window"><path d="M430 70H1550V625H430Z"/></clipPath>
+</defs>
+
+<rect width="1600" height="900" fill="url(#bg)"/>
+<circle cx="1170" cy="310" r="390" fill="url(#glow)" filter="url(#blur20)"/>
+<circle cx="1280" cy="490" r="180" fill="url(#sun)" filter="url(#blur20)"/>
+
+<!-- architectural frame -->
+<path d="M0 0H1600V70H0Z" fill="#02070b"/>
+<path d="M0 0H360L285 900H0Z" fill="#03080c"/>
+<path d="M355 0H395L450 900H405Z" fill="#081014"/>
+<path d="M1540 0H1600V900H1515Z" fill="#050b0e"/>
+<rect x="430" y="70" width="1120" height="555" rx="2" fill="url(#glass)" stroke="#6bd93c" stroke-opacity=".10"/>
+
+<!-- horizon scene -->
+<g clip-path="url(#window)">
+  <rect x="430" y="70" width="1120" height="555" fill="#092126"/>
+  <path d="M430 415C590 310 720 365 850 300C970 238 1110 315 1215 250C1320 188 1435 230 1550 175V625H430Z" fill="#102f2a"/>
+  <path d="M430 470C590 390 720 435 855 370C1015 292 1155 390 1290 330C1400 280 1478 305 1550 270V625H430Z" fill="#0b231f"/>
+  <path d="M430 520C670 455 770 500 940 438C1100 380 1210 460 1550 355V625H430Z" fill="#071714"/>
+  <path d="M430 510C620 455 815 510 975 470C1135 430 1270 495 1550 420" fill="none" stroke="#87da7a" stroke-opacity=".17" stroke-width="18"/>
+  <path d="M430 513C620 458 815 513 975 473C1135 433 1270 498 1550 423" fill="none" stroke="#d6ffd2" stroke-opacity=".13" stroke-width="4"/>
+
+  <!-- solar fields -->
+  <g transform="translate(1010 490) skewX(-20)">
+    <g fill="#112d2e" stroke="#7dff32" stroke-opacity=".22" stroke-width="2">
+      <rect x="0" y="0" width="115" height="48"/><rect x="130" y="0" width="115" height="48"/><rect x="260" y="0" width="115" height="48"/>
+      <rect x="-35" y="62" width="115" height="48"/><rect x="95" y="62" width="115" height="48"/><rect x="225" y="62" width="115" height="48"/><rect x="355" y="62" width="115" height="48"/>
+    </g>
+    <g stroke="#79ef50" stroke-opacity=".16" stroke-width="1">
+      <path d="M38 0V48M76 0V48M168 0V48M206 0V48M298 0V48M336 0V48"/>
+      <path d="M3 62V110M41 62V110M133 62V110M171 62V110M263 62V110M301 62V110M393 62V110M431 62V110"/>
+    </g>
+  </g>
+
+  <!-- wind turbines -->
+  <g stroke="#c9e5df" stroke-opacity=".65" fill="none" stroke-linecap="round">
+    <g transform="translate(1335 310)">
+      <path d="M0 0V210" stroke-width="5"/><circle r="7" fill="#d9eee8" stroke="none"/>
+      <path d="M0 0L-75 -25M0 0L38 -70M0 0L48 62" stroke-width="5"/>
+    </g>
+    <g transform="translate(1460 355) scale(.72)">
+      <path d="M0 0V210" stroke-width="5"/><circle r="7" fill="#d9eee8" stroke="none"/>
+      <path d="M0 0L-75 -25M0 0L38 -70M0 0L48 62" stroke-width="5"/>
+    </g>
+    <g transform="translate(1215 365) scale(.58)">
+      <path d="M0 0V210" stroke-width="5"/><circle r="7" fill="#d9eee8" stroke="none"/>
+      <path d="M0 0L-75 -25M0 0L38 -70M0 0L48 62" stroke-width="5"/>
+    </g>
+  </g>
+
+  <!-- transmission grid -->
+  <g stroke="#87b9ac" stroke-opacity=".35" fill="none">
+    <path d="M925 390L925 525M885 470H965M897 430H953M925 390L887 470L925 525L963 470Z"/>
+    <path d="M815 420L815 520M785 475H845M794 445H836M815 420L785 475L815 520L845 475Z"/>
+    <path d="M845 445C930 400 1050 390 1160 410"/>
+    <path d="M845 475C930 430 1050 420 1160 440"/>
+  </g>
+</g>
+
+<!-- digital globe -->
+<g transform="translate(1110 285)" filter="url(#greenGlow)">
+  <circle r="210" fill="#091b19" fill-opacity=".26" stroke="#7dff32" stroke-opacity=".48" stroke-width="2"/>
+  <ellipse rx="210" ry="62" fill="none" stroke="#8dff55" stroke-opacity=".22"/>
+  <ellipse rx="210" ry="112" fill="none" stroke="#8dff55" stroke-opacity=".16" transform="rotate(28)"/>
+  <ellipse rx="210" ry="112" fill="none" stroke="#8dff55" stroke-opacity=".16" transform="rotate(-28)"/>
+  <ellipse rx="78" ry="210" fill="none" stroke="#8dff55" stroke-opacity=".22"/>
+  <ellipse rx="135" ry="210" fill="none" stroke="#8dff55" stroke-opacity=".14"/>
+  <path d="M-135 -62L-90 -114L-28 -124L12 -90L45 -98L82 -66L115 -20L82 12L38 2L18 38L-28 52L-58 22L-96 4Z" fill="#4ecf31" fill-opacity=".22" stroke="#a3ff70" stroke-opacity=".5"/>
+  <path d="M-18 60L18 84L35 132L16 170L-18 150L-40 105Z" fill="#4ecf31" fill-opacity=".16" stroke="#a3ff70" stroke-opacity=".35"/>
+  <g fill="#b8ff8f">
+    <circle cx="-95" cy="-42" r="4"/><circle cx="-43" cy="-92" r="3"/><circle cx="18" cy="-52" r="4"/>
+    <circle cx="70" cy="-18" r="3"/><circle cx="-12" cy="18" r="3"/><circle cx="24" cy="96" r="3"/>
+  </g>
+  <path d="M-155 -95C-20 -210 175 -155 228 -12" fill="none" stroke="#a8ff78" stroke-opacity=".38" stroke-width="2" stroke-dasharray="7 10"/>
+  <path d="M-205 32C-60 160 105 160 205 48" fill="none" stroke="#a8ff78" stroke-opacity=".32" stroke-width="2" stroke-dasharray="4 9"/>
+</g>
+
+<!-- window mullions -->
+<g stroke="#17252a" stroke-width="10">
+  <path d="M680 70V625"/><path d="M935 70V625"/><path d="M1265 70V625"/>
+</g>
+<g stroke="#7dff32" stroke-opacity=".07" stroke-width="2">
+  <path d="M680 70V625"/><path d="M935 70V625"/><path d="M1265 70V625"/>
+</g>
+
+<!-- executive table -->
+<path d="M270 610L1150 580L1540 900H70Z" fill="url(#desk)" stroke="#ffffff" stroke-opacity=".08"/>
+<path d="M360 648L1165 620" stroke="#7dff32" stroke-opacity=".12" stroke-width="2"/>
+<path d="M130 850L1460 785" stroke="#ffffff" stroke-opacity=".05" stroke-width="3"/>
+
+<!-- chairs -->
+<g fill="#0c1417" stroke="#2b393b" stroke-width="3">
+  <path d="M250 635Q190 630 175 685V800H300V685Q300 640 250 635Z"/>
+  <path d="M470 620Q420 615 405 660V755H520V660Q520 625 470 620Z"/>
+  <path d="M1260 620Q1210 615 1195 660V755H1310V660Q1310 625 1260 620Z"/>
+  <path d="M1440 650Q1380 645 1365 700V820H1495V700Q1495 655 1440 650Z"/>
+</g>
+
+<!-- subtle desk objects -->
+<g>
+  <rect x="675" y="690" width="210" height="95" rx="8" fill="#141f21" stroke="#7dff32" stroke-opacity=".12" transform="skewX(-16)"/>
+  <path d="M738 715H835" stroke="#9db5ae" stroke-opacity=".28" stroke-width="3"/>
+  <circle cx="1010" cy="690" r="27" fill="#142024" stroke="#ffffff" stroke-opacity=".12"/>
+  <circle cx="1048" cy="680" r="18" fill="#101a1d" stroke="#ffffff" stroke-opacity=".10"/>
+</g>
+
+<!-- ambient highlights -->
+<path d="M420 72H1547" stroke="#7dff32" stroke-opacity=".15"/>
+<path d="M440 625H1545" stroke="#7dff32" stroke-opacity=".08"/>
+<rect x="0" y="0" width="1600" height="900" fill="none" stroke="#ffffff" stroke-opacity=".03"/>
+</svg>
