@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="TerraHash Energy corporate governance documents, policies, committee terms of reference and constitutional documents.">
+<title>Corporate Governance Documents | TerraHash Energy</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="shortcut icon" href="/favicon-48x48.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+:root{--gov-bg:#031019;--gov-panel:#071925;--gov-panel2:#0a202d;--gov-green:#7dff32;--gov-text:#f4f8f6;--gov-muted:#9eb1b7;--gov-line:rgba(255,255,255,.10)}
+.gov-page{background:var(--gov-bg);color:var(--gov-text)}
+.gov-page .site-header{background:rgba(2,13,21,.94);border-bottom:1px solid rgba(255,255,255,.07)}
+.gov-page .nav a{color:#d5e0e2}.gov-page .nav a.active{color:var(--gov-green)}
+.gov-page .footer{background:#020b12}
+.gov-hero{min-height:500px;position:relative;display:flex;align-items:end;padding:125px 5% 74px;overflow:hidden;background:
+radial-gradient(circle at 80% 28%,rgba(125,255,50,.13),transparent 24%),
+linear-gradient(135deg,#020d15 0%,#061923 55%,#07170f 100%)}
+.gov-hero:before{content:"";position:absolute;inset:0;background:
+linear-gradient(115deg,rgba(255,255,255,.025) 1px,transparent 1px),
+linear-gradient(25deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:56px 56px}
+.gov-hero:after{content:"";position:absolute;left:5%;right:5%;bottom:0;height:1px;background:linear-gradient(90deg,var(--gov-green),rgba(125,255,50,.06))}
+.gov-hero-copy{position:relative;z-index:2;max-width:800px}
+.gov-eyebrow{font-size:11px;font-weight:800;letter-spacing:.18em;color:var(--gov-green);text-transform:uppercase}
+.gov-hero h1{font-size:clamp(44px,5.2vw,68px);line-height:1.02;letter-spacing:-.045em;margin:16px 0 18px}
+.gov-hero h1 span{color:var(--gov-green)}
+.gov-hero p{max-width:700px;color:#c1d0d4;font-size:16px;line-height:1.75}
+.gov-breadcrumb{margin-top:24px;color:#82979d;font-size:11px}.gov-breadcrumb a{color:#b7c8cd}.gov-breadcrumb span{margin:0 8px;color:#547169}
+.gov-summary{max-width:1240px;margin:auto;padding:34px 5%;display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--gov-line)}
+.gov-stat{padding:7px 24px;border-right:1px solid var(--gov-line)}.gov-stat:first-child{padding-left:0}.gov-stat:last-child{border-right:0}
+.gov-stat strong{display:block;font-size:24px;color:#fff}.gov-stat span{display:block;margin-top:4px;color:#82989f;font-size:10px;letter-spacing:.09em;text-transform:uppercase}
+.gov-section{max-width:1240px;margin:auto;padding:70px 5% 84px}
+.gov-intro{display:grid;grid-template-columns:.82fr 1.18fr;gap:70px;margin-bottom:34px;align-items:end}
+.gov-intro h2{font-size:36px;line-height:1.12;letter-spacing:-.035em;margin:10px 0 0}.gov-intro p{color:var(--gov-muted);line-height:1.8;margin:0}
+.gov-toolbar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0 23px;border-bottom:1px solid var(--gov-line)}
+.gov-filters{display:flex;gap:8px;flex-wrap:wrap}.gov-filter{appearance:none;border:1px solid rgba(255,255,255,.13);background:#071925;color:#b7c8cd;border-radius:999px;padding:8px 13px;font:inherit;font-size:11px;cursor:pointer}
+.gov-filter.active,.gov-filter:hover{border-color:rgba(125,255,50,.55);color:var(--gov-green);background:rgba(125,255,50,.06)}
+.gov-count{font-size:11px;color:#71868d}
+.gov-list{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+.doc-card{display:grid;grid-template-columns:58px 1fr auto;gap:18px;align-items:center;min-height:144px;padding:22px;background:linear-gradient(180deg,#081b27,#061721);border:1px solid var(--gov-line);border-radius:9px;transition:.18s ease}
+.doc-card:hover{transform:translateY(-2px);border-color:rgba(125,255,50,.30);box-shadow:0 18px 50px rgba(0,0,0,.16)}
+.doc-icon{width:54px;height:64px;border:1px solid rgba(125,255,50,.32);border-radius:6px;display:grid;place-items:center;background:rgba(125,255,50,.045);color:var(--gov-green);font-weight:900;font-size:13px;position:relative}
+.doc-icon:after{content:"PDF";position:absolute;bottom:8px;font-size:8px;letter-spacing:.1em;color:#a6b8bd}
+.doc-meta small{display:block;color:var(--gov-green);font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px}
+.doc-meta h3{font-size:16px;line-height:1.4;margin:0 0 6px;color:#f6faf8}.doc-meta p{font-size:11px;color:#7f949a;line-height:1.55;margin:0}
+.doc-actions{display:flex;gap:7px;flex-direction:column}.doc-btn{display:inline-flex;justify-content:center;align-items:center;min-width:86px;padding:8px 11px;border:1px solid rgba(255,255,255,.15);border-radius:5px;color:#d5e1e4;font-size:10px;font-weight:700}
+.doc-btn:hover{border-color:rgba(125,255,50,.5);color:var(--gov-green)}.doc-btn.download{background:#58bd29;border-color:#58bd29;color:#041007}.doc-btn.download:hover{background:#6ed63a;color:#041007}
+.gov-note{margin-top:30px;padding:21px 23px;border-left:2px solid var(--gov-green);background:rgba(125,255,50,.035);color:#8fa4aa;font-size:11px;line-height:1.75}
+.gov-note strong{color:#d8e4e7}
+.gov-cta{max-width:1120px;margin:0 auto 78px;padding:34px 38px;background:radial-gradient(circle at 80% 50%,rgba(125,255,50,.12),transparent 32%),#061a1a;border:1px solid rgba(125,255,50,.25);border-radius:8px;display:flex;justify-content:space-between;gap:30px;align-items:center}
+.gov-cta h2{font-size:27px;margin:6px 0 8px}.gov-cta p{color:#97abb0;font-size:12px;margin:0}
+.gov-cta a{display:inline-flex;white-space:nowrap;padding:11px 17px;border-radius:5px;background:#58bd29;color:#061306;font-size:11px;font-weight:800}
+@media(max-width:900px){.gov-intro{grid-template-columns:1fr;gap:18px}.gov-list{grid-template-columns:1fr}.gov-summary{grid-template-columns:1fr}.gov-stat{border-right:0;border-bottom:1px solid var(--gov-line);padding:16px 0}.gov-stat:last-child{border-bottom:0}.gov-toolbar{align-items:flex-start;flex-direction:column}.gov-cta{margin-left:20px;margin-right:20px}}
+@media(max-width:620px){.gov-hero{min-height:450px;padding:112px 20px 54px}.gov-section{padding:54px 20px 66px}.gov-summary{padding-left:20px;padding-right:20px}.doc-card{grid-template-columns:48px 1fr;gap:14px}.doc-icon{width:46px;height:56px}.doc-actions{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr}.gov-cta{padding:28px 24px;flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body class="gov-page">
+<header class="site-header"><a class="brand" href="index.html"><span class="logo">ϟ</span><span>TerraHash Energy</span></a><nav class="nav"><a href="index.html">Home</a><div class="nav-dropdown"><a href="about.html">About Us</a><div class="nav-submenu"><a href="leadership.html">Team &amp; Advisory Board</a><a href="milestones.html">Milestones 2013–2026</a></div></div><a href="solutions.html">Solutions</a><a href="digital-assets.html">Digital Assets</a><a href="ecosystem.html">Ecosystem</a><a href="market-intelligence.html">Market Intelligence</a><a class="active" href="investor-relations.html">Investor Relations</a><a href="news.html">News Center</a><a href="contact.html">Contact Us</a></nav><div class="header-actions"><button class="menu" data-menu aria-label="Open menu">☰</button></div></header>
+
+<main>
+<section class="gov-hero"><div class="gov-hero-copy"><div class="gov-eyebrow">Investor Relations / Governance</div><h1>Corporate Governance<br><span>Documents.</span></h1><p>Access TerraHash Energy corporate governance policies, board and committee terms of reference, shareholder communication materials and constitutional documents.</p><div class="gov-breadcrumb"><a href="index.html">Home</a><span>›</span><a href="investor-relations.html">Investor Relations</a><span>›</span>Corporate Governance</div></div></section>
+
+<section class="gov-summary"><div class="gov-stat"><strong>8</strong><span>Governance Documents</span></div><div class="gov-stat"><strong>PDF</strong><span>View Online or Download</span></div><div class="gov-stat"><strong>Sep 2026</strong><span>Document Library Updated</span></div></section>
+
+<section class="gov-section">
+<div class="gov-intro"><div><div class="gov-eyebrow">Document Library</div><h2>Policies and governance materials in one place.</h2></div><p>This document center is designed to provide direct access to TerraHash Energy governance materials. Select a document to view it in your browser or download a local PDF copy.</p></div>
+
+<div class="gov-toolbar"><div class="gov-filters"><button class="gov-filter active" data-filter="all">All Documents</button><button class="gov-filter" data-filter="board">Board</button><button class="gov-filter" data-filter="committee">Committees</button><button class="gov-filter" data-filter="shareholder">Shareholders</button><button class="gov-filter" data-filter="corporate">Corporate</button></div><div class="gov-count"><span id="docCount">8</span> documents</div></div>
+
+<div class="gov-list" id="documentList">
+
+<article class="doc-card" data-category="board"><div class="doc-icon">▤</div><div class="doc-meta"><small>Board Policy</small><h3>Board Diversity Policy</h3><p>董事会多元化政策</p></div><div class="doc-actions"><a class="doc-btn" href="downloads/governance/董事会多元化政策.pdf" target="_blank" rel="noopener">View PDF</a><a class="doc-btn download" href="downloads/governance/董事会多元化政策.pdf" download>Download</a></div></article>
+
+<article class="doc-card" data-category="board"><div class="doc-icon">▤</div><div class="doc-meta"><small>Board Procedure</small><h3>Board Nomination Procedures</h3><p>董事会提名程序</p></div><div class="doc-actions"><a class="doc-btn" href="downloads/governance/董事会提名程序.pdf" target="_blank" rel="noopener">View PDF</a><a class="doc-btn download" href="downloads/governance/董事会提名程序.pdf" download>Download</a></div></article>
+
+<article class="doc-card" data-category="board"><div class="doc-icon">▤</div><div class="doc-meta"><small>Board Information</small><h3>Board Members and Their Responsibilities</h3><p>董事名单及其职责</p></div><div class="doc-actions"><a class="doc-btn" href="downloads/governance/董事名单及其职责.pdf" target="_blank" rel="noopener">View PDF</a><a class="doc-btn download" href="downloads/governance/董事名单及其职责.pdf" download>Download</a></div></article>
+
+<article class="doc-card" data-category="shareholder"><div class="doc-icon">▤</div><div class="doc-meta"><small>Shareholder Policy</small><h3>Shareholder Communication Policy</h3><p>股东沟通政策</p></div><div class="doc-actions"><a class="doc-btn" href="downloads/governance/股东沟通政策.pdf" target="_blank" rel="noopener">View PDF</a><a class="doc-btn download" href="downloads/governance/股东沟通政策.pdf" download>Download</a></div></article>
+
+<article class="doc-card" data-category="committee"><div class="doc-icon">▤</div><div class="doc-meta"><small>Audit Committee</small><h3>Audit Committee Terms of Reference</h3><p>审计委员会职权范围</p></div><div class="doc-actions"><a class="doc-btn" href="downloads/governance/审计委员会职权范围.pdf" target="_blank" rel="noopener">View PDF</a><a class="doc-btn download" href="downloads/governance/审计委员会职权范围.pdf" download>Download</a></div></article>
+
+<article class="doc-card" data-category="corporate"><div class="doc-icon">▤</div><div class="doc-meta"><small>Constitutional Document</small><h3>Amended and Restated Memorandum and Articles of Association</h3><p>修订及重列组织章程大纲</p></div><div class="doc-actions"><a class="doc-btn" href="downloads/governance/修订及重列组织章程大纲.pdf" target="_blank" rel="noopener">View PDF</a><a class="doc-btn download" href="downloads/governance/修订及重列组织章程大纲.pdf" download>Download</a></div></article>
+
+<article class="doc-card" data-category="committee"><div class="doc-icon">▤</div><div class="doc-meta"><small>Nomination Committee</small><h3>Nomination Committee Terms of Reference</h3><p>职权范围任命委员会</p></div><div class="doc-actions"><a class="doc-btn" href="downloads/governance/职权范围任命委员会.pdf" target="_blank" rel="noopener">View PDF</a><a class="doc-btn download" href="downloads/governance/职权范围任命委员会.pdf" download>Download</a></div></article>
+
+<article class="doc-card" data-category="committee"><div class="doc-icon">▤</div><div class="doc-meta"><small>Remuneration Committee</small><h3>Remuneration Committee Terms of Reference</h3><p>职权范围-薪酬委员会</p></div><div class="doc-actions"><a class="doc-btn" href="downloads/governance/职权范围-薪酬委员会.pdf" target="_blank" rel="noopener">View PDF</a><a class="doc-btn download" href="downloads/governance/职权范围-薪酬委员会.pdf" download>Download</a></div></article>
+
+</div>
+<div class="gov-note"><strong>Document notice.</strong> The PDF documents available on this page are provided for corporate governance reference. If a document is amended or superseded, the latest formally approved version will govern.</div>
+</section>
+
+<section class="gov-cta"><div><div class="gov-eyebrow">Investor Relations</div><h2>Need additional corporate information?</h2><p>For governance, investor or corporate inquiries, contact the TerraHash Energy team.</p></div><a href="contact.html">CONTACT INVESTOR RELATIONS →</a></section>
+</main>
+
+<footer class="footer"><div class="footer-main"><div class="footer-brand"><a class="brand" href="index.html"><span class="logo">ϟ</span><span>TerraHash Energy</span></a><p>Clean energy infrastructure and digital innovation for a more transparent, smarter and sustainable future.</p></div><div><h4>About Us</h4><a href="about.html">Company Overview</a><a href="leadership.html">Leadership</a><a href="milestones.html">Milestones</a></div><div><h4>Solutions</h4><a href="solutions.html">Energy Infrastructure</a><a href="solutions.html">Energy Management</a></div><div><h4>Investors</h4><a href="investor-relations.html">Investor Relations</a><a href="corporate-governance.html">Corporate Governance</a></div><div><h4>Intelligence</h4><a href="market-intelligence.html">Market Intelligence</a><a href="digital-assets.html">Digital Assets</a></div><div><h4>Contact</h4><a href="contact.html">Investor Inquiry</a><a href="contact.html">Contact Us</a></div></div><div class="footer-bottom"><span>© 2026 TerraHash Energy. All rights reserved.</span><span>Governance information is subject to applicable law and formally approved company documents.</span></div><a href="https://www.linkedin.com/company/terrahash-energy/" target="_blank" rel="noopener noreferrer" aria-label="TerraHash Energy on LinkedIn" class="footer-linkedin"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V8.98h3.42v1.57h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.32 7.41a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.1 20.45H3.54V8.98H7.1v11.47Z"/></svg></a><div class="footer-corporate-info" style="margin-top:14px;font-size:12px;line-height:1.7;color:inherit;opacity:.78"><div>TerraHash Energy LLC · Los Angeles, California, United States</div><div><a href="mailto:ir@terrahashenergy.com">Corporate Inquiries: ir@terrahashenergy.com</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="applicant-privacy-notice.html">Applicant Privacy Notice</a> · <a href="https://www.linkedin.com/company/terrahash-energy/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div></div></footer>
+
+<script src="script.js"></script>
+<script>
+(function(){
+  const buttons=[...document.querySelectorAll('.gov-filter')];
+  const cards=[...document.querySelectorAll('.doc-card')];
+  const count=document.getElementById('docCount');
+  buttons.forEach(btn=>btn.addEventListener('click',()=>{
+    buttons.forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+    const filter=btn.dataset.filter; let visible=0;
+    cards.forEach(card=>{const show=filter==='all'||card.dataset.category===filter;card.style.display=show?'grid':'none';if(show)visible++;});
+    count.textContent=visible;
+  }));
+})();
+</script>
+</body>
+</html>
