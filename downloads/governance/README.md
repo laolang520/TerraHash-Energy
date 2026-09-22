@@ -1,14 +1,14 @@
-# TerraHash Energy Governance Downloads
+# Corporate Governance Documents
 
-Place the following PDF files in this folder using these exact filenames:
+This directory contains the PDF documents used by `corporate-governance.html`.
 
-1. 董事会多元化政策.pdf
-2. 董事会提名程序.pdf
-3. 董事名单及其职责.pdf
-4. 股东沟通政策.pdf
-5. 审计委员会职权范围.pdf
-6. 修订及重列组织章程大纲.pdf
-7. 职权范围任命委员会.pdf
-8. 职权范围-薪酬委员会.pdf
+Current files:
 
-The live page `/corporate-governance.html` is already configured to provide both browser viewing and direct downloads from this folder.
+- TerraHash_Energy_Board_Diversity_Policy.pdf
+- TerraHash_Energy_Shareholder_Director_Nomination_Procedures.pdf
+- TerraHash_Energy_List_of_Directors_Roles_and_Functions.pdf
+- TerraHash_Energy_Shareholders_Communication_Policy.pdf
+- TerraHash_Energy_Audit_Committee_Terms_of_Reference.pdf
+- TerraHash_Energy_Amended_and_Restated_Memorandum_and_Articles_of_Association.pdf
+- TerraHash_Energy_Nomination_Committee_Terms_of_Reference.pdf
+- TerraHash_Energy_Compensation_Committee_Terms_of_Reference.pdf
