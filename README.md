@@ -31,3 +31,15 @@ python -m http.server 8080 --directory web
 ## Homepage Visual
 
 The homepage uses the English corporate hero visual at `assets/homepage-hero.jpg`.
+
+## Recruitment form operations
+
+The production site is published from the repository root by `.github/workflows/pages.yml` on pushes to `main`.
+
+`careers-cdo.html`, `careers-coo.html` and `careers-cgo.html` submit native multipart POST requests through FormSubmit to the recruiting contact already listed on those pages: `hr@terrahashenergy.com`. Each submission includes the position, source page, applicant details and an optional PDF, DOC or DOCX resume (up to 10 MB). The existing general contact form continues to use its own recipient.
+
+FormSubmit requires email activation. Before relying on recruiting intake, submit a clearly labeled test from each live role page, complete the provider's verification step and follow any activation email received by the HR mailbox. After activation, submit again with a non-sensitive sample resume and check that both the fields and attachment arrive. Repository deployment and browser validation alone do not confirm inbox delivery. FormSubmit does not retain attachments for submissions awaiting activation.
+
+The service redirects to the originating role page's `#application-submitted` confirmation only after its submission flow. `careers-form.js` adds file validation and duplicate-submission protection; native submission and the confirmation also work without JavaScript. A provider error or a failed connection must not be treated as a successful submission.
+
+Provider references: https://formsubmit.co/documentation and https://formsubmit.co/help.
