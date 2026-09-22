@@ -1,0 +1,16 @@
+.email-application { scroll-margin-top: 105px; min-width: 0; }
+.email-application .contact-box { margin: 22px 0 16px; }
+.email-application .contact-box a { overflow-wrap: anywhere; }
+.email-apply { display: flex; align-items: center; justify-content: center; gap: 14px; box-sizing: border-box; width: 100%; min-height: 48px; padding: 14px 18px; border: 1px solid #7dff32; border-radius: 8px; background: #7dff32; color: #061008; font-size: 11px; font-weight: 900; text-align: center; text-decoration: none; }
+.email-apply:hover { background: #9aff61; border-color: #9aff61; color: #061008; }
+.email-application a:focus-visible, .email-template summary:focus-visible { outline: 2px solid #7dff32; outline-offset: 4px; }
+.email-template { margin: 20px 0 14px; border: 1px solid rgba(125,255,50,.2); border-radius: 10px; background: #050d0a; }
+.email-template summary { padding: 14px; color: #dce7df; font-size: 12px; font-weight: 700; line-height: 1.5; cursor: pointer; }
+.email-template summary::marker { color: #7dff32; }
+.email-template-content { padding: 0 14px 16px; color: #bdccc2; font-size: 12px; line-height: 1.7; }
+.email-template-content strong { color: #eaf4ed; }
+.email-template-content p { margin: 4px 0 16px; overflow-wrap: anywhere; }
+.email-template-content pre { margin: 4px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; }
+.email-application .email-fallback { color: #9bafa1; }
+.email-application .email-privacy { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.08); }
+.email-privacy a { color: #7dff32; text-decoration: underline; }

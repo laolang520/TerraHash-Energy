@@ -32,14 +32,14 @@ python -m http.server 8080 --directory web
 
 The homepage uses the English corporate hero visual at `assets/homepage-hero.jpg`.
 
-## Recruitment form operations
+## Recruitment email applications
 
 The production site is published from the repository root by `.github/workflows/pages.yml` on pushes to `main`.
 
-`careers-cdo.html`, `careers-coo.html` and `careers-cgo.html` submit native multipart POST requests through FormSubmit to the recruiting contact already listed on those pages: `hr@terrahashenergy.com`. Each submission includes the position, source page, applicant details and an optional PDF, DOC or DOCX resume (up to 10 MB). The existing general contact form continues to use its own recipient.
+The three executive role pages (`careers-cdo.html`, `careers-coo.html`, and `careers-cgo.html`) now offer **Apply by Email** links addressed to `hr@terrahashenergy.com`. Each link pre-fills the relevant position in the subject and an English application template in the message body, retaining the information requested by the previous form.
 
-FormSubmit requires email activation. Before relying on recruiting intake, submit a clearly labeled test from each live role page, complete the provider's verification step and follow any activation email received by the HR mailbox. After activation, submit again with a non-sensitive sample resume and check that both the fields and attachment arrive. Repository deployment and browser validation alone do not confirm inbox delivery. FormSubmit does not retain attachments for submissions awaiting activation.
+Applicants complete the draft in their own email app, attach their resume, and send it themselves. The link does not send mail or attach files automatically. The visible HR address and expandable template can also be copied into webmail if no default email app is configured. Resume attachment limits depend on the sender and recipient email providers.
 
-The service redirects to the originating role page's `#application-submitted` confirmation only after its submission flow. `careers-form.js` adds file validation and duplicate-submission protection; native submission and the confirmation also work without JavaScript. A provider error or a failed connection must not be treated as a successful submission.
+Recruitment no longer uses FormSubmit, activation emails, web uploads, or website submission confirmations. The existing general contact page remains separate. The role pages require no JavaScript for the email links or template disclosure.
 
-Provider references: https://formsubmit.co/documentation and https://formsubmit.co/help.
+Mailto format: https://www.rfc-editor.org/rfc/rfc6068.
