@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraHash Energy - 2026 LA Subsidiary Setup, Market Expansion & HK Power Fund</title>
+    <style>
+        :root {
+            --primary-color: #0d233a;
+            --accent-green: #2ecc71;
+            --accent-green-hover: #27ae60;
+            --bg-light: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --border-color: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-light); color: var(--text-main); line-height: 1.6; }
+
+        header {
+            position: relative;
+            background: linear-gradient(rgba(13, 35, 58, 0.88), rgba(13, 35, 58, 0.88)), 
+                        url('https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTRVT6O09htR6ZQi4AO2vdPeqmeTbUoDomnmEc-ruMNTuvV4oL1sdyWsEd9HzWJ22yuKJvMuC1lIzXFSO0') center/cover no-repeat;
+            color: #ffffff;
+            text-align: center;
+            padding: 4.5rem 1.5rem;
+            border-bottom: 4px solid var(--accent-green);
+        }
+        header h1 { font-size: 2.8rem; margin-bottom: 0.8rem; font-weight: 700; letter-spacing: 1px; }
+        header p { font-size: 1.15rem; color: #e2e8f0; max-width: 900px; margin: 0 auto; line-height: 1.5; }
+
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+        section { margin-bottom: 3rem; background: var(--card-bg); padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); }
+        section h2 { font-size: 1.8rem; color: var(--primary-color); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border-color); }
+
+        .overview-text p { margin-bottom: 1rem; font-size: 1.05rem; color: #4a5568; }
+
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        .card { background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); }
+        
+        .img-wrapper { width: 100%; height: 210px; background: #1a202c; overflow: hidden; position: relative; }
+        .card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.3s; }
+
+        .card-body { padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
+        .card-title { font-size: 1.25rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .card-location { font-size: 0.85rem; font-weight: bold; color: var(--accent-green); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .card-ul { list-style: none; margin-bottom: 1.5rem; }
+        .card-ul li { position: relative; padding-left: 1.25rem; margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--text-muted); }
+        .card-ul li::before { content: "•"; color: var(--accent-green); font-weight: bold; position: absolute; left: 0; }
+
+        .btn-modal { display: inline-block; background-color: var(--accent-green); color: #ffffff; border: none; padding: 0.6rem 1.2rem; border-radius: 4px; font-weight: 600; font-size: 0.9rem; text-align: center; cursor: pointer; transition: background 0.2s; }
+        .btn-modal:hover { background-color: var(--accent-green-hover); }
+
+        .timeline { position: relative; padding-left: 2rem; border-left: 3px solid var(--accent-green); }
+        .timeline-item { position: relative; margin-bottom: 2rem; }
+        .timeline-item::before { content: ""; position: absolute; left: -2.4rem; top: 0.25rem; width: 12px; height: 12px; border-radius: 50%; background-color: var(--accent-green); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--accent-green); }
+        .timeline-date { display: inline-block; background-color: var(--primary-color); color: #ffffff; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .timeline-title { font-size: 1.2rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .timeline-desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem; }
+
+        .milestone-box { background-color: #f8fafc; border-left: 3px solid var(--primary-color); padding: 0.75rem 1rem; border-radius: 0 4px 4px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .milestone-text { font-size: 0.85rem; color: #4a5568; font-weight: 500; }
+        .milestone-btn { color: var(--accent-green); background: none; border: none; font-weight: bold; font-size: 0.85rem; cursor: pointer; text-decoration: underline; }
+
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+        .modal-content { background-color: #ffffff; margin: 8% auto; padding: 2rem; border-radius: 8px; width: 90%; max-width: 650px; position: relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); }
+        .close-btn { position: absolute; right: 1.5rem; top: 1rem; font-size: 1.8rem; font-weight: bold; color: #a0aec0; cursor: pointer; }
+        .close-btn:hover { color: #333; }
+        .modal-title { font-size: 1.4rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .modal-address { font-size: 0.9rem; font-weight: bold; color: var(--accent-green); margin-bottom: 1rem; background: #eefbf3; padding: 0.4rem 0.8rem; border-radius: 4px; display: inline-block; }
+        .modal-body { font-size: 0.95rem; color: #4a5568; line-height: 1.7; }
+
+        footer { background-color: var(--primary-color); color: #a0aec0; text-align: center; padding: 2rem 1.5rem; font-size: 0.9rem; margin-top: 3rem; }
+    </style>
+<style>.milestone-site-header{display:flex;align-items:center;gap:20px;background:#020d12;color:#fff;padding:15px 3.5%;font-family:Inter,system-ui,sans-serif}.milestone-site-header .milestone-brand{color:#fff;font-size:19px;font-weight:800;text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:10px}.milestone-site-header .milestone-mark{border:2px solid #77e43e;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;color:#77e43e}.milestone-site-header nav{margin-left:auto;display:flex;gap:16px;align-items:center;overflow-x:auto;scrollbar-width:thin}.milestone-site-header nav a{font-size:12px;color:#e3ede7;text-decoration:none;white-space:nowrap}.milestone-site-header nav a:hover,.milestone-site-header nav .milestone-back{color:#77e43e}.milestone-site-header nav .milestone-back{border-left:1px solid #375344;padding-left:14px}@media(max-width:900px){.milestone-site-header{display:block}.milestone-site-header nav{margin-top:12px;padding-bottom:8px}.milestone-site-header .milestone-brand{font-size:17px}}</style></head>
+<body><div class="milestone-site-header"><a class="milestone-brand" href="../index.html"><span class="milestone-mark">ϟ</span> TerraHash Energy</a><nav aria-label="Main navigation"><a href="../index.html">Home</a><a href="../about.html">About Us</a><a href="../solutions.html">Solutions</a><a href="../digital-assets.html">Digital Assets</a><a href="../ecosystem.html">Ecosystem</a><a href="../market-intelligence.html">Market Intelligence</a><a href="../investor-relations.html">Investor Relations</a><a href="../news.html">News Center</a><a href="../careers.html">Careers</a><a href="../contact.html">Contact Us</a><a class="milestone-back" href="../milestones.html">← All Milestones</a></nav></div>
+
+    <header>
+        <h1>TerraHash Energy</h1>
+        <p>2026 YTD Review (As of September): LA Subsidiary Setup, North American Market Expansion & Hong Kong Green Power Capital Conduit</p>
+    </header>
+
+    <div class="container">
+        
+        <section class="overview-text">
+            <h2>2026 YTD Overview (Q1–Q3 2026): Preparing LA Subsidiary & HK Power Capital Execution</h2>
+            <p>As of <strong>September 2026</strong>, <strong>TerraHash Energy</strong> is actively executing its North American strategic roadmap. The company has established the <strong>Los Angeles Americas Subsidiary Steering Office</strong> in California to handle legal incorporation, grid compliance, and regional expansion. Simultaneously, <strong>Hong Kong Headquarters</strong> maintains its role as the global capital engine, channeling funds from its <strong>$500 Million Power Infra Fund II</strong> to upgrade high-voltage transformers and power grids across US operating sites.</p>
+        </section>
+
+        <section>
+            <h2>2026 YTD Regional Expansion & Power Capital Corridors</h2>
+            <div class="grid-container">
+                
+                <!-- Milestone section -->
+                <div class="card">
+                    <div class="img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1580655653885-65763b2597d0?q=80&w=800&auto=format&fit=crop" alt="Los Angeles Americas Subsidiary Setup Office" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop';">
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">LA Americas Subsidiary Setup & Expansion</h3>
+                            <div class="card-location">📍 Steering Office: Century City, Los Angeles, CA, USA</div>
+                            <ul class="card-ul">
+                                <li><strong>Subsidiary Setup Phase:</strong> Steering team handling US incorporation, local legal compliance, and talent hiring.</li>
+                                <li><strong>Grid Engagement:</strong> Establishing direct policy and PPA dialogs with CAISO, WECC, and ERCOT.</li>
+                            </ul>
+                        </div>
+                        <button class="btn-modal" onclick="openModal('modal1')">View Project Details ↗</button>
+                    </div>
+                </div>
+
+                <!-- Milestone section -->
+                <div class="card">
+                    <div class="img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800&auto=format&fit=crop" alt="Hong Kong Power Infrastructure Capital Conduit" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=800&auto=format&fit=crop';">
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">HK $500M Power Upgrade Capital Fund II</h3>
+                            <div class="card-location">📍 Global Capital Hub: Two IFC, Central, Hong Kong</div>
+                            <ul class="card-ul">
+                                <li><strong>Fund II Capital Deployment:</strong> Ongoing deployment of $500M for 345kV/230kV smart transformer purchases.</li>
+                                <li><strong>Cross-Border Treasury Bridge:</strong> Continuous cross-border liquidity pipeline servicing US grid construction.</li>
+                            </ul>
+                        </div>
+                        <button class="btn-modal" onclick="openModal('modal2')">View Project Details ↗</button>
+                    </div>
+                </div>
+
+                <!-- Milestone section -->
+                <div class="card">
+                    <div class="img-wrapper">
+                        <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcSJsORAwAscn3luqZdWeOEyH4kqC7yEfqzK8tCadVUWMMx_z-sjemv828SAehDjZt6Qn47uGIf1hnc1fF8" alt="Southwest US Solar Interconnect & Nexus Treasury">
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Southwest US Solar Interconnect & Nexus Treasury</h3>
+                            <div class="card-location">📍 Grid Field: Navajo Energy Belt, AZ/CA Border, USA</div>
+                            <ul class="card-ul">
+                                <li><strong>300MW Solar Interconnect Setup:</strong> On-site power transformer installation managed under LA steering committee.</li>
+                                <li><strong>Nexus zkVM Integration:</strong> Automated on-chain treasury settlements tied back to HK vault reserves.</li>
+                            </ul>
+                        </div>
+                        <button class="btn-modal" onclick="openModal('modal3')">View Project Details ↗</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>2026 Timeline & Strategic Milestones (Up to September 2026)</h2>
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <span class="timeline-date">March 2026</span>
+                    <h3 class="timeline-title">Los Angeles Subsidiary Steering Office Established</h3>
+                    <p class="timeline-desc">TerraHash formally set up its Americas Subsidiary Steering Office in Century City, Los Angeles, initiating corporate structuring and US power market entry planning.</p>
+                    <div class="milestone-box">
+                        <span class="milestone-text">Location: Century Plaza Tower, Century City, Los Angeles, CA 90067, USA</span>
+                        <button class="milestone-btn" onclick="openModal('modal1')">View Details ↗</button>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">June 2026</span>
+                    <h3 class="timeline-title">Hong Kong Executes First Tranche of $500M Power Fund II</h3>
+                    <p class="timeline-desc">Hong Kong HQ disbursed the first tranche of $500M Power Infra Fund II, procuring 500MVA transformers and GIS switchgear for US sites.</p>
+                    <div class="milestone-box">
+                        <span class="milestone-text">Location: Suite 6808, Two IFC, Central, Hong Kong</span>
+                        <button class="milestone-btn" onclick="openModal('modal2')">View Details ↗</button>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">September 2026 (Current)</span>
+                    <h3 class="timeline-title">Current Status: Global Managed Capacity Hits 16.8 EH/s</h3>
+                    <p class="timeline-desc">With LA subsidiary preparation in full swing and HK capital flowing steadily, global green managed hashrate reached 16.8 EH/s by September 2026.</p>
+                    <div class="milestone-box">
+                        <span class="milestone-text">Location: Global Network - LA Steering Office, HK HQ & On-Chain Nexus Treasury</span>
+                        <button class="milestone-btn" onclick="openModal('modal4')">View Details ↗</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+            <h3 class="modal-title">2026 Los Angeles Subsidiary Preparation and Expansion</h3>
+            <div class="modal-address">📍 Steering office: Suite 2800, Century Plaza Tower, Century City, Los Angeles, CA 90067, USA</div>
+            <div class="modal-body"><p>As of September 2026, the archived roadmap describes preparations to establish a wholly owned Americas subsidiary, with a steering office in Century City, Los Angeles, coordinating recruitment and legal, tax and corporate structuring.</p><br><p>The team is described as engaging with California and Western electricity-market stakeholders, including CAISO and WECC, regarding interconnection planning and renewable power-purchase arrangements.</p></div>
+        </div>
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
+            <h3 class="modal-title">2026 Hong Kong Power-Infrastructure Capital Deployment</h3>
+            <div class="modal-address">📍 Hong Kong capital offices: Suite 6808, Two IFC, Central, Hong Kong; One Exchange Square, Hong Kong</div>
+            <div class="modal-body"><p>The archived report describes the first-half 2026 deployment of a $500 million Asia-Pacific green-power and high-voltage substation infrastructure fund, coordinated by the Hong Kong headquarters.</p><br><p>The plan states that capital is directed toward North American transformer and switchgear upgrades, including 500 MVA smart transformers and gas-insulated switchgear, to support project delivery.</p></div>
+        </div>
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal3')">&times;</span>
+            <h3 class="modal-title">2026 Southwest US Solar, Storage and Computing Corridor</h3>
+            <div class="modal-address">📍 Planned site: Navajo Clean Energy Corridor, CA/AZ border, 86047, USA</div>
+            <div class="modal-body"><p>The Los Angeles steering office's archived plan describes a 300 MW solar project paired with a 100 MW / 400 MWh battery storage system in the US Southwest.</p><br><p>The project proposes auditing infrastructure progress and funding flows through Nexus zero-knowledge smart contracts linked to the Hong Kong treasury.</p></div>
+        </div>
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal4')">&times;</span>
+            <h3 class="modal-title">2026 Global Managed Hashrate Reaches 16.8 EH/s</h3>
+            <div class="modal-address">📍 Operating network: Los Angeles steering office; Hong Kong headquarters; Nexus on-chain treasury; North American and European power sites</div>
+            <div class="modal-body"><p>The archived September 2026 milestone describes coordination between the Los Angeles office for Americas power assets and the Hong Kong headquarters for finance and derivatives risk management.</p><br><p>The report states that global managed hashrate reached 16.8 EH/s in September 2026, with the company targeting further growth before year-end.</p></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 TerraHash Energy. All Rights Reserved. | LA Subsidiary Setup, HK $500M Power Infra Fund II & Global 16.8 EH/s Clean Compute</p>
+    </footer>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
