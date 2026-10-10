@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraHash Energy - 2016 Hong Kong Review</title>
+    <style>
+        :root {
+            --primary-color: #0d233a;
+            --accent-green: #2ecc71;
+            --accent-green-hover: #27ae60;
+            --bg-light: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --border-color: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-light); color: var(--text-main); line-height: 1.6; }
+
+        /* Milestone styles */
+        header {
+            position: relative;
+            background: linear-gradient(rgba(13, 35, 58, 0.85), rgba(13, 35, 58, 0.85)), 
+                        url('https://images.unsplash.com/photo-1506970846876-ac31dd246a67?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+            color: #ffffff;
+            text-align: center;
+            padding: 4.5rem 1.5rem;
+            border-bottom: 4px solid var(--accent-green);
+        }
+        header h1 { font-size: 2.8rem; margin-bottom: 0.8rem; font-weight: 700; letter-spacing: 1px; }
+        header p { font-size: 1.15rem; color: #e2e8f0; max-width: 900px; margin: 0 auto; line-height: 1.5; }
+
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+        section { margin-bottom: 3rem; background: var(--card-bg); padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); }
+        section h2 { font-size: 1.8rem; color: var(--primary-color); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border-color); }
+
+        .overview-text p { margin-bottom: 1rem; font-size: 1.05rem; color: #4a5568; }
+
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        .card { background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); }
+        .card img { width: 100%; height: 210px; object-fit: cover; display: block; }
+        .card-body { padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
+        .card-title { font-size: 1.25rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .card-ul { list-style: none; margin-bottom: 1.5rem; }
+        .card-ul li { position: relative; padding-left: 1.25rem; margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--text-muted); }
+        .card-ul li::before { content: "•"; color: var(--accent-green); font-weight: bold; position: absolute; left: 0; }
+
+        .btn-modal { display: inline-block; background-color: var(--accent-green); color: #ffffff; border: none; padding: 0.6rem 1.2rem; border-radius: 4px; font-weight: 600; font-size: 0.9rem; text-align: center; cursor: pointer; transition: background 0.2s; }
+        .btn-modal:hover { background-color: var(--accent-green-hover); }
+
+        .timeline { position: relative; padding-left: 2rem; border-left: 3px solid var(--accent-green); }
+        .timeline-item { position: relative; margin-bottom: 2rem; }
+        .timeline-item::before { content: ""; position: absolute; left: -2.4rem; top: 0.25rem; width: 12px; height: 12px; border-radius: 50%; background-color: var(--accent-green); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--accent-green); }
+        .timeline-date { display: inline-block; background-color: var(--primary-color); color: #ffffff; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .timeline-title { font-size: 1.2rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .timeline-desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem; }
+
+        .milestone-box { background-color: #f8fafc; border-left: 3px solid var(--primary-color); padding: 0.75rem 1rem; border-radius: 0 4px 4px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .milestone-text { font-size: 0.85rem; color: #4a5568; font-weight: 500; }
+        .milestone-btn { color: var(--accent-green); background: none; border: none; font-weight: bold; font-size: 0.85rem; cursor: pointer; text-decoration: underline; }
+
+        /* Milestone styles */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+        .modal-content { background-color: #ffffff; margin: 10% auto; padding: 2rem; border-radius: 8px; width: 90%; max-width: 600px; position: relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); }
+        .close-btn { position: absolute; right: 1.5rem; top: 1rem; font-size: 1.8rem; font-weight: bold; color: #a0aec0; cursor: pointer; }
+        .close-btn:hover { color: #333; }
+        .modal-title { font-size: 1.4rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .modal-body { font-size: 0.95rem; color: #4a5568; line-height: 1.7; }
+
+        footer { background-color: var(--primary-color); color: #a0aec0; text-align: center; padding: 2rem 1.5rem; font-size: 0.9rem; margin-top: 3rem; }
+    </style>
+<style>.milestone-site-header{display:flex;align-items:center;gap:20px;background:#020d12;color:#fff;padding:15px 3.5%;font-family:Inter,system-ui,sans-serif}.milestone-site-header .milestone-brand{color:#fff;font-size:19px;font-weight:800;text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:10px}.milestone-site-header .milestone-mark{border:2px solid #77e43e;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;color:#77e43e}.milestone-site-header nav{margin-left:auto;display:flex;gap:16px;align-items:center;overflow-x:auto;scrollbar-width:thin}.milestone-site-header nav a{font-size:12px;color:#e3ede7;text-decoration:none;white-space:nowrap}.milestone-site-header nav a:hover,.milestone-site-header nav .milestone-back{color:#77e43e}.milestone-site-header nav .milestone-back{border-left:1px solid #375344;padding-left:14px}@media(max-width:900px){.milestone-site-header{display:block}.milestone-site-header nav{margin-top:12px;padding-bottom:8px}.milestone-site-header .milestone-brand{font-size:17px}}</style></head>
+<body><div class="milestone-site-header"><a class="milestone-brand" href="../index.html"><span class="milestone-mark">ϟ</span> TerraHash Energy</a><nav aria-label="Main navigation"><a href="../index.html">Home</a><a href="../about.html">About Us</a><a href="../solutions.html">Solutions</a><a href="../digital-assets.html">Digital Assets</a><a href="../ecosystem.html">Ecosystem</a><a href="../market-intelligence.html">Market Intelligence</a><a href="../investor-relations.html">Investor Relations</a><a href="../news.html">News Center</a><a href="../careers.html">Careers</a><a href="../contact.html">Contact Us</a><a class="milestone-back" href="../milestones.html">← All Milestones</a></nav></div>
+
+    <!-- Milestone section -->
+    <header>
+        <h1>TerraHash Energy</h1>
+        <p>2016 Milestone Review: Post-Paris Framework, District Cooling Infrastructure & Energy Market Regulatory Reforms in Hong Kong</p>
+    </header>
+
+    <div class="container">
+        
+        <section class="overview-text">
+            <h2>2016 Strategic Overview in Hong Kong</h2>
+            <p>In 2016, following the ratification of the Paris Agreement, Hong Kong established the inter-departmental <em>Steering Committee on Climate Change</em>. <strong>TerraHash Energy</strong> expanded its core solutions into large-scale district energy management, real-time demand-side response, and next-generation IoT integration across Hong Kong’s major infrastructure developments.</p>
+        </section>
+
+        <section>
+            <h2>2016 Hong Kong Regional Development Blueprint</h2>
+            <div class="grid-container">
+                
+                <!-- Milestone section -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800&auto=format&fit=crop" alt="Climate Action and Modern City">
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Post-Paris Policy & Utility Reforms</h3>
+                            <ul class="card-ul">
+                                <li><strong>Steering Committee Established:</strong> Chief Secretary led new climate action steering framework.</li>
+                                <li><strong>Scheme of Control (SCA):</strong> Negotiations kicked off for post-2018 feed-in tariff and RE integration.</li>
+                            </ul>
+                        </div>
+                        <button class="btn-modal" onclick="openModal('modal1')">View Project Details ↗</button>
+                    </div>
+                </div>
+
+                <!-- Milestone section -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=800&auto=format&fit=crop" alt="Kai Tak Infrastructure">
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Kai Tak District Cooling System (DCS)</h3>
+                            <ul class="card-ul">
+                                <li><strong>Infrastructure Phase II:</strong> Expanded seawater-cooled central air-conditioning network.</li>
+                                <li><strong>Smart Optimization:</strong> Real-time load allocation for Kai Tak Cruise Terminal & hospitals.</li>
+                            </ul>
+                        </div>
+                        <button class="btn-modal" onclick="openModal('modal2')">View Project Details ↗</button>
+                    </div>
+                </div>
+
+                <!-- Milestone section -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop" alt="Kowloon East Commercial District">
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Kowloon East Smart City Pilot Zone</h3>
+                            <ul class="card-ul">
+                                <li><strong>EKEO Low-Carbon Trial:</strong> Smart energy sensors deployed in Kwun Tong industrial revamping.</li>
+                                <li><strong>Microgrid Management:</strong> Automated energy balance systems for commercial towers.</li>
+                            </ul>
+                        </div>
+                        <button class="btn-modal" onclick="openModal('modal3')">View Project Details ↗</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>2016 TerraHash Development Timeline</h2>
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <span class="timeline-date">March 2016</span>
+                    <h3 class="timeline-title">District Energy Telemetry Pilot (Kai Tak Development Area)</h3>
+                    <p class="timeline-desc">Deployed advanced IoT telemetry nodes across the Kai Tak District Cooling System, optimizing seawater pump energy consumption during off-peak hours.</p>
+                    <div class="milestone-box">
+                        <span class="milestone-text">Location: Kai Tak Cruise Terminal & Public Infrastructure Hub</span>
+                        <button class="milestone-btn" onclick="openModal('modal2')">View Details ↗</button>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">July 2016</span>
+                    <h3 class="timeline-title">Industrial Revitalization Demand-Response Project (Kwun Tong)</h3>
+                    <p class="timeline-desc">Partnered with Kowloon East Smart City Office (EKEO) to retrofit former industrial buildings with automated energy management controllers.</p>
+                    <div class="milestone-box">
+                        <span class="milestone-text">Location: Kwun Tong & Kowloon Bay Industrial Zone</span>
+                        <button class="milestone-btn" onclick="openModal('modal3')">View Details ↗</button>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">October 2016</span>
+                    <h3 class="timeline-title">Substation Load Management Expansion (CLP West Kowloon Grid)</h3>
+                    <p class="timeline-desc">Integrated real-time transformer telemetry with CLP Power's distribution sub-stations in West Kowloon, improving peak-load tolerance.</p>
+                    <div class="milestone-box">
+                        <span class="milestone-text">Location: West Kowloon Cultural & Transportation Hub</span>
+                        <button class="milestone-btn" onclick="openModal('modal4')">View Details ↗</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+            <h3 class="modal-title">2016 Paris Agreement Response and Utility Regulation</h3>
+            <div class="modal-body"><p>Hong Kong formed a Steering Committee on Climate Change in 2016, led by the Chief Secretary, to coordinate its response to the Paris Agreement.</p><br><p>The government opened discussions with CLP Power and HK Electric on new Scheme of Control Agreements, including future feed-in tariffs and allowable returns. TerraHash's archived plan describes preparing standardized smart-meter and distributed-energy interfaces.</p></div>
+        </div>
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
+            <h3 class="modal-title">2016 Kai Tak District Cooling System</h3>
+            <div class="modal-body"><p>Kai Tak's district cooling system is a major public infrastructure initiative that uses centralized seawater cooling to serve buildings across the development area.</p><br><p>During its second-stage expansion in 2016, the archived project describes predictive water-flow and temperature-differential controls for pump operation, responding to demand from the cruise terminal and nearby facilities, with a claimed cooling-energy saving of 35%.</p></div>
+        </div>
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal3')">&times;</span>
+            <h3 class="modal-title">2016 Kowloon East Smart-City Pilot</h3>
+            <div class="modal-body"><p>The Energizing Kowloon East Office promoted a Smart Kowloon East program to transform older industrial districts around Kwun Tong and Kowloon Bay into more efficient commercial areas.</p><br><p>TerraHash's archived work describes edge-computing energy monitors and microgrid controls designed to automate load shifting for air-conditioning and lighting in revitalized industrial buildings and offices.</p></div>
+        </div>
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal4')">&times;</span>
+            <h3 class="modal-title">2016 West Kowloon Grid and Substation Telemetry</h3>
+            <div class="modal-body"><p>Expansion of the West Kowloon Cultural District and high-speed rail construction increased electricity demand in the area during 2016.</p><br><p>The archived collaboration with CLP Power describes IoT telemetry at high-voltage substations, providing millisecond-level transformer-temperature and instantaneous-load monitoring to support grid reliability.</p></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2016 TerraHash Energy. All Rights Reserved. | Post-Paris Framework, District Energy & Smart Grid Solutions</p>
+    </footer>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
