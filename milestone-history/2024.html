@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraHash Energy - 2024 Wind Upgrades & Substation Heavy Transformer Expansion</title>
+    <style>
+        :root {
+            --primary-color: #0d233a;
+            --accent-green: #2ecc71;
+            --accent-green-hover: #27ae60;
+            --bg-light: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --border-color: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-light); color: var(--text-main); line-height: 1.6; }
+
+        header {
+            position: relative;
+            background: linear-gradient(rgba(13, 35, 58, 0.85), rgba(13, 35, 58, 0.85)), 
+                        url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+            color: #ffffff;
+            text-align: center;
+            padding: 4.5rem 1.5rem;
+            border-bottom: 4px solid var(--accent-green);
+        }
+        header h1 { font-size: 2.8rem; margin-bottom: 0.8rem; font-weight: 700; letter-spacing: 1px; }
+        header p { font-size: 1.15rem; color: #e2e8f0; max-width: 900px; margin: 0 auto; line-height: 1.5; }
+
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+        section { margin-bottom: 3rem; background: var(--card-bg); padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); }
+        section h2 { font-size: 1.8rem; color: var(--primary-color); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border-color); }
+
+        .overview-text p { margin-bottom: 1rem; font-size: 1.05rem; color: #4a5568; }
+
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        .card { background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); }
+        .card img { width: 100%; height: 210px; object-fit: cover; display: block; }
+        .card-body { padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
+        .card-title { font-size: 1.25rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .card-location { font-size: 0.85rem; font-weight: bold; color: var(--accent-green); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .card-ul { list-style: none; margin-bottom: 1.5rem; }
+        .card-ul li { position: relative; padding-left: 1.25rem; margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--text-muted); }
+        .card-ul li::before { content: "•"; color: var(--accent-green); font-weight: bold; position: absolute; left: 0; }
+
+        .btn-modal { display: inline-block; background-color: var(--accent-green); color: #ffffff; border: none; padding: 0.6rem 1.2rem; border-radius: 4px; font-weight: 600; font-size: 0.9rem; text-align: center; cursor: pointer; transition: background 0.2s; }
+        .btn-modal:hover { background-color: var(--accent-green-hover); }
+
+        .timeline { position: relative; padding-left: 2rem; border-left: 3px solid var(--accent-green); }
+        .timeline-item { position: relative; margin-bottom: 2rem; }
+        .timeline-item::before { content: ""; position: absolute; left: -2.4rem; top: 0.25rem; width: 12px; height: 12px; border-radius: 50%; background-color: var(--accent-green); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--accent-green); }
+        .timeline-date { display: inline-block; background-color: var(--primary-color); color: #ffffff; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .timeline-title { font-size: 1.2rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .timeline-desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem; }
+
+        .milestone-box { background-color: #f8fafc; border-left: 3px solid var(--primary-color); padding: 0.75rem 1rem; border-radius: 0 4px 4px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .milestone-text { font-size: 0.85rem; color: #4a5568; font-weight: 500; }
+        .milestone-btn { color: var(--accent-green); background: none; border: none; font-weight: bold; font-size: 0.85rem; cursor: pointer; text-decoration: underline; }
+
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+        .modal-content { background-color: #ffffff; margin: 8% auto; padding: 2rem; border-radius: 8px; width: 90%; max-width: 650px; position: relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); }
+        .close-btn { position: absolute; right: 1.5rem; top: 1rem; font-size: 1.8rem; font-weight: bold; color: #a0aec0; cursor: pointer; }
+        .close-btn:hover { color: #333; }
+        .modal-title { font-size: 1.4rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .modal-address { font-size: 0.9rem; font-weight: bold; color: var(--accent-green); margin-bottom: 1rem; background: #eefbf3; padding: 0.4rem 0.8rem; border-radius: 4px; display: inline-block; }
+        .modal-body { font-size: 0.95rem; color: #4a5568; line-height: 1.7; }
+
+        footer { background-color: var(--primary-color); color: #a0aec0; text-align: center; padding: 2rem 1.5rem; font-size: 0.9rem; margin-top: 3rem; }
+    </style>
+<style>.milestone-site-header{display:flex;align-items:center;gap:20px;background:#020d12;color:#fff;padding:15px 3.5%;font-family:Inter,system-ui,sans-serif}.milestone-site-header .milestone-brand{color:#fff;font-size:19px;font-weight:800;text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:10px}.milestone-site-header .milestone-mark{border:2px solid #77e43e;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;color:#77e43e}.milestone-site-header nav{margin-left:auto;display:flex;gap:16px;align-items:center;overflow-x:auto;scrollbar-width:thin}.milestone-site-header nav a{font-size:12px;color:#e3ede7;text-decoration:none;white-space:nowrap}.milestone-site-header nav a:hover,.milestone-site-header nav .milestone-back{color:#77e43e}.milestone-site-header nav .milestone-back{border-left:1px solid #375344;padding-left:14px}@media(max-width:900px){.milestone-site-header{display:block}.milestone-site-header nav{margin-top:12px;padding-bottom:8px}.milestone-site-header .milestone-brand{font-size:17px}}</style></head>
+<body><div class="milestone-site-header"><a class="milestone-brand" href="../index.html"><span class="milestone-mark">ϟ</span> TerraHash Energy</a><nav aria-label="Main navigation"><a href="../index.html">Home</a><a href="../about.html">About Us</a><a href="../solutions.html">Solutions</a><a href="../digital-assets.html">Digital Assets</a><a href="../ecosystem.html">Ecosystem</a><a href="../market-intelligence.html">Market Intelligence</a><a href="../investor-relations.html">Investor Relations</a><a href="../news.html">News Center</a><a href="../careers.html">Careers</a><a href="../contact.html">Contact Us</a><a class="milestone-back" href="../milestones.html">← All Milestones</a></nav></div>
+
+    <header>
+        <h1>TerraHash Energy</h1>
+        <p>2024 Strategic Review: Wind Energy Grid Modernization, 345kV Substation & High-Voltage Transformer Field Redevelopment</p>
+    </header>
+
+    <div class="container">
+        
+        <section class="overview-text">
+            <h2>2024 Strategic Overview: Post-Halving Heavy Power Infrastructure Breakthrough</h2>
+            <p>Following the April 2024 Bitcoin Halving, <strong>TerraHash Energy</strong> spearheaded a major infrastructure upgrade across its primary construction sites in <strong>Texas (USA), North Dakota (USA), Hong Kong (HQ), and Iceland</strong>. To maximize efficiency, TerraHash executed a <strong>345kV/230kV Substation Modernization Program</strong>, commissioning 500MVA oil-immersed transformers and Gas-Insulated Switchgear (GIS) directly adjacent to major wind energy corridors.</p>
+        </section>
+
+        <section>
+            <h2>2024 Construction Sites & High-Voltage Infrastructure Hubs</h2>
+            <div class="grid-container">
+                
+                <!-- Milestone section -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?q=80&w=800&auto=format&fit=crop" alt="High-Voltage Transformer Substation Expansion">
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Mega-Transformer & Substation Redevelopment</h3>
+                            <div class="card-location">📍 Pecos Substation Field, Ward County, Texas, USA</div>
+                            <ul class="card-ul">
+                                <li><strong>345kV Main Substation Upgrade:</strong> Commissioned 500MVA oil-immersed step-down transformer yard.</li>
+                                <li><strong>GIS Switchgear Architecture:</strong> Reduced sub-station transmission and transformation loss to 0.78%.</li>
+                            </ul>
+                        </div>
+                        <button class="btn-modal" onclick="openModal('modal1')">View Project Details ↗</button>
+                    </div>
+                </div>
+
+                <!-- Milestone section -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=800&auto=format&fit=crop" alt="Wind Power Microgrid 2.0 Integration">
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Wind Energy Microgrid 2.0 & Grid Support</h3>
+                            <div class="card-location">📍 Stutsman County Wind Hub, North Dakota, USA</div>
+                            <ul class="card-ul">
+                                <li><strong>10-ms Dynamic Load Response:</strong> Substation smart tap changers paired directly with 200MW wind turbines.</li>
+                                <li><strong>Off-Grid Wind Interconnect:</strong> Eliminated night-time wind curtailment at Courtenay Wind Corridor.</li>
+                            </ul>
+                        </div>
+                        <button class="btn-modal" onclick="openModal('modal2')">View Project Details ↗</button>
+                    </div>
+                </div>
+
+                <!-- Milestone section -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1506970845246-18f21d533b20?q=80&w=800&auto=format&fit=crop" alt="Hong Kong Capital & Nordic HPC Transition">
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">HK $200M Infra Fund & AI/HPC Pivots</h3>
+                            <div class="card-location">📍 Two IFC, Central, Hong Kong & Keflavík, Iceland</div>
+                            <ul class="card-ul">
+                                <li><strong>$200M Heavy Infrastructure Fund:</strong> Secured long-lead 500MVA transformer supply lines from HK HQ.</li>
+                                <li><strong>Dual-Purpose Compute Infrastructure:</strong> Converted Nordic high-voltage sites for dual AI & Bitcoin load.</li>
+                            </ul>
+                        </div>
+                        <button class="btn-modal" onclick="openModal('modal3')">View Project Details ↗</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>2024 Development Timeline & Key Site Milestones</h2>
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <span class="timeline-date">April 2024</span>
+                    <h3 class="timeline-title">Texas 345kV Substation Commissioned (Ward County, TX)</h3>
+                    <p class="timeline-desc">Coinciding with the 4th Bitcoin Halving, TerraHash energized its 500MVA 345kV primary transformer substation in Ward County, Texas, boosting site efficiency to record levels.</p>
+                    <div class="milestone-box">
+                        <span class="milestone-text">Location: Pecos High-Voltage Substation Yard, Ward County, TX 79772, USA</span>
+                        <button class="milestone-btn" onclick="openModal('modal1')">View Details ↗</button>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">August 2024</span>
+                    <h3 class="timeline-title">Stutsman Wind Microgrid 2.0 Energized (North Dakota)</h3>
+                    <p class="timeline-desc">Upgraded wind farm substations in Stutsman County with automated tap changers and CATL battery coupling, capturing 100% of night-time wind energy spikes.</p>
+                    <div class="milestone-box">
+                        <span class="milestone-text">Location: Courtenay Wind Interconnect, Stutsman County, ND 58426, USA</span>
+                        <button class="milestone-btn" onclick="openModal('modal2')">View Details ↗</button>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">November 2024</span>
+                    <h3 class="timeline-title">Iceland Dual-Purpose HPC/Bitcoin Center & 8.2 EH/s Hashrate</h3>
+                    <p class="timeline-desc">Deployed $200M from Hong Kong Heavy Power Infra Fund to acquire transformer reserves and upgrade Keflavík Data Center for AI/HPC and Bitcoin dual operations.</p>
+                    <div class="milestone-box">
+                        <span class="milestone-text">Location: Fitjar Energy Park, Keflavík 260, Iceland & Two IFC, Central, Hong Kong</span>
+                        <button class="milestone-btn" onclick="openModal('modal4')">View Details ↗</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+            <h3 class="modal-title">2024 West Texas High-Voltage Transformer Substation</h3>
+            <div class="modal-address">📍 Project location: Pecos High-Voltage Substation Yard, Ward County, Texas 79772, USA</div>
+            <div class="modal-body"><p>The archived development plan describes a 345 kV / 230 kV substation upgrade in the ERCOT region of West Texas, including two 500 MVA smart oil-filled transformers and containerized gas-insulated switchgear.</p><br><p>The design reports transformer efficiency of 99.22% and stable power delivery for a 180 MW liquid-cooled computing installation.</p></div>
+        </div>
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
+            <h3 class="modal-title">2024 North Dakota Wind-Connected Microgrid</h3>
+            <div class="modal-address">📍 Project location: Courtenay Wind Interconnect, Stutsman County, ND 58426, USA</div>
+            <div class="modal-body"><p>The archive describes a site adjacent to the 200 MW Courtenay wind installation, equipped with smart on-load tap-changing transformers integrated with a CATL battery energy storage system.</p><br><p>Its proposed controls respond to variations in wind generation and flexible computing demand, with the archive reporting rapid switching and 98.5% local utilization of available wind output.</p></div>
+        </div>
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal3')">&times;</span>
+            <h3 class="modal-title">2024 Hong Kong Infrastructure Fund and Iceland Hybrid Facility</h3>
+            <div class="modal-address">📍 Hong Kong headquarters: Suite 6801, Two IFC, Central, Hong Kong<br>📍 Iceland site: Fitjar Energy Park, Keflavík 260, Iceland</div>
+            <div class="modal-body"><p>The archived review describes a $200 million Hong Kong power-infrastructure fund intended to secure high-voltage transformer capacity for international projects.</p><br><p>It also describes adapting a geothermal and wind-powered facility near Keflavík, Iceland for mixed AI/high-performance computing workloads and liquid-cooled Bitcoin mining.</p></div>
+        </div>
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal4')">&times;</span>
+            <h3 class="modal-title">2024 Global Managed Hashrate and Energy Infrastructure</h3>
+            <div class="modal-address">📍 Operating locations: Texas, North Dakota, Keflavík (Iceland), and Hong Kong headquarters</div>
+            <div class="modal-body"><p>The archived year-end milestone reports global managed hashrate of 8.2 EH/s following the expansion of substation-backed facilities in Texas and North Dakota.</p><br><p>The energy-infrastructure strategy centers on high-voltage grid access, transformer availability and geographically diversified sites in Texas, North Dakota, Iceland and Hong Kong.</p></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 TerraHash Energy. All Rights Reserved. | 345kV Transformer Field Redevelopment, Wind Grid 2.0 & HK $200M Infrastructure Fund</p>
+    </footer>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
