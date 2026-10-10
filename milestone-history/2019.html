@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraHash Energy - 2019 Hong Kong & Mining Profitability Review</title>
+    <style>
+        :root {
+            --primary-color: #0d233a;
+            --accent-green: #2ecc71;
+            --accent-green-hover: #27ae60;
+            --bg-light: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --border-color: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-light); color: var(--text-main); line-height: 1.6; }
+
+        /* Milestone styles */
+        header {
+            position: relative;
+            background: linear-gradient(rgba(13, 35, 58, 0.85), rgba(13, 35, 58, 0.85)), 
+                        url('https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+            color: #ffffff;
+            text-align: center;
+            padding: 4.5rem 1.5rem;
+            border-bottom: 4px solid var(--accent-green);
+        }
+        header h1 { font-size: 2.8rem; margin-bottom: 0.8rem; font-weight: 700; letter-spacing: 1px; }
+        header p { font-size: 1.15rem; color: #e2e8f0; max-width: 900px; margin: 0 auto; line-height: 1.5; }
+
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+        section { margin-bottom: 3rem; background: var(--card-bg); padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); }
+        section h2 { font-size: 1.8rem; color: var(--primary-color); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border-color); }
+
+        .overview-text p { margin-bottom: 1rem; font-size: 1.05rem; color: #4a5568; }
+
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        .card { background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); }
+        .card img { width: 100%; height: 210px; object-fit: cover; display: block; }
+        .card-body { padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
+        .card-title { font-size: 1.25rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .card-ul { list-style: none; margin-bottom: 1.5rem; }
+        .card-ul li { position: relative; padding-left: 1.25rem; margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--text-muted); }
+        .card-ul li::before { content: "•"; color: var(--accent-green); font-weight: bold; position: absolute; left: 0; }
+
+        .btn-modal { display: inline-block; background-color: var(--accent-green); color: #ffffff; border: none; padding: 0.6rem 1.2rem; border-radius: 4px; font-weight: 600; font-size: 0.9rem; text-align: center; cursor: pointer; transition: background 0.2s; }
+        .btn-modal:hover { background-color: var(--accent-green-hover); }
+
+        .timeline { position: relative; padding-left: 2rem; border-left: 3px solid var(--accent-green); }
+        .timeline-item { position: relative; margin-bottom: 2rem; }
+        .timeline-item::before { content: ""; position: absolute; left: -2.4rem; top: 0.25rem; width: 12px; height: 12px; border-radius: 50%; background-color: var(--accent-green); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--accent-green); }
+        .timeline-date { display: inline-block; background-color: var(--primary-color); color: #ffffff; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .timeline-title { font-size: 1.2rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .timeline-desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem; }
+
+        .milestone-box { background-color: #f8fafc; border-left: 3px solid var(--primary-color); padding: 0.75rem 1rem; border-radius: 0 4px 4px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .milestone-text { font-size: 0.85rem; color: #4a5568; font-weight: 500; }
+        .milestone-btn { color: var(--accent-green); background: none; border: none; font-weight: bold; font-size: 0.85rem; cursor: pointer; text-decoration: underline; }
+
+        /* Milestone styles */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+        .modal-content { background-color: #ffffff; margin: 10% auto; padding: 2rem; border-radius: 8px; width: 90%; max-width: 600px; position: relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); }
+        .close-btn { position: absolute; right: 1.5rem; top: 1rem; font-size: 1.8rem; font-weight: bold; color: #a0aec0; cursor: pointer; }
+        .close-btn:hover { color: #333; }
+        .modal-title { font-size: 1.4rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .modal-body { font-size: 0.95rem; color: #4a5568; line-height: 1.7; }
+
+        footer { background-color: var(--primary-color); color: #a0aec0; text-align: center; padding: 2rem 1.5rem; font-size: 0.9rem; margin-top: 3rem; }
+    </style>
+<style>.milestone-site-header{display:flex;align-items:center;gap:20px;background:#020d12;color:#fff;padding:15px 3.5%;font-family:Inter,system-ui,sans-serif}.milestone-site-header .milestone-brand{color:#fff;font-size:19px;font-weight:800;text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:10px}.milestone-site-header .milestone-mark{border:2px solid #77e43e;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;color:#77e43e}.milestone-site-header nav{margin-left:auto;display:flex;gap:16px;align-items:center;overflow-x:auto;scrollbar-width:thin}.milestone-site-header nav a{font-size:12px;color:#e3ede7;text-decoration:none;white-space:nowrap}.milestone-site-header nav a:hover,.milestone-site-header nav .milestone-back{color:#77e43e}.milestone-site-header nav .milestone-back{border-left:1px solid #375344;padding-left:14px}@media(max-width:900px){.milestone-site-header{display:block}.milestone-site-header nav{margin-top:12px;padding-bottom:8px}.milestone-site-header .milestone-brand{font-size:17px}}</style></head>
+<body><div class="milestone-site-header"><a class="milestone-brand" href="../index.html"><span class="milestone-mark">ϟ</span> TerraHash Energy</a><nav aria-label="Main navigation"><a href="../index.html">Home</a><a href="../about.html">About Us</a><a href="../solutions.html">Solutions</a><a href="../digital-assets.html">Digital Assets</a><a href="../ecosystem.html">Ecosystem</a><a href="../market-intelligence.html">Market Intelligence</a><a href="../investor-relations.html">Investor Relations</a><a href="../news.html">News Center</a><a href="../careers.html">Careers</a><a href="../contact.html">Contact Us</a><a class="milestone-back" href="../milestones.html">← All Milestones</a></nav></div>
+
+    <!-- Milestone section -->
+    <header>
+        <h1>TerraHash Energy</h1>
+        <p>2019 Strategic Review: Bitcoin Market Recovery, Mining Profitability Surges & Next-Gen ASIC Efficiency Deployment</p>
+    </header>
+
+    <div class="container">
+        
+        <section class="overview-text">
+            <h2>2019 Strategic Overview in Hong Kong & Global Mining</h2>
+            <p>In 2019, the Bitcoin network experienced a dramatic recovery, with BTC prices surging from ~$3,500 to over $13,000 in mid-year. <strong>TerraHash Energy</strong> capitalized on this profitability boom by deploying next-generation 7nm ASIC hardware, optimizing electricity costs through Hong Kong's Feed-in Tariff arbitrage, and achieving record-breaking profit margins on green computing operations.</p>
+        </section>
+
+        <section>
+            <h2>2019 Mining Profitability & Fleet Blueprint</h2>
+            <div class="grid-container">
+                
+                <!-- Milestone section -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1621416894569-0f39ed31d247?q=80&w=800&auto=format&fit=crop" alt="Bitcoin Price Surge & Profit Margins">
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Bitcoin Mining Profitability Surge</h3>
+                            <ul class="card-ul">
+                                <li><strong>BTC Price Rebound:</strong> Price rally from $3.5k to $13k+ expanded daily gross profit per unit by over 300%.</li>
+                                <li><strong>Low Breakeven Threshold:</strong> Electricity breakeven cost dropped below $4,000/BTC for optimized fleet.</li>
+                            </ul>
+                        </div>
+                        <button class="btn-modal" onclick="openModal('modal1')">View Project Details ↗</button>
+                    </div>
+                </div>
+
+                <!-- Milestone section -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop" alt="7nm ASIC Mining Fleet Expansion">
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">7nm ASIC Hardware Upgrade</h3>
+                            <ul class="card-ul">
+                                <li><strong>Efficiency Breakthrough:</strong> Upgraded fleet to Antminer S17/T17 and Whatsminer M20S (40–45 J/TH).</li>
+                                <li><strong>Hashrate Expansion:</strong> Scaled total managed hash capacity beyond 100 PH/s in regional hubs.</li>
+                            </ul>
+                        </div>
+                        <button class="btn-modal" onclick="openModal('modal2')">View Project Details ↗</button>
+                    </div>
+                </div>
+
+                <!-- Milestone section -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?q=80&w=800&auto=format&fit=crop" alt="Green Energy Arbitrage HK">
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">FiT Tariff Arbitrage & Power Cost Control</h3>
+                            <ul class="card-ul">
+                                <li><strong>Dual Revenue Stream:</strong> Selling rooftop solar at HK$4-5/kWh via FiT while sourcing low-cost off-grid power for mining.</li>
+                                <li><strong>Dynamic Load Dispatch:</strong> Smart switching between hash computation and solar grid export.</li>
+                            </ul>
+                        </div>
+                        <button class="btn-modal" onclick="openModal('modal3')">View Project Details ↗</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>2019 TerraHash Development Timeline</h2>
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <span class="timeline-date">April 2019</span>
+                    <h3 class="timeline-title">Mining Profitability Turning Point</h3>
+                    <p class="timeline-desc">As Bitcoin broke through $5,000, net profit margins per TeraHash doubled. TerraHash locked in forward electricity supply contracts and expanded fleet capacity.</p>
+                    <div class="milestone-box">
+                        <span class="milestone-text">Market Event: BTC Rebound & Hashrate Recovery</span>
+                        <button class="milestone-btn" onclick="openModal('modal1')">View Details ↗</button>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">July 2019</span>
+                    <h3 class="timeline-title">7nm ASIC Deployment & Record Q2 Margin</h3>
+                    <p class="timeline-desc">Integrated the newly arrived Antminer S17 series into immersion-cooled container facilities. Daily net profit peaked as BTC reached $13,000+.</p>
+                    <div class="milestone-box">
+                        <span class="milestone-text">Location: Hong Kong Regional Computing Center</span>
+                        <button class="milestone-btn" onclick="openModal('modal2')">View Details ↗</button>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">November 2019</span>
+                    <h3 class="timeline-title">Green Hashrate Hedging Platform Launch</h3>
+                    <p class="timeline-desc">Launched the proprietary 'Green Hashrate Hedging System', connecting HK rooftop solar FiT income directly with mining pool revenue streams to guarantee baseline ROI.</p>
+                    <div class="milestone-box">
+                        <span class="milestone-text">Platform: TerraHash Smart Arbitrage System</span>
+                        <button class="milestone-btn" onclick="openModal('modal4')">View Details ↗</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+            <h3 class="modal-title">2019 Bitcoin Recovery and Mining Profitability</h3>
+            <div class="modal-body"><p>Bitcoin recovered from its 2018 decline, climbing from approximately $3,400 early in 2019 to above $13,000 in June and July. The recovery materially improved mining margins.</p><br><p>The archived model estimates electricity at $0.04–0.05 per kWh and a shutdown or breakeven BTC price of roughly $3,500–4,500. At the mid-year peak, gross mining margins were estimated at 65–70%.</p></div>
+        </div>
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
+            <h3 class="modal-title">2019 Next-Generation 7 nm ASIC Deployment</h3>
+            <div class="modal-body"><p>The industry introduced 7 nm miners including the Antminer S17/T17 and WhatsMiner M20S families, delivering around 50–72 TH/s and improved energy efficiency of roughly 40–45 J/TH.</p><br><p>As global Bitcoin network hashrate exceeded 100 EH/s, TerraHash's archive describes procuring a new ASIC fleet and lifting managed computing capacity beyond 100 PH/s.</p></div>
+        </div>
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal3')">&times;</span>
+            <h3 class="modal-title">2019 Feed-in Tariff Arbitrage and Electricity Costs</h3>
+            <div class="modal-body"><p>Hong Kong's feed-in tariff program paid approximately HK$4–5 per kWh for qualifying distributed solar generation, higher than typical mining electricity procurement costs.</p><br><p>TerraHash's archived strategy combines exporting rooftop solar electricity to the grid with lower-cost direct or off-grid electricity for computing operations, aiming to stabilize cash flow and reduce blended energy expenditure.</p></div>
+        </div>
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal4')">&times;</span>
+            <h3 class="modal-title">2019 Green Hashrate Hedging and ROI Strategy</h3>
+            <div class="modal-body"><p>The archived project describes a dynamic hedging approach intended to reduce exposure to changing Bitcoin prices and network difficulty.</p><br><p>The model combines relatively stable rooftop-solar tariff revenue with more volatile Bitcoin mining returns. This was presented as a way to support fleet cash flow during price declines; investment outcomes are not guaranteed.</p></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2019 TerraHash Energy. All Rights Reserved. | Mining Profitability, 7nm ASIC Fleet & FiT Energy Arbitrage</p>
+    </footer>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
