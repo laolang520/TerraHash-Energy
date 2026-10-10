@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraHash Energy - 2015 Hong Kong Review</title>
+    <style>
+        :root {
+            --primary-color: #0d233a;
+            --accent-green: #2ecc71;
+            --accent-green-hover: #27ae60;
+            --bg-light: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --border-color: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-light); color: var(--text-main); line-height: 1.6; }
+
+        header { background-color: var(--primary-color); color: #ffffff; text-align: center; padding: 3rem 1.5rem; border-bottom: 4px solid var(--accent-green); }
+        header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        header p { font-size: 1.1rem; color: #a0aec0; max-width: 900px; margin: 0 auto; }
+
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+        section { margin-bottom: 3rem; background: var(--card-bg); padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); }
+        section h2 { font-size: 1.8rem; color: var(--primary-color); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border-color); }
+
+        .overview-text p { margin-bottom: 1rem; font-size: 1.05rem; color: #4a5568; }
+
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        .card { background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); }
+        .card img { width: 100%; height: 200px; object-fit: cover; }
+        .card-body { padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
+        .card-title { font-size: 1.25rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .card-ul { list-style: none; margin-bottom: 1.5rem; }
+        .card-ul li { position: relative; padding-left: 1.25rem; margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--text-muted); }
+        .card-ul li::before { content: "•"; color: var(--accent-green); font-weight: bold; position: absolute; left: 0; }
+
+        .btn-modal { display: inline-block; background-color: var(--accent-green); color: #ffffff; border: none; padding: 0.6rem 1.2rem; border-radius: 4px; font-weight: 600; font-size: 0.9rem; text-align: center; cursor: pointer; transition: background 0.2s; }
+        .btn-modal:hover { background-color: var(--accent-green-hover); }
+
+        .timeline { position: relative; padding-left: 2rem; border-left: 3px solid var(--accent-green); }
+        .timeline-item { position: relative; margin-bottom: 2rem; }
+        .timeline-item::before { content: ""; position: absolute; left: -2.4rem; top: 0.25rem; width: 12px; height: 12px; border-radius: 50%; background-color: var(--accent-green); border: 3px solid #ffffff; box-shadow: 0 0 0 2px var(--accent-green); }
+        .timeline-date { display: inline-block; background-color: var(--primary-color); color: #ffffff; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .timeline-title { font-size: 1.2rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .timeline-desc { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem; }
+
+        .milestone-box { background-color: #f8fafc; border-left: 3px solid var(--primary-color); padding: 0.75rem 1rem; border-radius: 0 4px 4px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .milestone-text { font-size: 0.85rem; color: #4a5568; font-weight: 500; }
+        .milestone-btn { color: var(--accent-green); background: none; border: none; font-weight: bold; font-size: 0.85rem; cursor: pointer; text-decoration: underline; }
+
+        /* Milestone styles */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+        .modal-content { background-color: #ffffff; margin: 10% auto; padding: 2rem; border-radius: 8px; width: 90%; max-width: 600px; position: relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); }
+        .close-btn { position: absolute; right: 1.5rem; top: 1rem; font-size: 1.8rem; font-weight: bold; color: #a0aec0; cursor: pointer; }
+        .close-btn:hover { color: #333; }
+        .modal-title { font-size: 1.4rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .modal-body { font-size: 0.95rem; color: #4a5568; line-height: 1.7; }
+
+        footer { background-color: var(--primary-color); color: #a0aec0; text-align: center; padding: 2rem 1.5rem; font-size: 0.9rem; margin-top: 3rem; }
+    </style>
+<style>.milestone-site-header{display:flex;align-items:center;gap:20px;background:#020d12;color:#fff;padding:15px 3.5%;font-family:Inter,system-ui,sans-serif}.milestone-site-header .milestone-brand{color:#fff;font-size:19px;font-weight:800;text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:10px}.milestone-site-header .milestone-mark{border:2px solid #77e43e;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;color:#77e43e}.milestone-site-header nav{margin-left:auto;display:flex;gap:16px;align-items:center;overflow-x:auto;scrollbar-width:thin}.milestone-site-header nav a{font-size:12px;color:#e3ede7;text-decoration:none;white-space:nowrap}.milestone-site-header nav a:hover,.milestone-site-header nav .milestone-back{color:#77e43e}.milestone-site-header nav .milestone-back{border-left:1px solid #375344;padding-left:14px}@media(max-width:900px){.milestone-site-header{display:block}.milestone-site-header nav{margin-top:12px;padding-bottom:8px}.milestone-site-header .milestone-brand{font-size:17px}}</style></head>
+<body><div class="milestone-site-header"><a class="milestone-brand" href="../index.html"><span class="milestone-mark">ϟ</span> TerraHash Energy</a><nav aria-label="Main navigation"><a href="../index.html">Home</a><a href="../about.html">About Us</a><a href="../solutions.html">Solutions</a><a href="../digital-assets.html">Digital Assets</a><a href="../ecosystem.html">Ecosystem</a><a href="../market-intelligence.html">Market Intelligence</a><a href="../investor-relations.html">Investor Relations</a><a href="../news.html">News Center</a><a href="../careers.html">Careers</a><a href="../contact.html">Contact Us</a><a class="milestone-back" href="../milestones.html">← All Milestones</a></nav></div>
+
+    <header>
+        <h1>TerraHash Energy</h1>
+        <p>2015 Milestone Review: Climate Action Alignment, Smart Grid Analytics & Large-Scale Renewable Integration in Hong Kong</p>
+    </header>
+
+    <div class="container">
+        
+        <section class="overview-text">
+            <h2>2015 Strategic Overview in Hong Kong</h2>
+            <p>In 2015, <strong>TerraHash Energy</strong> aligned its technology roadmap with the HKSAR Government’s official <em>Hong Kong Climate Change Report 2015</em>. Expanding beyond earlier energy storage pilots, TerraHash pioneered enterprise-level energy analytics, dynamic grid balancing, and automated demand-response solutions across Hong Kong's utility networks and infrastructure projects.</p>
+        </section>
+
+        <section>
+            <h2>2015 Hong Kong Regional Development Blueprint</h2>
+            <div class="grid-container">
+                
+                <!-- Milestone section -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" alt="Hong Kong Climate Strategy">
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Hong Kong Island Grid & Decarbonization</h3>
+                            <ul class="card-ul">
+                                <li><strong>Climate Policy 2015:</strong> HKSAR targets 50-60% carbon intensity reduction by 2020.</li>
+                                <li><strong>HK Electric Smart Grid:</strong> Upgraded south Hong Kong Island network with predictive load telemetry.</li>
+                            </ul>
+                        </div>
+                        <button class="btn-modal" onclick="openModal('modal1')">View Project Details ↗</button>
+                    </div>
+                </div>
+
+                <!-- Milestone section -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=600&q=80" alt="Tuen Mun Power Station">
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Tuen Mun & New Territories Gas Hub</h3>
+                            <ul class="card-ul">
+                                <li><strong>Black Point D1 CCGT:</strong> Approved environmental permits for natural gas turbine expansion.</li>
+                                <li><strong>Telemetry Analytics:</strong> Microsecond-level grid monitoring for thermal transition.</li>
+                            </ul>
+                        </div>
+                        <button class="btn-modal" onclick="openModal('modal2')">View Project Details ↗</button>
+                    </div>
+                </div>
+
+                <!-- Milestone section -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=600&q=80" alt="Water Energy Infrastructure">
+                    <div class="card-body">
+                        <div>
+                            <h3 class="card-title">Tseung Kwan O Water-Energy Infrastructure</h3>
+                            <ul class="card-ul">
+                                <li><strong>TKO Desalination Plant:</strong> Energy-efficient reverse osmosis auxiliary microgrid design.</li>
+                                <li><strong>Floating Solar Expansion:</strong> Reservoirs equipped with PV systems to save evaporation loss.</li>
+                            </ul>
+                        </div>
+                        <button class="btn-modal" onclick="openModal('modal3')">View Project Details ↗</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>2015 TerraHash Development Timeline</h2>
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <span class="timeline-date">February 2015</span>
+                    <h3 class="timeline-title">Predictive Grid Telemetry Analytics Pilot (Lamma Island)</h3>
+                    <p class="timeline-desc">Deployed real-time solar variance forecasting software to balance dynamic load demands across HK Electric's grid.</p>
+                    <div class="milestone-box">
+                        <span class="milestone-text">Location: South Hong Kong Island Generation Hub</span>
+                        <button class="milestone-btn" onclick="openModal('modal1')">View Details ↗</button>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">May 2015</span>
+                    <h3 class="timeline-title">Central Commercial District Energy Efficiency Initiative</h3>
+                    <p class="timeline-desc">Joined the government-backed Low-Carbon Partnership Program, installing AI-driven chiller plant monitoring systems in Central towers.</p>
+                    <div class="milestone-box">
+                        <span class="milestone-text">Location: Central & Admiralty Financial Core</span>
+                        <button class="milestone-btn" onclick="openModal('modal4')">View Details ↗</button>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">August 2015</span>
+                    <h3 class="timeline-title">Desalination Auxiliary Power Pilot (Tseung Kwan O)</h3>
+                    <p class="timeline-desc">Finalized design for a solar-storage hybrid auxiliary power setup to lower desalination carbon intensity.</p>
+                    <div class="milestone-box">
+                        <span class="milestone-text">Location: Tseung Kwan O Area 137</span>
+                        <button class="milestone-btn" onclick="openModal('modal3')">View Details ↗</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+            <h3 class="modal-title">2015 Hong Kong Island Grid and Climate Policy</h3>
+            <div class="modal-body"><p>In November 2015, the Hong Kong government published its Climate Change Report 2015, prioritizing electricity decarbonization and building efficiency, with a target to cut carbon intensity by 50–60% against 2005 levels by 2020.</p><br><p>HK Electric advanced smart-grid telemetry around Lamma Power Station and the southern Hong Kong Island network. The archived project describes TerraHash's clean-energy forecasting and dynamic balancing work to improve reliability during peak demand.</p></div>
+        </div>
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
+            <h3 class="modal-title">2015 Tuen Mun / Black Point Energy Hub</h3>
+            <div class="modal-body"><p>In 2015, the Environmental Protection Department approved the environmental impact assessment permit for Black Point Power Station's D1 combined-cycle gas turbine (CCGT) unit.</p><br><p>To support Hong Kong's transition from coal toward natural gas, TerraHash's project narrative describes microsecond-resolution telemetry intended to balance turbine ramp-up, ramp-down and sudden grid-frequency fluctuations.</p></div>
+        </div>
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal3')">&times;</span>
+            <h3 class="modal-title">2015 Tseung Kwan O Water and Energy Infrastructure</h3>
+            <div class="modal-body"><p>The Civil Engineering and Development Department and Water Supplies Department advanced planning for the Tseung Kwan O Area 137 desalination project in 2015, including its clean-energy options.</p><br><p>The project concept paired distributed solar generation with battery storage for auxiliary microgrid power, drawing on lessons from floating solar demonstrations at Shek Pik Reservoir.</p></div>
+        </div>
+    </div>
+
+    <!-- Milestone section -->
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal4')">&times;</span>
+            <h3 class="modal-title">2015 Central and Admiralty Low-Carbon Buildings</h3>
+            <div class="modal-body"><p>The government's 2015 climate report emphasized improved energy efficiency in commercial buildings, including partnership initiatives in Hong Kong's central business district.</p><br><p>The archived TerraHash plan describes real-time chiller energy monitoring and AI-based alerts for offices in Central and Admiralty, with adaptive off-peak cooling schedules and a reported 8% annual reduction in shared-area energy use.</p></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2015 TerraHash Energy. All Rights Reserved. | Climate Action, Smart Grid Analytics & Clean Infra Solutions</p>
+    </footer>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
