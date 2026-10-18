@@ -1,0 +1,7 @@
+{
+  "title": "TerraHash Energy Company Update",
+  "summary": "Add the public announcement summary here. This text will be used for LinkedIn and shortened automatically for X when necessary.",
+  "url": "https://www.terrahashenergy.com/",
+  "publish": false,
+  "platforms": ["x", "linkedin"]
+}
