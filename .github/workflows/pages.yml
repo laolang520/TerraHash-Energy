@@ -131,7 +131,12 @@ jobs:
               nav = page[start:end]
               assert '<details' not in nav, f'Unexpected nested navigation in {name}'
               assert all(f'href="{target}"' in nav for target in required), f'Navigation link missing in {name}'
-          print('Verified: flat Digital Assets menu and all 11 research pages')
+          for name in pages:
+              page = Path(name).read_text(encoding='utf-8')
+              assert '<nav class="nav">' in page, f'Corporate navigation missing in {name}'
+              assert '<nav class="edm-site-nav"' not in page, f'Duplicate research nav in {name}'
+              assert '<div class="preview-ribbon">' not in page, f'Preview ribbon still shown in {name}'
+          print('Verified: flat Digital Assets navigation, one corporate menu per page, all 11 published research pages')
           PY
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
