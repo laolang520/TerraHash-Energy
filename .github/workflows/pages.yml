@@ -103,6 +103,36 @@ jobs:
               encoding='utf-8'
           )
           PY
+      - name: Verify Digital Assets navigation and published research pages
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          pages = [
+              'energy-digital-markets.html',
+              'energy-markets-pathways.html',
+              'energy-markets-compute.html',
+              'energy-markets-implementation.html',
+              'energy-markets-commercial.html',
+              'energy-markets-ecosystem.html',
+              'energy-markets-blockchain.html',
+              'energy-markets-tokenization.html',
+              'energy-markets-depin.html',
+              'energy-markets-btc-mining.html',
+              'energy-markets-rwa.html'
+          ]
+          for name in pages:
+              assert Path(name).is_file(), f'Missing research page: {name}'
+          required = pages[:7]
+          for name in ('index.html', 'digital-assets.html', 'energy-digital-markets.html'):
+              page = Path(name).read_text(encoding='utf-8')
+              start = page.index('<div class="nav-dropdown nav-digital-assets">')
+              end = page.index('</div></div>', start) + len('</div></div>')
+              nav = page[start:end]
+              assert '<details' not in nav, f'Unexpected nested navigation in {name}'
+              assert all(f'href="{target}"' in nav for target in required), f'Navigation link missing in {name}'
+          print('Verified: flat Digital Assets menu and all 11 research pages')
+          PY
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
