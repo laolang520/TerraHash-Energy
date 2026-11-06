@@ -29,3 +29,10 @@
  .nav .nav-subgroup-links{margin-left:7px}
  .nav .nav-subgroup-links a{white-space:normal;padding:9px 12px}
 }
+
+
+/* Flat Digital Assets menu: direct access to each published research page */
+.nav .nav-digital-assets>.nav-submenu{min-width:265px;max-height:min(78vh,600px);overflow-y:auto;overscroll-behavior:contain}
+.nav .nav-digital-assets>.nav-submenu>a{white-space:normal;line-height:1.35;padding:11px 14px}
+.nav .nav-digital-assets>.nav-submenu>.nav-assets-overview{font-weight:800;color:#f0f7f3;border-bottom:1px solid rgba(125,255,50,.16);border-radius:0;margin-bottom:3px}
+@media(max-width:760px){.nav .nav-digital-assets>.nav-submenu{min-width:0;max-height:none;overflow:visible}.nav .nav-digital-assets>.nav-submenu>a{padding:10px 12px}}
