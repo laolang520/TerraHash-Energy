@@ -9,3 +9,23 @@
 .nav .nav-submenu a{display:block;padding:12px 14px;border:0;border-radius:7px;color:#d9e1e3;font-size:12px;white-space:nowrap}
 .nav .nav-submenu a:hover,.nav .nav-submenu a.active{background:rgba(125,255,50,.08);color:var(--green);border-bottom-color:transparent}
 @media(max-width:760px){.nav-dropdown{display:block;width:100%;height:auto}.nav-dropdown>a:after{display:none}.nav-submenu{position:static;min-width:0;padding:0 0 5px 12px;margin:0 0 4px 10px;background:transparent;border:0;border-left:1px solid rgba(125,255,50,.22);border-radius:0;box-shadow:none;opacity:1;visibility:visible;transform:none}.nav .nav-submenu a{padding:8px 12px;font-size:12px}}
+
+
+/* Digital Assets / Energy & Digital Markets nested research navigation */
+.nav .nav-submenu .nav-assets-overview{font-weight:750;color:#f2f8f4}
+.nav .nav-submenu .nav-subgroup{border-top:1px solid rgba(125,255,50,.16);margin-top:5px;padding-top:5px}
+.nav .nav-submenu .nav-subgroup summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer;padding:12px 14px;border-radius:7px;color:#d9e1e3;font-size:12px;font-weight:750;white-space:nowrap;user-select:none}
+.nav .nav-submenu .nav-subgroup summary::-webkit-details-marker{display:none}
+.nav .nav-submenu .nav-subgroup summary:after{content:'⌄';color:#7dff32;font-size:13px;transition:transform .15s}
+.nav .nav-submenu .nav-subgroup[open]>summary:after{transform:rotate(180deg)}
+.nav .nav-submenu .nav-subgroup summary:hover,.nav .nav-submenu .nav-subgroup summary:focus-visible{background:rgba(125,255,50,.08);color:#7dff32}
+.nav .nav-subgroup-links{padding:2px 0 5px 10px;margin-left:12px;border-left:1px solid rgba(125,255,50,.24)}
+.nav .nav-subgroup-links a{font-size:12px;white-space:nowrap;padding:8px 12px;color:#c7d6d0}
+.nav .nav-subgroup-links a.active{color:#7dff32;font-weight:750}
+.nav .nav-dropdown:has(.nav-subgroup)>.nav-submenu{min-width:265px;max-height:min(75vh,620px);overflow-y:auto}
+@media(max-width:760px){
+ .nav .nav-dropdown:has(.nav-subgroup)>.nav-submenu{max-height:none;overflow:visible}
+ .nav .nav-submenu .nav-subgroup summary{padding:9px 12px;white-space:normal}
+ .nav .nav-subgroup-links{margin-left:7px}
+ .nav .nav-subgroup-links a{white-space:normal;padding:9px 12px}
+}
