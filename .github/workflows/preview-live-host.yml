@@ -1,0 +1,100 @@
+name: Publish TerraHash independent online preview
+on:
+  push:
+    branches:
+      - redesign-preview-20261106
+    paths:
+      - .github/workflows/preview-live-host.yml
+      - preview-v2/**
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  online-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out preview branch
+        uses: actions/checkout@v4
+      - name: Prepare self-contained static website
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, shutil, zipfile
+          root=Path('/tmp/terrahash-online-site')
+          root.mkdir(parents=True,exist_ok=True)
+          source=Path('preview-v2')
+          target_prefix='https://htmlpreview.github.io/?https://github.com/laolang520/TerraHash-Energy/blob/redesign-preview-20261106/preview-v2/'
+          asset_prefix='https://raw.githubusercontent.com/laolang520/TerraHash-Energy/redesign-preview-20261106/'
+          assets=set()
+          pages=list(source.glob('*.html'))
+          for p in pages:
+              s=p.read_text('utf-8')
+              s=s.replace(target_prefix, '')
+              s=s.replace(asset_prefix, '')
+              assert '<main id="main">' in s and 'Energy' in s,p
+              assert '<style>' in s,p
+              assert '<script src="site.js"' not in s,p
+              for path in re.findall(r'(?:src|href)="(assets/[^"]+)"',s):
+                  assets.add(path)
+              (root/p.name).write_text(s,'utf-8')
+          for asset in sorted(assets):
+              src=Path(asset)
+              assert src.is_file(),f'missing {asset}'
+              dest=root/asset
+              dest.parent.mkdir(parents=True,exist_ok=True)
+              shutil.copyfile(src,dest)
+          shutil.copyfile('favicon.svg',root/'favicon.svg')
+          (root/'robots.txt').write_text('User-agent: *\nDisallow: /\n')
+          assert len(pages)==16,len(pages)
+          assert (root/'index.html').exists()
+          archive=Path('/tmp/terrahash-online-site.zip')
+          with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=8) as z:
+              for p in root.rglob('*'):
+                  if p.is_file(): z.write(p,p.relative_to(root))
+          print('Prepared',len(pages),'pages',len(assets),'assets',archive.stat().st_size,'ZIP bytes')
+          assert archive.stat().st_size<25_000_000
+          PY
+      - name: Publish to independent temporary HTML host
+        shell: bash
+        run: |
+          curl --fail-with-body --silent --show-error --retry 2 --retry-delay 3 \
+            -X POST https://ship.page/deploy \
+            -H "Content-Type: application/zip" \
+            --data-binary @/tmp/terrahash-online-site.zip \
+            -o /tmp/terrahash-preview-response.json
+          python3 - <<'PY'
+          import json,os
+          d=json.load(open('/tmp/terrahash-preview-response.json'))
+          url=d.get('url','')
+          assert url.startswith('https://') and '.ship.place/' in url,(list(d.keys()),url[:100])
+          print('PUBLIC_PREVIEW_URL='+url)
+          with open(os.environ['GITHUB_ENV'],'a') as f:f.write('PREVIEW_URL='+url+'\n')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+              f.write('## TerraHash independent online preview\n\n'+url+'\n\nThe published site is isolated from the live TerraHash domain and main branch.\n')
+          PY
+      - name: Check live homepage, company page and images
+        shell: bash
+        run: |
+          curl --fail --silent --show-error -L "$PREVIEW_URL" -o /tmp/terrahash-live-home.html
+          grep -q '<h1>Energy infrastructure for a' /tmp/terrahash-live-home.html
+          curl --fail --silent --show-error -L "${PREVIEW_URL}company.html" -o /tmp/terrahash-live-company.html
+          grep -q '<h1>A U.S. company.' /tmp/terrahash-live-company.html
+          curl --fail --silent --show-error -L "${PREVIEW_URL}favicon.svg" -o /tmp/terrahash-live-favicon.svg
+          test -s /tmp/terrahash-live-favicon.svg
+          echo 'LIVE_WEBSITE_HTTP=PASS'
+      - name: Browser render actual hosted site
+        shell: bash
+        run: |
+          google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
+            --virtual-time-budget=5000 --dump-dom "$PREVIEW_URL" > /tmp/terrahash-hosted-dom.html
+          grep -q 'Energy infrastructure for a' /tmp/terrahash-hosted-dom.html
+          google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
+            --hide-scrollbars --window-size=1440,900 \
+            --screenshot=/tmp/terrahash-live-online.png "$PREVIEW_URL"
+          echo 'LIVE_BROWSER_RENDER=PASS'
+      - name: Upload screenshot for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: terrahash-real-online-preview-screenshot
+          path: /tmp/terrahash-live-online.png
