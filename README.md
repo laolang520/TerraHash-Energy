@@ -10,7 +10,7 @@
 - `CNAME` 指向 `www.terrahashenergy.com`；`.nojekyll`、favicon、`styles.css` 和 `script.js` 是正式站点资源。
 - 根目录的正式 `.html` 页面包括官网首页、公司介绍、团队与治理、解决方案、招聘、能源与数字市场、数字资产、新闻和联系页面。
 - `milestone-history/` 用于官网里程碑页面链接的历史详情。
-- `downloads/governance/` 保存官网可下载的公司治理文件。
+- 公司治理页面及 8 份 PDF 暂存在独立 `hold/corporate-governance-review-2026-11-07` 分支，尚未作为正式官网内容发布；待核实修订后再重新上线。
 - `assets/` 和根目录图片只保留正式页面实际使用的素材。
 
 ## 发布规范
