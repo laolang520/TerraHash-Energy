@@ -3,13 +3,14 @@
   // Load review overrides after every original inline stylesheet.
   const lateStylesheet = document.createElement('link');
   lateStylesheet.rel = 'stylesheet';
-  lateStylesheet.href = '/focus-preview/preview.css?v=2';
+  lateStylesheet.href = '/focus-preview/preview.css?v=3';
   document.head.appendChild(lateStylesheet);
   const home = document.body.dataset.previewPage === 'index.html';
   const navHtml = [
     '<a href="/focus-preview/index.html">Home</a>',
-    '<a href="/focus-preview/solutions.html">Renewable Energy</a>',
-    '<a href="/focus-preview/energy-markets-compute.html">BTC Infrastructure</a>',
+    '<a href="/focus-preview/mining-sites.html">Bitcoin Mining Sites</a>',
+    '<a href="/focus-preview/energy-markets-btc-mining.html">BTC Infrastructure</a>',
+    '<a href="/focus-preview/solutions.html">Power & Energy</a>',
     '<a href="/focus-preview/corporate-identity.html">U.S. Development</a>',
     '<a href="/focus-preview/about.html">Company</a>',
     '<a href="/focus-preview/investor-relations.html">Investors</a>',
@@ -17,13 +18,10 @@
     '<a href="/focus-preview/leadership.html">Team & Advisory Board</a>',
     '<a href="/focus-preview/milestones.html">Milestones 2013–2026</a>',
     '<a href="/focus-preview/digital-assets.html">Digital Assets</a>',
-    '<a href="/focus-preview/energy-digital-markets.html">Energy & Digital Markets</a>',
-    '<a href="/focus-preview/energy-markets-pathways.html">Strategic Pathways</a>',
-    '<a href="/focus-preview/energy-markets-btc-mining.html">BTC Mining</a>',
+    '<a href="/focus-preview/energy-markets-compute.html">BTC Economics</a>',
     '<a href="/focus-preview/energy-markets-implementation.html">Implementation</a>',
     '<a href="/focus-preview/energy-markets-commercial.html">Commercial Model</a>',
-    '<a href="/focus-preview/energy-markets-ecosystem.html">Market Ecosystem</a>',
-    '<a href="/focus-preview/energy-markets-blockchain.html">Blockchain Technology</a>',
+    '<a href="/focus-preview/energy-digital-markets.html">Energy & Digital Markets</a>',
     '<a href="/focus-preview/ecosystem.html">Ecosystem</a>',
     '<a href="/focus-preview/market-intelligence.html">Market Intelligence</a>',
     '<a href="/focus-preview/corporate-governance.html">Corporate Governance</a>',
@@ -44,6 +42,17 @@
       nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
     }
     if (home) document.body.classList.add('th-preview-home');
+    // Rebalance every preview deep-dive page around mining-site development.
+    document.querySelectorAll('.th-focus-kicker').forEach(el => {
+      el.textContent = 'BITCOIN MINING SITES / POWER INFRASTRUCTURE / U.S. DEVELOPMENT';
+    });
+    document.querySelectorAll('.th-focus-rail-inner').forEach(el => {
+      el.innerHTML = [
+        '<a href="/focus-preview/mining-sites.html"><em>01 / CORE DIRECTION</em><strong>U.S. Mining Sites</strong><small>Power-ready locations and mining facility development</small></a>',
+        '<a href="/focus-preview/solutions.html"><em>02 / INFRASTRUCTURE</em><strong>Energy & Power</strong><small>Grid connections, energy resources and electrical systems</small></a>',
+        '<a href="/focus-preview/corporate-identity.html"><em>03 / PRIORITY MARKET</em><strong>U.S. Development</strong><small>American partners, site diligence and staged execution</small></a>'
+      ].join('');
+    });
     // Keep new links constructed by original scripts inside the preview.
     document.addEventListener('click', e => {
       const link = e.target.closest('a[href]');
