@@ -51,3 +51,15 @@ jobs:
         with:
           name: terrahash-redesign-preview-screenshots
           path: preview-screenshots/
+
+      - name: Package complete offline browser preview
+        shell: bash
+        run: |
+          zip -q -r terrahash-redesign-offline.zip preview-v2 assets favicon.svg privacy-policy.html applicant-privacy-notice.html corporate-governance.html
+          unzip -tq terrahash-redesign-offline.zip
+          echo "Offline preview archive is ready"
+      - name: Upload offline HTML website
+        uses: actions/upload-artifact@v4
+        with:
+          name: terrahash-redesign-offline-website
+          path: terrahash-redesign-offline.zip
