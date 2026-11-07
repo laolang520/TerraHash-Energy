@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.terrahashenergy.com/</loc><lastmod>2026-09-03</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://www.terrahashenergy.com/about.html</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.terrahashenergy.com/solutions.html</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.terrahashenergy.com/digital-assets.html</loc><lastmod>2026-09-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.terrahashenergy.com/market-intelligence.html</loc><lastmod>2026-09-03</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.terrahashenergy.com/investor-relations.html</loc><lastmod>2026-09-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>\n  <url><loc>https://www.terrahashenergy.com/corporate-governance.html</loc><lastmod>2026-09-21</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.terrahashenergy.com/news.html</loc><lastmod>2026-09-03</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.terrahashenergy.com/contact.html</loc><lastmod>2026-09-03</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.terrahashenergy.com/privacy.html</loc><lastmod>2026-09-03</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
-<url><loc>https://www.terrahashenergy.com/ecosystem.html</loc></url></urlset>
+  <url><loc>https://www.terrahashenergy.com/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/about.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/leadership.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/milestones.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/solutions.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/digital-assets.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/energy-digital-markets.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/market-intelligence.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/ecosystem.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/investor-relations.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/corporate-identity.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/corporate-performance.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/corporate-governance.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/news.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/careers.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/contact.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/privacy-policy.html</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://www.terrahashenergy.com/applicant-privacy-notice.html</loc><lastmod>2026-11-06</lastmod></url>
+</urlset>

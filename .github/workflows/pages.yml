@@ -51,7 +51,8 @@ jobs:
           for path in pages:
               text = path.read_text(encoding='utf-8')
               canonical = BASE + ('/' if path.name == 'index.html' else '/' + path.name)
-              if '-preview' not in path.name:
+              is_preview = '-preview' in path.name
+              if not is_preview:
                   sitemap_urls.append(canonical)
 
               title_match = re.search(r'<title>(.*?)</title>', text, flags=re.I|re.S)
@@ -84,7 +85,7 @@ jobs:
               if not re.search(r'<meta\s+name=["\']twitter:card["\']', text, flags=re.I):
                   tags.append('<meta name="twitter:card" content="summary_large_image">')
               if not re.search(r'<meta\s+name=["\']robots["\']', text, flags=re.I):
-                  tags.append('<meta name="robots" content="index,follow,max-image-preview:large">')
+                  tags.append('<meta name="robots" content="noindex,follow">' if is_preview else '<meta name="robots" content="index,follow,max-image-preview:large">')
 
               if tags:
                   text = text.replace('</head>', ''.join(tags) + '</head>', 1)
