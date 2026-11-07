@@ -23,6 +23,63 @@ footer{background:#040907;padding:55px 0 25px}footer .footer-row{display:flex;ju
 @media(max-width:960px){.nav-links{display:none}.mobile-menu{display:block}.hero{padding:73px 0 68px}.hero-layout{grid-template-columns:1fr}.hero-visual{max-width:690px}.focus-items{grid-template-columns:repeat(2,1fr)}.focus-items a:nth-child(2){border-right:0}.focus-items a:nth-child(3),.focus-items a:nth-child(4){border-top:1px solid var(--line)}.focus-items a:nth-child(3){padding-left:0}.intro-grid{grid-template-columns:1fr;gap:15px}.focus-cards{grid-template-columns:1fr 1fr}.us-grid{grid-template-columns:1fr;gap:35px}.process-grid{grid-template-columns:repeat(2,1fr)}.cta-wrap{grid-template-columns:1fr}.cta-links{flex-direction:row;flex-wrap:wrap}.company-links .wrap{display:block}.company-links nav{margin-top:15px}footer .footer-row{display:block}footer .footer-links{margin-top:30px;justify-content:flex-start}}
 @media(max-width:650px){.wrap,.nav-inner{width:calc(100% - 38px)}.review-ribbon{padding:9px 19px;font-size:9px;letter-spacing:0}.review-ribbon a{font-size:9px}.nav-inner{min-height:70px}.brand{font-size:19px}.hero{padding:65px 0}.hero h1{font-size:clamp(47px,10vw,66px)}.hero p.hero-copy{font-size:16px}.hero-visual{padding:12px}.hero-visual-image img{max-height:360px}.actions{display:flex;flex-direction:column}.btn{width:100%}.section{padding:73px 0}.section-title{font-size:clamp(34px,9vw,48px)}.focus-items{grid-template-columns:1fr}.focus-items a,.focus-items a+ a{padding:17px 0;border-right:0;border-top:1px solid var(--line)}.focus-items a:first-child{border-top:0}.focus-cards{grid-template-columns:1fr}.focus-card{min-height:0;padding:25px}.focus-card h3{margin-top:22px}.featured-asset .asset-photo img{max-height:430px}.featured-asset .asset-caption{display:block}.featured-asset .asset-caption p{margin:0 0 8px}.asset-columns{columns:1}.asset-photo img{max-height:420px}.zoom-link{right:11px;bottom:11px}.us-mark strong{font-size:68px}.process-grid{grid-template-columns:1fr}.process-grid article{min-height:0}.process-grid h3{margin-top:14px}.cta-wrap .section-title{font-size:41px}.cta-links{flex-direction:column}footer .legal{display:block}footer .legal span+span{display:block;margin-top:12px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn:hover{transform:none}}
+
+/* Refined V7: original imagery grouped by business; no image clipping or forced aspect ratio. */
+.v8-business-section{background:#0a1710;border-top:1px solid var(--line)}
+.v8-business-section:nth-of-type(2n){background:#101e16}
+.v8-business-heading{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);align-items:end;gap:55px;margin-bottom:29px}
+.v8-business-heading .section-title{max-width:730px;font-size:clamp(35px,4.4vw,58px)}
+.v8-business-heading>div:last-child>p{font-size:14px;line-height:1.85;color:#b5c9b8;margin:0 0 17px}
+.v8-business-tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:17px}
+.v8-business-tags span{font-size:10px;color:#d8edda;border:1px solid rgba(176,237,144,.25);border-radius:30px;padding:7px 10px;font-weight:650}
+.v8-business-link{color:var(--lime);font-size:12px;font-weight:850}
+.v8-business-link:hover{text-decoration:underline;text-underline-offset:4px}
+.v8-media-grid{display:grid;grid-template-columns:minmax(0,1.17fr) minmax(0,.83fr);grid-template-rows:auto auto;gap:16px}
+.v8-media-card{min-width:0;margin:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;background:#11231a;overflow:hidden}
+.v8-lead-media{grid-row:span 2}
+.v8-image{display:flex;align-items:center;justify-content:center;min-height:0;padding:15px;background:#08140e}
+.v8-lead-media .v8-image{flex:1 1 auto;min-height:280px;padding:21px}
+.v8-image img{width:auto;height:auto;max-width:100%;max-height:190px;object-fit:contain;display:block}
+.v8-lead-media .v8-image img{max-height:450px}
+.v8-media-caption{display:flex;gap:14px;align-items:center;justify-content:space-between;padding:19px 20px 20px}
+.v8-media-caption strong{display:block;font-size:15px;line-height:1.3;font-weight:800}
+.v8-media-caption p{margin:5px 0 0;color:#acbfaf;font-size:11px;line-height:1.7}
+.v8-photo-button{white-space:nowrap;font-size:10px;font-weight:780;background:#1a3823;color:#e0f7e0;border:1px solid #3a6244;padding:8px 10px;border-radius:5px}
+.v8-photo-button:hover{background:#285034}
+.v8-illustrative-note{padding:17px 0;background:#091810;border-bottom:1px solid var(--line);font-size:11px;line-height:1.75;color:#a2b8a5}
+.v8-trust{margin-top:59px;border-top:1px solid rgba(174,240,106,.25);padding-top:36px}
+.v8-trust h3{font-size:clamp(23px,2.5vw,34px);letter-spacing:-.04em;line-height:1.16;margin:0 0 25px}
+.v8-trust-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.v8-trust-grid article{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:10px;background:#11271b;padding:24px;min-height:218px}
+.v8-trust-grid span{font-size:10px;letter-spacing:.14em;font-weight:850;color:var(--lime)}
+.v8-trust-grid h4{font-size:20px;margin:17px 0 10px;line-height:1.25}
+.v8-trust-grid p{color:#b9cdbc;font-size:12px;line-height:1.7;margin:0 0 15px}
+.v8-trust-grid a{font-size:12px;font-weight:850;color:var(--lime);margin-top:auto}
+.v8-partner-grid{display:grid;grid-template-columns:minmax(0,.84fr) minmax(0,1.16fr);gap:65px;align-items:start}
+.v8-site-points{border-top:1px solid rgba(174,240,106,.25);margin-top:27px}
+.v8-site-points>div{padding:14px 0;border-bottom:1px solid rgba(174,240,106,.15);display:grid;grid-template-columns:92px 1fr;gap:12px;font-size:12px}
+.v8-site-points strong{color:var(--lime)}
+.v8-site-points span{color:#b6ccbb}
+.v8-contact-note{font-size:12px;color:#b4cabb;line-height:1.75}
+.v8-contact-note a{font-weight:750;color:var(--lime)}
+.v8-intake{border:1px solid rgba(174,240,106,.27);background:#091b10;padding:30px;border-radius:12px}
+.v8-intake h3{font-size:27px;letter-spacing:-.035em;margin:0 0 10px;line-height:1.2}
+.v8-intake>p{font-size:12px;line-height:1.75;color:#a9beac;margin:0 0 23px}
+.v8-fields{display:grid;grid-template-columns:1fr 1fr;gap:0 13px}
+.v8-intake label{display:flex;flex-direction:column;gap:8px;font-size:11px;line-height:1.3;color:#e6f1e6;font-weight:750;margin-bottom:17px}
+.v8-intake label span{color:var(--lime)}
+.v8-intake input,.v8-intake select,.v8-intake textarea{width:100%;min-width:0;padding:11px 12px;border:1px solid #3c5840;border-radius:6px;background:#07130c;color:#fff;font:400 13px/1.5 inherit;outline:none}
+.v8-intake input:focus,.v8-intake select:focus,.v8-intake textarea:focus{border-color:var(--lime);box-shadow:0 0 0 2px rgba(174,240,106,.12)}
+.v8-intake input::placeholder,.v8-intake textarea::placeholder{color:#778c7a}
+.v8-intake textarea{min-height:92px;resize:vertical}
+.v8-intake-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.v8-intake-actions a{font-size:11px;color:#c2d6c6;font-weight:780}
+.v8-intake .v8-intake-status{font-size:11px;color:#9db49f;margin:15px 0 0}
+@media(max-width:1090px){.v8-business-heading{gap:30px}.v8-media-caption{display:block}.v8-photo-button{margin-top:12px}.v8-partner-grid{gap:35px}}
+@media(max-width:960px){.v8-business-heading{display:block}.v8-business-heading>div:last-child{margin-top:18px;max-width:800px}.v8-trust-grid{grid-template-columns:1fr 1fr}.v8-partner-grid{grid-template-columns:1fr}.v8-image img{max-height:240px}}
+@media(max-width:700px){.v8-media-grid{grid-template-columns:1fr;grid-template-rows:auto}.v8-lead-media{grid-row:auto}.v8-lead-media .v8-image{min-height:0}.v8-media-caption{display:flex}.v8-photo-button{margin-top:0}.v8-image img{max-height:320px}.v8-lead-media .v8-image img{max-height:380px}.v8-trust{margin-top:42px}.v8-trust-grid{grid-template-columns:1fr}.v8-trust-grid article{min-height:0}.v8-fields{grid-template-columns:1fr}.v8-intake{padding:22px}.v8-site-points>div{grid-template-columns:80px 1fr}}
+@media(max-width:440px){.v8-media-caption{display:block}.v8-photo-button{margin-top:12px}}
+
 </style>
 </head>
 <body>
@@ -72,16 +129,47 @@ footer{background:#040907;padding:55px 0 25px}footer .footer-row{display:flex;ju
 <p class="eyebrow">OUR DEVELOPMENT APPROACH</p><h2 class="section-title" id="approach-title">From site review to infrastructure.</h2>
 <div class="process-grid"><article><span>01 / EVALUATE</span><h3>Screen the site</h3><p>Land, physical access, available power, zoning and constraints.</p></article><article><span>02 / VALIDATE</span><h3>Test the economics</h3><p>Utility conditions, electricity costs, facility requirements and financing.</p></article><article><span>03 / DESIGN</span><h3>Plan the facility</h3><p>Electrical systems, cooling, mining equipment and phased capacity planning.</p></article><article><span>04 / EXECUTE</span><h3>Advance by milestones</h3><p>Proceed when commercial diligence, approvals and arrangements support it.</p></article></div>
 </div></section>
-<section class="section cta-section" aria-labelledby="contact-title"><div class="wrap cta-wrap">
-<div><p class="eyebrow">SITE OWNERS · POWER PARTNERS · INFRASTRUCTURE DEVELOPERS</p><h2 class="section-title" id="contact-title">Have a U.S. site or available power?</h2><p class="section-lead">We welcome qualified conversations about power-ready land, utility access, renewable-energy projects and BTC mining facility development.</p></div>
-<div class="cta-links"><a class="btn primary" href="/focus-preview/contact.html">Discuss a Partnership ↗</a><a class="btn ghost" href="/focus-preview/investor-relations.html">Investor Relations ↗</a></div>
-</div></section>
+<section class="section cta-section" id="site-inquiry" aria-labelledby="contact-title"><div class="wrap v8-partner-grid">
+<div class="v8-partner-copy"><p class="eyebrow">LANDOWNERS · UTILITIES · SITE &amp; POWER PARTNERS</p><h2 class="section-title" id="contact-title">Have a potential U.S. Bitcoin mining site?</h2>
+<p class="section-lead">A useful conversation starts with location, possible power access and the status of the site. Share as much information as you have, even if the opportunity is still being evaluated.</p>
+<div class="v8-site-points"><div><strong>Location</strong><span>State, city, land availability, access and zoning</span></div><div><strong>Electricity</strong><span>Potential capacity (MW), utility service and interconnection</span></div><div><strong>Development</strong><span>Owner, developer, energy provider or prospective partner</span></div></div>
+<p class="v8-contact-note">For general inquiries, <a href="/focus-preview/contact.html">visit our contact page ↗</a> or email <a href="mailto:ir@terrahashenergy.com">ir@terrahashenergy.com</a>.</p>
+</div>
+<form class="v8-intake" id="v8-site-form" aria-label="Prepare prospective U.S. mining site inquiry">
+<h3>Introduce a potential site</h3>
+<p>This creates an email draft in your own email application. It does not submit information to a website server or send an email automatically.</p>
+<div class="v8-fields">
+<label>Site location / state <span aria-hidden="true">*</span><input name="Site location" type="text" required maxlength="150" placeholder="e.g., West Texas, TX" autocomplete="address-level1"></label>
+<label>Your role<select name="Your role"><option value="">Select one</option><option>Landowner</option><option>Power / utility provider</option><option>Site developer</option><option>Infrastructure operator</option><option>Investor / partner</option><option>Other</option></select></label>
+<label>Potential power (MW)<input name="Power (MW)" type="number" step="any" min="0" inputmode="decimal" placeholder="If known"></label>
+<label>Land area (acres)<input name="Land area (acres)" type="number" step="any" min="0" inputmode="decimal" placeholder="If known"></label>
+<label>Utility provider<input name="Utility provider" type="text" maxlength="130" placeholder="If known"></label>
+<label>Your email<input name="Reply email" type="email" maxlength="200" placeholder="contact@example.com" autocomplete="email"></label>
+</div>
+<label>Additional details<textarea name="Project notes" rows="3" maxlength="1800" placeholder="Site conditions, power availability, development stage, or questions"></textarea></label>
+<div class="v8-intake-actions"><button type="submit" class="btn primary">Prepare inquiry email ↗</button><a href="/focus-preview/contact.html">Use contact page instead ↗</a></div>
+<p class="v8-intake-status" id="v8-intake-status" role="status" aria-live="polite">Your email client will open for review before you send.</p>
+</form></div></section>
 <div class="company-links"><div class="wrap"><span>COMPANY INFORMATION &amp; DEEPER RESEARCH</span><nav aria-label="More company information"><a href="/focus-preview/about.html">Company Overview</a><a href="/focus-preview/leadership.html">Leadership</a><a href="/focus-preview/milestones.html">History</a><a href="/focus-preview/digital-assets.html">Digital Assets</a><a href="/focus-preview/news.html">News</a></nav></div></div>
 </main>
 <footer><div class="wrap"><div class="footer-row"><div><a class="footer-brand" href="#top">TerraHash Energy</a><p>U.S. Bitcoin mining site development, supported by energy and infrastructure experience.</p><p>TerraHash Energy LLC · Los Angeles, California</p></div><nav class="footer-links" aria-label="Footer"><a href="/focus-preview/mining-sites.html">Mining Sites</a><a href="/focus-preview/solutions.html">Energy</a><a href="/focus-preview/investor-relations.html">Investors</a><a href="/focus-preview/careers.html">Careers</a><a href="/focus-preview/contact.html">Contact</a><a href="/focus-preview/corporate-governance.html">Governance</a><a href="/focus-preview/privacy-policy.html">Privacy</a></nav></div>
 <div class="legal"><span>© 2026 TerraHash Energy LLC · All rights reserved.</span><span>333 S Grand Ave, Floors 28–30, Los Angeles, CA 90071 · <a href="mailto:ir@terrahashenergy.com">ir@terrahashenergy.com</a></span></div></div></footer>
 <dialog id="image-viewer" class="viewer" aria-label="Original full-size image"><div class="viewer-header"><b id="viewer-title">Original image</b><form method="dialog"><button class="viewer-close" aria-label="Close image">Close ×</button></form></div><img id="viewer-photo" alt=""><p>Original image is shown without cropping. Use the close button or Esc to return.</p></dialog>
 <script>
-(()=>{const dialog=document.getElementById('image-viewer');const previewImg=document.getElementById('viewer-photo');const name=document.getElementById('viewer-title');document.querySelectorAll('[data-zoom]').forEach(button=>{button.addEventListener('click',()=>{previewImg.src=button.getAttribute('data-zoom');previewImg.alt=button.getAttribute('data-caption')||'Original image';name.textContent=button.getAttribute('data-caption')||'Original image';if(typeof dialog.showModal==='function')dialog.showModal();else window.open(previewImg.src,'_blank','noopener');});});dialog.addEventListener('close',()=>{previewImg.removeAttribute('src')});document.querySelectorAll('.mobile-links a').forEach(a=>a.addEventListener('click',()=>{document.querySelector('.mobile-menu')?.removeAttribute('open')}));})();
+(()=>{const dialog=document.getElementById('image-viewer');const previewImg=document.getElementById('viewer-photo');const name=document.getElementById('viewer-title');document.querySelectorAll('[data-zoom]').forEach(button=>{button.addEventListener('click',()=>{previewImg.src=button.getAttribute('data-zoom');previewImg.alt=button.getAttribute('data-caption')||'Original image';name.textContent=button.getAttribute('data-caption')||'Original image';if(typeof dialog.showModal==='function')dialog.showModal();else window.open(previewImg.src,'_blank','noopener');});});dialog.addEventListener('close',()=>{previewImg.removeAttribute('src')});document.querySelectorAll('.mobile-links a').forEach(a=>a.addEventListener('click',()=>{document.querySelector('.mobile-menu')?.removeAttribute('open')}));
+const form=document.getElementById('v8-site-form');
+if(form){form.addEventListener('submit',event=>{
+event.preventDefault();
+if(!form.reportValidity())return;
+const data=new FormData(form);
+const locationName=String(data.get('Site location')||'').trim();
+const fields=[...data.entries()].filter(([key,val])=>String(val).trim()).map(([key,val])=>key+': '+String(val).trim());
+const body=['Potential U.S. Bitcoin Mining Site Inquiry','',...fields,'','Please contact me about next steps.'].join('\n');
+const href='mailto:ir@terrahashenergy.com?subject='+encodeURIComponent('TerraHash mining-site inquiry — '+locationName)+'&body='+encodeURIComponent(body);
+const status=document.getElementById('v8-intake-status');
+if(status)status.textContent='Draft prepared. Review it in your email application before sending; the webpage has not submitted your details.';
+window.location.href=href;
+});}
+})();
 </script>
 </body></html>
