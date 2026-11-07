@@ -3,7 +3,7 @@
   // Load review overrides after every original inline stylesheet.
   const lateStylesheet = document.createElement('link');
   lateStylesheet.rel = 'stylesheet';
-  lateStylesheet.href = '/focus-preview/preview.css?v=3';
+  lateStylesheet.href = '/focus-preview/preview.css?v=4';
   document.head.appendChild(lateStylesheet);
   const home = document.body.dataset.previewPage === 'index.html';
   const navHtml = [
@@ -42,6 +42,13 @@
       nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
     }
     if (home) document.body.classList.add('th-preview-home');
+    // The production script swaps the platform visual; preserve the original site image in this preview.
+    if (home) {
+      const visual = document.querySelector('.platform-photo img');
+      if (visual) {
+        visual.src = '/image_斯坦福的能源系统太强了作为一名在..._5.png';
+      }
+    }
     // Rebalance every preview deep-dive page around mining-site development.
     document.querySelectorAll('.th-focus-kicker').forEach(el => {
       el.textContent = 'BITCOIN MINING SITES / POWER INFRASTRUCTURE / U.S. DEVELOPMENT';
