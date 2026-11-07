@@ -63,3 +63,16 @@ jobs:
         with:
           name: terrahash-redesign-offline-website
           path: terrahash-redesign-offline.zip
+
+      - name: Check alternative HTML preview gateway
+        shell: bash
+        continue-on-error: true
+        run: |
+          URL='https://htmlpreview.github.io/?https://github.com/laolang520/TerraHash-Energy/blob/redesign-preview-20261106/preview-v2/index.html'
+          timeout 55s google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=15000 --dump-dom "$URL" > /tmp/terrahash-htmlpreview-dom.html
+          if grep -q 'Energy infrastructure for a' /tmp/terrahash-htmlpreview-dom.html; then
+            echo 'ALTERNATIVE_HTMLPREVIEW_RENDER=PASS'
+          else
+            echo 'ALTERNATIVE_HTMLPREVIEW_RENDER=FAIL'
+            exit 1
+          fi
