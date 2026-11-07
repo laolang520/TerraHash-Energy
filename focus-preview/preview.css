@@ -259,3 +259,82 @@ body.th-preview-home .chain-section{padding-top:76px!important;padding-bottom:82
  .th-site-spotlight-tags{grid-template-columns:1fr}
  body.th-preview-home .th-mining-home-hero:after{background:linear-gradient(90deg,rgba(1,10,8,.96),rgba(1,10,8,.65)),linear-gradient(0deg,rgba(1,10,8,.7),transparent 44%)!important}
 }
+
+
+/* V5 — balance oversized restored homepage photography while preserving all assets. */
+body.th-preview-home .th-mining-home-hero{min-height:655px!important}
+body.th-preview-home .th-mining-home-hero .hero-inner{padding-top:140px!important;padding-bottom:75px!important}
+body.th-preview-home .th-site-spotlight{
+  width:min(calc(100% - 52px),1160px);
+  max-width:1160px;
+  margin:62px auto;
+  min-height:0!important;
+  grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);
+  border:1px solid rgba(149,239,82,.22);
+  border-radius:14px;
+  overflow:hidden;
+}
+body.th-preview-home .th-site-spotlight-image{
+  min-height:0!important;
+  height:auto!important;
+  max-width:100%;
+  overflow:hidden;
+}
+body.th-preview-home .th-site-spotlight-image img{
+  position:absolute!important;inset:0;
+  width:100%!important;height:100%!important;
+  max-width:100%;object-fit:cover!important;
+  object-position:center!important;
+}
+body.th-preview-home .th-site-spotlight-copy{padding:34px clamp(25px,4vw,48px)!important}
+body.th-preview-home .th-site-spotlight h2{
+  font-size:clamp(32px,3.2vw,47px)!important;
+  line-height:1.08!important;
+  margin:11px 0 14px!important;
+}
+body.th-preview-home .th-site-spotlight p:not(.home-kicker){
+  font-size:13px!important;line-height:1.65!important;margin:0!important;
+}
+body.th-preview-home .th-site-spotlight-tags{gap:5px 14px!important;margin:13px 0 21px!important}
+body.th-preview-home .th-site-spotlight-tags span{font-size:11px!important;padding:7px 0!important}
+body.th-preview-home .platform-photo{
+  width:calc(100% - 44px)!important;
+  max-width:980px!important;
+  height:clamp(240px,28vw,340px)!important;
+  margin-inline:auto!important;
+}
+body.th-preview-home .platform-photo img{width:100%!important;height:100%!important;object-fit:cover!important}
+body.th-preview-home .execution-photo{
+  height:340px!important;
+  max-height:340px!important;
+  max-width:560px!important;
+}
+body.th-preview-home .execution-photo img{object-fit:cover!important}
+body.th-preview-home .gateway-card{min-height:290px!important}
+body.th-preview-home .news-feature>img{height:235px!important}
+body.th-preview-home .home-cta{min-height:360px!important}
+@media(max-width:980px){
+ body.th-preview-home .th-mining-home-hero{min-height:640px!important}
+ body.th-preview-home .th-site-spotlight{width:calc(100% - 42px);margin:42px auto}
+ body.th-preview-home .th-site-spotlight-copy{padding:27px!important}
+ body.th-preview-home .th-site-spotlight h2{font-size:37px!important}
+ body.th-preview-home .platform-photo{height:290px!important}
+ body.th-preview-home .execution-photo{height:295px!important}
+}
+@media(max-width:740px){
+ body.th-preview-home .th-mining-home-hero{min-height:625px!important}
+ body.th-preview-home .th-site-spotlight{display:block!important;width:calc(100% - 34px)!important;margin:34px auto!important}
+ body.th-preview-home .th-site-spotlight-image{
+   height:230px!important;min-height:0!important;max-height:230px!important;position:relative!important;
+ }
+ body.th-preview-home .th-site-spotlight-image img{
+   position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+ }
+ body.th-preview-home .th-site-spotlight-copy{padding:28px 25px 32px!important}
+ body.th-preview-home .th-site-spotlight h2{font-size:35px!important}
+ body.th-preview-home .platform-photo{width:calc(100% - 36px)!important;height:235px!important}
+ body.th-preview-home .execution-photo{height:255px!important;max-height:255px!important}
+ body.th-preview-home .gateway-card{min-height:270px!important}
+ body.th-preview-home .news-feature>img{height:215px!important}
+ body.th-preview-home .home-cta{min-height:345px!important}
+}
