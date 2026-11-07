@@ -3,7 +3,7 @@
   // Load review overrides after every original inline stylesheet.
   const lateStylesheet = document.createElement('link');
   lateStylesheet.rel = 'stylesheet';
-  lateStylesheet.href = '/focus-preview/preview.css?v=5';
+  lateStylesheet.href = '/focus-preview/preview.css?v=6';
   document.head.appendChild(lateStylesheet);
   const home = document.body.dataset.previewPage === 'index.html';
   const navHtml = [

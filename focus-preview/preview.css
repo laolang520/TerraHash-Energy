@@ -261,80 +261,217 @@ body.th-preview-home .chain-section{padding-top:76px!important;padding-bottom:82
 }
 
 
-/* V5 — balance oversized restored homepage photography while preserving all assets. */
-body.th-preview-home .th-mining-home-hero{min-height:655px!important}
-body.th-preview-home .th-mining-home-hero .hero-inner{padding-top:140px!important;padding-bottom:75px!important}
+
+/* V6 — full-frame homepage photography: scale the entire source image, never crop its contents.
+   The preview keeps the original image assets. Intentional background letterboxing is used
+   wherever an image's aspect ratio differs from the surrounding card. */
+body.th-preview-home .home-hero-bg{
+  object-fit:contain!important;
+  object-position:center center!important;
+  width:100%!important;
+  height:100%!important;
+  background:#06111a!important;
+}
+body.th-preview-home .th-mining-home-hero{min-height:675px!important;background:#06111a!important}
+body.th-preview-home .th-mining-home-hero .hero-inner{padding-top:145px!important;padding-bottom:83px!important}
+body.th-preview-home .th-mining-home-hero:after{
+  background:linear-gradient(90deg,rgba(2,11,9,.93) 0%,rgba(2,11,9,.78) 34%,rgba(2,11,9,.2) 80%,rgba(2,11,9,.03) 100%)!important;
+}
+/* The new mining-site image is an actual image, not a cropped background. */
 body.th-preview-home .th-site-spotlight{
-  width:min(calc(100% - 52px),1160px);
-  max-width:1160px;
-  margin:62px auto;
+  width:min(calc(100% - 50px),1160px)!important;
+  max-width:1160px!important;
+  margin:52px auto!important;
   min-height:0!important;
-  grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);
+  grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr)!important;
   border:1px solid rgba(149,239,82,.22);
   border-radius:14px;
   overflow:hidden;
 }
 body.th-preview-home .th-site-spotlight-image{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  position:relative!important;
   min-height:0!important;
   height:auto!important;
+  max-height:none!important;
   max-width:100%;
-  overflow:hidden;
+  overflow:visible!important;
+  background:#081910!important;
 }
 body.th-preview-home .th-site-spotlight-image img{
-  position:absolute!important;inset:0;
-  width:100%!important;height:100%!important;
-  max-width:100%;object-fit:cover!important;
+  position:static!important;
+  inset:auto!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:480px!important;
+  max-width:100%!important;
+  object-fit:contain!important;
   object-position:center!important;
+  filter:none!important;
+  display:block!important;
 }
-body.th-preview-home .th-site-spotlight-copy{padding:34px clamp(25px,4vw,48px)!important}
+body.th-preview-home .th-site-spotlight-copy{padding:36px clamp(25px,3.5vw,46px)!important}
 body.th-preview-home .th-site-spotlight h2{
-  font-size:clamp(32px,3.2vw,47px)!important;
-  line-height:1.08!important;
-  margin:11px 0 14px!important;
+  font-size:clamp(32px,3.2vw,46px)!important;
+  margin:11px 0 15px!important;
+  line-height:1.1!important;
 }
 body.th-preview-home .th-site-spotlight p:not(.home-kicker){
-  font-size:13px!important;line-height:1.65!important;margin:0!important;
+  font-size:13px!important;line-height:1.7!important;margin:0!important;
 }
-body.th-preview-home .th-site-spotlight-tags{gap:5px 14px!important;margin:13px 0 21px!important}
+body.th-preview-home .th-site-spotlight-tags{gap:5px 13px!important;margin:15px 0 23px!important}
 body.th-preview-home .th-site-spotlight-tags span{font-size:11px!important;padding:7px 0!important}
+
+/* Original wide energy-system photo: retain its actual aspect ratio. */
 body.th-preview-home .platform-photo{
-  width:calc(100% - 44px)!important;
+  width:min(calc(100% - 42px),980px)!important;
   max-width:980px!important;
-  height:clamp(240px,28vw,340px)!important;
+  height:auto!important;
+  max-height:none!important;
   margin-inline:auto!important;
+  overflow:visible!important;
+  background:#081910!important;
 }
-body.th-preview-home .platform-photo img{width:100%!important;height:100%!important;object-fit:cover!important}
+body.th-preview-home .platform-photo img{
+  width:100%!important;height:auto!important;
+  max-width:100%!important;
+  max-height:520px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  display:block!important;
+}
+
+/* Original gateway pictures: image above the copy, no heavy text gradient over the photo. */
+body.th-preview-home .gateway-card{
+  display:flex!important;
+  flex-direction:column!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  background:#0e2118!important;
+}
+body.th-preview-home .gateway-card:after{display:none!important;content:none!important}
+body.th-preview-home .gateway-card img{
+  position:static!important;
+  inset:auto!important;
+  display:block!important;
+  width:100%!important;
+  height:215px!important;
+  max-width:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#081910!important;
+}
+body.th-preview-home .gateway-copy{
+  position:static!important;
+  inset:auto!important;
+  left:auto!important;right:auto!important;bottom:auto!important;
+  padding:21px 21px 26px!important;
+  flex:1 1 auto!important;
+}
+body.th-preview-home .gateway-copy h3{font-size:21px!important}
+body.th-preview-home .gateway-copy p{font-size:12px!important;line-height:1.6!important}
+
+/* Original engineering / renewable-energy photograph. */
 body.th-preview-home .execution-photo{
-  height:340px!important;
-  max-height:340px!important;
+  width:100%!important;
   max-width:560px!important;
+  height:auto!important;
+  max-height:none!important;
+  min-height:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  background:#081910!important;
 }
-body.th-preview-home .execution-photo img{object-fit:cover!important}
-body.th-preview-home .gateway-card{min-height:290px!important}
-body.th-preview-home .news-feature>img{height:235px!important}
-body.th-preview-home .home-cta{min-height:360px!important}
+body.th-preview-home .execution-photo img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:490px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+
+/* The company news image is informative, not a decorative crop. */
+body.th-preview-home .news-feature>img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:450px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#081910!important;
+}
+
+/* Original full-width partnership art, now displayed complete alongside the CTA. */
+body.th-preview-home .home-cta{
+  display:grid!important;
+  grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)!important;
+  min-height:0!important;
+  height:auto!important;
+  align-items:stretch!important;
+  background:#0a2016!important;
+}
+body.th-preview-home .home-cta:after{content:none!important;display:none!important}
+body.th-preview-home .home-cta>img{
+  position:static!important;
+  inset:auto!important;
+  width:100%!important;
+  height:100%!important;
+  max-height:500px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#081910!important;
+}
+body.th-preview-home .home-cta-copy{
+  position:relative!important;
+  width:100%!important;
+  max-width:none!important;
+  align-self:center!important;
+  padding:55px clamp(28px,5vw,75px)!important;
+  background:#0a2016!important;
+  z-index:1!important;
+}
+
+/* Responsive layouts never switch the content images back to cover. */
 @media(max-width:980px){
- body.th-preview-home .th-mining-home-hero{min-height:640px!important}
- body.th-preview-home .th-site-spotlight{width:calc(100% - 42px);margin:42px auto}
- body.th-preview-home .th-site-spotlight-copy{padding:27px!important}
- body.th-preview-home .th-site-spotlight h2{font-size:37px!important}
- body.th-preview-home .platform-photo{height:290px!important}
- body.th-preview-home .execution-photo{height:295px!important}
+  body.th-preview-home .th-site-spotlight{width:calc(100% - 36px)!important;margin:40px auto!important}
+  body.th-preview-home .th-site-spotlight-copy{padding:28px!important}
+  body.th-preview-home .th-site-spotlight h2{font-size:35px!important}
+  body.th-preview-home .platform-photo{width:calc(100% - 36px)!important}
+  body.th-preview-home .gateway-card img{height:195px!important}
 }
 @media(max-width:740px){
- body.th-preview-home .th-mining-home-hero{min-height:625px!important}
- body.th-preview-home .th-site-spotlight{display:block!important;width:calc(100% - 34px)!important;margin:34px auto!important}
- body.th-preview-home .th-site-spotlight-image{
-   height:230px!important;min-height:0!important;max-height:230px!important;position:relative!important;
- }
- body.th-preview-home .th-site-spotlight-image img{
-   position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
- }
- body.th-preview-home .th-site-spotlight-copy{padding:28px 25px 32px!important}
- body.th-preview-home .th-site-spotlight h2{font-size:35px!important}
- body.th-preview-home .platform-photo{width:calc(100% - 36px)!important;height:235px!important}
- body.th-preview-home .execution-photo{height:255px!important;max-height:255px!important}
- body.th-preview-home .gateway-card{min-height:270px!important}
- body.th-preview-home .news-feature>img{height:215px!important}
- body.th-preview-home .home-cta{min-height:345px!important}
+  body.th-preview-home .th-mining-home-hero{min-height:630px!important}
+  body.th-preview-home .th-site-spotlight{
+    display:flex!important;
+    flex-direction:column!important;
+    width:calc(100% - 30px)!important;
+    margin:32px auto!important;
+  }
+  body.th-preview-home .th-site-spotlight-image{
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    display:block!important;
+  }
+  body.th-preview-home .th-site-spotlight-image img{
+    width:100%!important;
+    height:auto!important;
+    max-height:430px!important;
+    object-fit:contain!important;
+  }
+  body.th-preview-home .th-site-spotlight-copy{padding:30px 23px 35px!important}
+  body.th-preview-home .platform-photo{width:calc(100% - 28px)!important;height:auto!important}
+  body.th-preview-home .platform-photo img{height:auto!important;max-height:420px!important;object-fit:contain!important}
+  body.th-preview-home .execution-photo{width:100%!important;height:auto!important}
+  body.th-preview-home .execution-photo img{height:auto!important;max-height:420px!important}
+  body.th-preview-home .gateway-card img{height:225px!important;object-fit:contain!important}
+  body.th-preview-home .news-feature>img{height:auto!important;max-height:420px!important}
+  body.th-preview-home .home-cta{display:flex!important;flex-direction:column!important}
+  body.th-preview-home .home-cta>img{height:auto!important;max-height:430px!important;object-fit:contain!important}
+  body.th-preview-home .home-cta-copy{padding:42px 6vw!important}
 }
