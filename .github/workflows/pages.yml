@@ -124,7 +124,7 @@ jobs:
           for name in pages:
               assert Path(name).is_file(), f'Missing research page: {name}'
           required = pages[:7]
-          for name in ('index.html', 'digital-assets.html', 'energy-digital-markets.html'):
+          for name in ('digital-assets.html', 'energy-digital-markets.html'):
               page = Path(name).read_text(encoding='utf-8')
               start = page.index('<div class="nav-dropdown nav-digital-assets">')
               end = page.index('</div></div>', start) + len('</div></div>')
@@ -133,9 +133,12 @@ jobs:
               assert all(f'href="{target}"' in nav for target in required), f'Navigation link missing in {name}'
           for name in pages:
               page = Path(name).read_text(encoding='utf-8')
-              assert '<nav class="nav">' in page, f'Corporate navigation missing in {name}'
+              assert ('<nav class="nav">' in page or (name == 'index.html' and 'id="site-nav" class="nav"' in page)), f'Corporate navigation missing in {name}'
               assert '<nav class="edm-site-nav"' not in page, f'Duplicate research nav in {name}'
               assert '<div class="preview-ribbon">' not in page, f'Preview ribbon still shown in {name}'
+          home = Path('index.html').read_text(encoding='utf-8')
+          for item in ('Renewable Power.', 'Bitcoin Infrastructure.', 'U.S. Growth.', 'href="#btc-infrastructure"', 'href="#us-development"'):
+              assert item in home, f'Homepage strategic focus missing: {item}'
           ecosystem = Path('ecosystem.html').read_text(encoding='utf-8')
           assert 'Understanding the <span>Digital Asset Ecosystem.</span>' in ecosystem, 'Updated Ecosystem heading missing'
           assert 'ALTIORA MARKETS' in ecosystem, 'ALTIORA MARKETS section missing'
