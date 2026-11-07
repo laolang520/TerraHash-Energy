@@ -1,45 +1,33 @@
-# TerraHash Energy
+# TerraHash Energy — Corporate Website
 
-新能源 × 数字资产基础设施公司的开源官网与项目原型。
+The production website at https://www.terrahashenergy.com/ is published from **the repository root** through `.github/workflows/pages.yml` on pushes to `main`. The `web/` folder is a legacy site prototype, not the primary deployed homepage.
 
-> 定位：把可再生能源项目的数据、发电量与数字资产基础设施连接起来，提供透明的数据展示、项目管理与合规预留接口。
->
-> 注意：本项目是产品/技术原型，不构成证券发行、投资建议、代币发行或金融服务。
+## Repository layout
 
-## 项目结构
+- Root `*.html`, `styles.css`, `script.js`: public corporate website.
+- `milestone-history/`: confirmed international development history (2013–2026) as published by TerraHash Energy; retain historical achievements and quantitative reports.
+- `leadership.html`: leadership, directors and advisory board profiles; preserve the company-confirmed personnel information.
+- `design-previews/` and `*-preview.html`: non-production design prototypes.
+- `downloads/governance/`: published governance PDF library.
+- `data/projects.json`: existing project data. Do not remove entries without approval.
+- `docs/CONTENT_AUDIT_2026-11-06.md`: site content consistency and technical review log.
 
-- `web/` — 静态官网，可直接部署到 GitHub Pages
-- `docs/` — 公司与产品说明
-- `contracts/` — 数字资产登记的示例接口（仅原型，不用于真实资金）
-- `data/` — 示例新能源项目数据
-- `.github/workflows/` — GitHub Pages 自动部署
+## Editorial guidance
 
-## 本地运行
+Keep the verified international development record, management and board information intact. Use consistent wording to distinguish the international historical corporate chapter from the U.S. LLC's independent operational management without diminishing reported achievements. Do not substitute generic doubts or 'unverified' labels for company-confirmed information.
 
-直接打开 `web/index.html` 即可；也可以：
+## Local preview
 
-```bash
-python -m http.server 8080 --directory web
-```
+From the repository root, run `python -m http.server 8080` and open `http://localhost:8080/`.
 
-然后访问 `http://localhost:8080`。
+## Homepage visual
 
-## GitHub Pages
-
-本仓库已配置 GitHub Actions 自动部署。进入 Settings → Pages，选择 GitHub Actions 作为发布方式。
-
-## Homepage Visual
-
-The homepage uses the English corporate hero visual at `assets/homepage-hero.jpg`.
+The homepage uses the corporate hero image at `assets/homepage-hero.jpg`.
 
 ## Recruitment email applications
 
-The production site is published from the repository root by `.github/workflows/pages.yml` on pushes to `main`.
+The executive role pages (`careers-cdo.html`, `careers-coo.html`, `careers-cgo.html`) use **Apply by Email** links addressed to `hr@terrahashenergy.com`. The links prefill the role-specific subject and a reusable application template in the sender's email program.
 
-The three executive role pages (`careers-cdo.html`, `careers-coo.html`, and `careers-cgo.html`) now offer **Apply by Email** links addressed to `hr@terrahashenergy.com`. Each link pre-fills the relevant position in the subject and an English application template in the message body, retaining the information requested by the previous form.
+The sender must review the draft, add attachments, and send the message. These links do not submit a form or upload resumes automatically. The separate general inquiry form on `contact.html` uses FormSubmit.
 
-Applicants complete the draft in their own email app, attach their resume, and send it themselves. The link does not send mail or attach files automatically. The visible HR address and expandable template can also be copied into webmail if no default email app is configured. Resume attachment limits depend on the sender and recipient email providers.
-
-Recruitment no longer uses FormSubmit, activation emails, web uploads, or website submission confirmations. The existing general contact page remains separate. The role pages require no JavaScript for the email links or template disclosure.
-
-Mailto format: https://www.rfc-editor.org/rfc/rfc6068.
+Mailto reference: https://www.rfc-editor.org/rfc/rfc6068.
