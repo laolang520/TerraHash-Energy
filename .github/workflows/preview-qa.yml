@@ -24,7 +24,10 @@ jobs:
           for p in pages:
               s=p.read_text()
               assert 'noindex,nofollow' in s, p
-              assert 'site.js' in s and 'styles.css' in s, p
+              assert '<main id="main">' in s and '<h1>' in s, p
+              assert '<style>' in s, p
+              assert '<script src="site.js"' not in s, p
+              assert 'htmlpreview.github.io/' in s, p
               assert 'data-page=' in s, p
           js=(d/'site.js').read_text()
           for name in ['home','company','solutions','development','technology','insights','leadership','history','governance','capital','careers','candidate','contact','role-coo','role-cdo','role-cgo']:
@@ -41,7 +44,7 @@ jobs:
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/terrahash-preview.log 2>&1 &
           sleep 2
           google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=3000 --dump-dom http://127.0.0.1:8765/preview-v2/index.html >/tmp/terrahash-rendered.html
-          grep -q 'Energy infrastructure for a' /tmp/terrahash-rendered.html
+          grep -q '<h1>Energy infrastructure for a' /tmp/terrahash-rendered.html
           google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --virtual-time-budget=3000 --window-size=1440,1000 --screenshot=/tmp/terrahash-desktop.png http://127.0.0.1:8765/preview-v2/index.html
           google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --virtual-time-budget=3000 --window-size=420,900 --screenshot=/tmp/terrahash-mobile.png http://127.0.0.1:8765/preview-v2/index.html
           mkdir -p preview-screenshots
@@ -76,3 +79,19 @@ jobs:
             echo 'ALTERNATIVE_HTMLPREVIEW_RENDER=FAIL'
             exit 1
           fi
+
+      - name: Screenshot external HTMLPreview site
+        shell: bash
+        continue-on-error: true
+        run: |
+          URL='https://htmlpreview.github.io/?https://github.com/laolang520/TerraHash-Energy/blob/redesign-preview-20261106/preview-v2/index.html'
+          timeout 60s google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --hide-scrollbars --virtual-time-budget=15000 --window-size=1440,900 --screenshot=/tmp/terrahash-htmlpreview.png "$URL"
+          file /tmp/terrahash-htmlpreview.png
+          cp /tmp/terrahash-htmlpreview.png preview-screenshots/external-htmlpreview.png
+      - name: Upload HTMLPreview external screenshot
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: terrahash-external-preview-screenshot
+          path: preview-screenshots/external-htmlpreview.png
+          if-no-files-found: ignore
