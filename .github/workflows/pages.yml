@@ -159,9 +159,9 @@ jobs:
               page = Path(name).read_text(encoding='utf-8')
               assert 'mailto:hr@terrahashenergy.com?subject=' in page, f'Missing HR mailto: {name}'
               assert '&amp;body=' in page, f'Missing application email template: {name}'
-              assert 'APPLY BY EMAIL' in page, f'Missing email application button: {name}'
-          assert home.count('class="role-link role-email-link" href="mailto:hr@terrahashenergy.com?subject=') == 3, 'Careers homepage missing email application links'
-          print('Verified: email applications use the original prefilled email templates')
+              assert 'class="email-apply"' not in page, f'Unexpected added application button: {name}'
+          assert 'class="role-link role-email-link"' not in home, 'Unexpected added Careers email button'
+          print('Verified: original HR email contact and templates retained without added buttons')
           PY
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
