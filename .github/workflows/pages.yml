@@ -137,7 +137,7 @@ jobs:
               assert '<nav class="edm-site-nav"' not in page, f'Duplicate research nav in {name}'
               assert '<div class="preview-ribbon">' not in page, f'Preview ribbon still shown in {name}'
           ecosystem = Path('ecosystem.html').read_text(encoding='utf-8')
-          assert 'Understanding the <span>Digital Asset Ecosystem.</span>' in ecosystem, 'Updated Ecosystem heading missing'
+          assert 'Independent Industry Examples: <span>Digital Asset Ecosystem.</span>' in ecosystem, 'Current Ecosystem heading missing'
           assert 'ALTIORA MARKETS' in ecosystem, 'ALTIORA MARKETS section missing'
           assert 'NEXUS' not in ecosystem, 'Obsolete NEXUS content still present'
           assert 'THREE-TIER PLATFORM' not in ecosystem, 'Duplicated infrastructure overview still present'
