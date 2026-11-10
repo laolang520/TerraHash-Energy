@@ -143,6 +143,10 @@ jobs:
           assert 'THREE-TIER PLATFORM' not in ecosystem, 'Duplicated infrastructure overview still present'
           for href in ('energy-markets-ecosystem.html', 'energy-markets-blockchain.html', 'energy-markets-compute.html'):
               assert f'href="{href}"' in ecosystem, f'Ecosystem link missing: {href}'
+          news = Path('news.html').read_text(encoding='utf-8')
+          for obsolete in ('TerraHash Updates', 'Ask about company updates.', 'REQUEST UPDATES', 'TerraHash%20Energy%20Updates'):
+              assert obsolete not in news, f'Obsolete News Center updates block restored: {obsolete}'
+          print('Verified: News Center request-updates block is absent')
           print('Verified: final Ecosystem content, ALTIORA MARKETS, flat navigation and 11 published research pages')
           PY
       - name: Upload website
