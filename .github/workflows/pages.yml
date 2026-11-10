@@ -149,18 +149,19 @@ jobs:
           print('Verified: News Center request-updates block is absent')
           print('Verified: final Ecosystem content, ALTIORA MARKETS, flat navigation and 11 published research pages')
           PY
-      - name: Verify recruitment email composition links
+      - name: Verify on-page recruitment applications
         shell: bash
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import re
-          for name in ('careers.html', 'careers-cdo.html', 'careers-coo.html', 'careers-cgo.html'):
+          home = Path('careers.html').read_text(encoding='utf-8')
+          for name in ('careers-cdo.html', 'careers-coo.html', 'careers-cgo.html'):
               page = Path(name).read_text(encoding='utf-8')
-              assert 'mailto:hr@terrahashenergy.com?subject=' in page, f'Missing HR email link: {name}'
-              assert '&amp;body=' in page, f'Missing prefilled email body: {name}'
-              assert 'APPLY BY EMAIL' in page, f'Missing application button: {name}'
-          print('Verified: all Careers email buttons include the recipient, role subject and application template')
+              assert 'action="https://formsubmit.co/hr@terrahashenergy.com"' in page, f'Missing application endpoint: {name}'
+              assert 'enctype="multipart/form-data"' in page, f'Missing attachment encoding: {name}'
+              assert 'name="attachment"' in page and 'SUBMIT APPLICATION' in page, f'Missing application form: {name}'
+              assert f'href="{name}#apply"' in home, f'Careers application button points elsewhere: {name}'
+          print('Verified: Careers uses on-page executive applications with resume attachments')
           PY
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
